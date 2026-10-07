@@ -19,25 +19,18 @@
     }
     :root[data-theme="dark"] { --accent: #4ade80; --accent-soft: #15301f; }
 
-    .sg-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
-    .sg-head small { color: #b8cdb8; font: 500 10px var(--mono); letter-spacing: 0.1em; }
-    .sg-total { font-family: var(--serif); font-size: 44px; font-weight: 800; color: #4ade80; line-height: 1.1; }
-    .sg-sub { color: #b8cdb8; font-size: 12px; margin-bottom: 18px; }
-    .sg-row { display: grid; grid-template-columns: 38px 1fr 44px; gap: 8px; align-items: center; margin: 10px 0; font: 500 11px var(--mono); }
-    .sg-row span:first-child { color: #b8cdb8; }
-    .sg-row span:last-child { text-align: right; }
-    .bar { height: 8px; border-radius: 4px; background: #162e1c; position: relative; }
-    .bar i { position: absolute; top: 0; bottom: 0; border-radius: 4px; }
-    .bar .pos { left: 50%; background: #4ade80; }
-    .bar .neg { right: 50%; background: #ff6b6b; }
-    .bar::after { content: ""; position: absolute; left: 50%; top: -3px; bottom: -3px; width: 1px; background: #5a7a5e; }
-    .pos-t { color: #4ade80; } .neg-t { color: #ff6b6b; }
-    .hole-card { margin-top: 18px; background: #162e1c; border: 1px solid #1f4228; border-radius: 14px; padding: 12px 14px; }
-    .hole-card .top { display: flex; justify-content: space-between; font: 500 10px var(--mono); color: #b8cdb8; letter-spacing: 0.08em; }
-    .hole-card .dist { font-family: var(--serif); font-size: 22px; font-weight: 700; margin: 4px 0 2px; }
-    .hole-card .dist small { font-family: var(--sans); font-size: 12px; color: #b8cdb8; font-weight: 400; }
-    .tabs { display: flex; justify-content: space-between; margin-top: 18px; padding-top: 12px; border-top: 1px solid #1f4228; font-size: 10px; color: #5a7a5e; }
-    .tabs b { color: #4ade80; font-weight: 500; }
+    .phone .shot { display: block; width: 100%; height: auto; border-radius: 28px; }
+    .hero .phone { width: 300px; }
+    .gallery {
+      display: grid; grid-auto-flow: column; grid-auto-columns: 240px; gap: 24px;
+      overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px 4px 20px;
+      margin: 0 -4px;
+    }
+    .gallery figure { margin: 0; scroll-snap-align: start; }
+    .gallery .phone { width: 100%; box-shadow: 0 16px 36px rgba(27, 27, 43, 0.18); }
+    .gallery figcaption { margin-top: 16px; font-size: 14px; color: var(--ink-soft); }
+    .gallery figcaption strong { display: block; color: var(--ink); font-family: var(--serif); font-size: 16px; margin-bottom: 4px; }
+    @media (min-width: 1024px) { .gallery { grid-auto-flow: row; grid-template-columns: repeat(4, 1fr); grid-auto-columns: auto; overflow: visible; } }
   </style>
 </head>
 <body>
@@ -48,6 +41,7 @@
     <nav class="nav-links">
       <a href="../"><span lang="en">All apps</span><span lang="nl">Alle apps</span></a>
       <a href="#features"><span lang="en">Features</span><span lang="nl">Functies</span></a>
+      <a href="#screens"><span lang="en">Screenshots</span><span lang="nl">Screenshots</span></a>
       <a href="#how"><span lang="en">How it works</span><span lang="nl">Hoe het werkt</span></a>
       <a href="#faq">FAQ</a>
       <a href="privacy/">Privacy</a>
@@ -89,27 +83,9 @@
         </div>
       </div>
 
-      <div class="phone" aria-label="App preview" role="img">
-        <div class="screen">
-          <div class="sg-head">
-            <small>STROKES GAINED</small>
-            <small>18 HOLES</small>
-          </div>
-          <div class="sg-total">+1.8</div>
-          <div class="sg-sub"><span lang="en">vs. HCP 18 baseline · score 92</span><span lang="nl">t.o.v. HCP 18 · score 92</span></div>
-          <div class="sg-row"><span>TEE</span><div class="bar"><i class="pos" style="width:22%"></i></div><span class="pos-t">+1.4</span></div>
-          <div class="sg-row"><span>APP</span><div class="bar"><i class="neg" style="width:14%"></i></div><span class="neg-t">−0.9</span></div>
-          <div class="sg-row"><span>SGM</span><div class="bar"><i class="pos" style="width:10%"></i></div><span class="pos-t">+0.6</span></div>
-          <div class="sg-row"><span>PUT</span><div class="bar"><i class="pos" style="width:12%"></i></div><span class="pos-t">+0.7</span></div>
-          <div class="hole-card">
-            <div class="top"><span>HOLE 7 · PAR 4</span><span>GPS ●</span></div>
-            <div class="dist">142 m <small><span lang="en">to the pin</span><span lang="nl">tot de vlag</span></small></div>
-            <div style="font-size:12px;color:#b8cdb8"><span lang="en">Fairway · expected 3.0 strokes</span><span lang="nl">Fairway · verwacht 3,0 slagen</span></div>
-          </div>
-          <div class="tabs">
-            <span>Calculator</span><b><span lang="en">Round</span><span lang="nl">Ronde</span></b><span><span lang="en">History</span><span lang="nl">Geschiedenis</span></span><span><span lang="en">Progress</span><span lang="nl">Voortgang</span></span>
-          </div>
-        </div>
+      <div class="phone">
+        <img class="shot" lang="en" src="screens/en-detail.jpg" width="540" height="1169" alt="Round summary in Strokes Gained: score, strokes gained per category and the scorecard">
+        <img class="shot" lang="nl" src="screens/nl-detail.jpg" width="540" height="1169" alt="Rondeoverzicht in Strokes Gained: score, strokes gained per categorie en de scorekaart">
       </div>
     </div>
   </section>
@@ -173,6 +149,49 @@
           <h3><span lang="en">Optional cloud backup</span><span lang="nl">Optionele cloudback-up</span></h3>
           <p><span lang="en">Rounds are backed up automatically. Sign in with Google to get them back on a new device.</span><span lang="nl">Rondes worden automatisch geback-upt. Log in met Google om ze terug te krijgen op een nieuw toestel.</span></p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="screens">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow"><span lang="en">See it in action</span><span lang="nl">Zie het in actie</span></p>
+        <h2><span lang="en">Real screens, <em class="accent">real rounds.</em></span><span lang="nl">Echte schermen, <em class="accent">echte rondes.</em></span></h2>
+        <p class="section-lead">
+          <span lang="en">Screenshots from the app with 40 demo rounds loaded.</span>
+          <span lang="nl">Schermafbeeldingen uit de app met 40 demorondes geladen.</span>
+        </p>
+      </div>
+      <div class="gallery">
+        <figure>
+          <div class="phone">
+            <img class="shot" lang="en" src="screens/en-detail.jpg" width="540" height="1169" loading="lazy" alt="Round summary">
+            <img class="shot" lang="nl" src="screens/nl-detail.jpg" width="540" height="1169" loading="lazy" alt="Rondeoverzicht">
+          </div>
+          <figcaption><strong><span lang="en">Round summary</span><span lang="nl">Rondeoverzicht</span></strong><span lang="en">Score, strokes gained per category, scorecard and your best and worst shots.</span><span lang="nl">Score, strokes gained per categorie, scorekaart en je beste en slechtste slagen.</span></figcaption>
+        </figure>
+        <figure>
+          <div class="phone">
+            <img class="shot" lang="en" src="screens/en-verloop.jpg" width="540" height="1169" loading="lazy" alt="Progress over time">
+            <img class="shot" lang="nl" src="screens/nl-verloop.jpg" width="540" height="1169" loading="lazy" alt="Voortgang door de tijd">
+          </div>
+          <figcaption><strong><span lang="en">Progress over time</span><span lang="nl">Voortgang door de tijd</span></strong><span lang="en">Strokes gained per category across your last rounds.</span><span lang="nl">Strokes gained per categorie over je laatste rondes.</span></figcaption>
+        </figure>
+        <figure>
+          <div class="phone">
+            <img class="shot" lang="en" src="screens/en-advies.jpg" width="540" height="1169" loading="lazy" alt="Practice advice">
+            <img class="shot" lang="nl" src="screens/nl-advies.jpg" width="540" height="1169" loading="lazy" alt="Trainingsadvies">
+          </div>
+          <figcaption><strong><span lang="en">Practice advice</span><span lang="nl">Trainingsadvies</span></strong><span lang="en">Your key stats and green-hit rate per approach distance.</span><span lang="nl">Je belangrijkste cijfers en greentreffers per approach-afstand.</span></figcaption>
+        </figure>
+        <figure>
+          <div class="phone">
+            <img class="shot" lang="en" src="screens/en-calc.jpg" width="540" height="1169" loading="lazy" alt="Target-zone calculator">
+            <img class="shot" lang="nl" src="screens/nl-calc.jpg" width="540" height="1169" loading="lazy" alt="Doelzone-calculator">
+          </div>
+          <figcaption><strong><span lang="en">Target-zone calculator</span><span lang="nl">Doelzone-calculator</span></strong><span lang="en">Expected strokes from any lie and distance, and where to aim.</span><span lang="nl">Verwachte slagen vanaf elke ligging en afstand, en waar je moet mikken.</span></figcaption>
+        </figure>
       </div>
     </div>
   </section>
