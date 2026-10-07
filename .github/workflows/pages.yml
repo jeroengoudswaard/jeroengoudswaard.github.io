@@ -1,0 +1,59 @@
+# Deploys this repository to GitHub Pages.
+#
+# Each app's web build is NOT committed here: an app repository publishes it
+# as an asset on a release in this repo (one fixed release tag per app), and
+# this workflow unpacks it into <app>/app/ at deploy time. App repositories
+# trigger a redeploy with a repository_dispatch event of type "app-released".
+name: Deploy site
+
+on:
+  push:
+    branches: [main]
+  repository_dispatch:
+    types: [app-released]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Assemble site
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir _site
+          rsync -a --exclude '.git' --exclude '.github' --exclude '_site' ./ _site/
+
+          # <release tag>:<folder>, one line per app with a web build.
+          for entry in "strokes-gained:strokes-gained"; do
+            tag="${entry%%:*}"; dir="${entry##*:}"
+            if gh release download "$tag" --repo "$GITHUB_REPOSITORY" \
+                 --pattern "${tag}-web.zip" --dir "/tmp/$tag"; then
+              mkdir -p "_site/$dir/app"
+              unzip -oq "/tmp/$tag/${tag}-web.zip" -d "_site/$dir/app"
+              echo "Unpacked web build for $tag"
+            else
+              echo "::notice::No web build released yet for $tag; keeping placeholder"
+            fi
+          done
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deployment
+        uses: actions/deploy-pages@v4

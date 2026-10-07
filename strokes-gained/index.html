@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Strokes Gained</title>
+  <meta name="description" content="Strokes Gained: golf target-zone calculator and shot-by-shot round tracker with GPS. See where you gain and lose strokes off the tee, on approach, around the green and putting.">
+  <link rel="icon" href="../assets/strokes-gained.jpg" type="image/jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Outfit:wght@400;500;600&family=Playfair+Display:ital,wght@0,700;0,800;1,700;1,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script src="../assets/site.js"></script>
+  <style>
+    /* Golf-green accent for this app, matching the app's own theme. */
+    :root { --accent: #2e7d32; --accent-soft: #e3f1e4; }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) { --accent: #4ade80; --accent-soft: #15301f; }
+    }
+    :root[data-theme="dark"] { --accent: #4ade80; --accent-soft: #15301f; }
+
+    .sg-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
+    .sg-head small { color: #b8cdb8; font: 500 10px var(--mono); letter-spacing: 0.1em; }
+    .sg-total { font-family: var(--serif); font-size: 44px; font-weight: 800; color: #4ade80; line-height: 1.1; }
+    .sg-sub { color: #b8cdb8; font-size: 12px; margin-bottom: 18px; }
+    .sg-row { display: grid; grid-template-columns: 38px 1fr 44px; gap: 8px; align-items: center; margin: 10px 0; font: 500 11px var(--mono); }
+    .sg-row span:first-child { color: #b8cdb8; }
+    .sg-row span:last-child { text-align: right; }
+    .bar { height: 8px; border-radius: 4px; background: #162e1c; position: relative; }
+    .bar i { position: absolute; top: 0; bottom: 0; border-radius: 4px; }
+    .bar .pos { left: 50%; background: #4ade80; }
+    .bar .neg { right: 50%; background: #ff6b6b; }
+    .bar::after { content: ""; position: absolute; left: 50%; top: -3px; bottom: -3px; width: 1px; background: #5a7a5e; }
+    .pos-t { color: #4ade80; } .neg-t { color: #ff6b6b; }
+    .hole-card { margin-top: 18px; background: #162e1c; border: 1px solid #1f4228; border-radius: 14px; padding: 12px 14px; }
+    .hole-card .top { display: flex; justify-content: space-between; font: 500 10px var(--mono); color: #b8cdb8; letter-spacing: 0.08em; }
+    .hole-card .dist { font-family: var(--serif); font-size: 22px; font-weight: 700; margin: 4px 0 2px; }
+    .hole-card .dist small { font-family: var(--sans); font-size: 12px; color: #b8cdb8; font-weight: 400; }
+    .tabs { display: flex; justify-content: space-between; margin-top: 18px; padding-top: 12px; border-top: 1px solid #1f4228; font-size: 10px; color: #5a7a5e; }
+    .tabs b { color: #4ade80; font-weight: 500; }
+  </style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="./"><img src="../assets/strokes-gained.jpg" alt="" width="30" height="30">Strokes Gained</a>
+    <nav class="nav-links">
+      <a href="../"><span lang="en">All apps</span><span lang="nl">Alle apps</span></a>
+      <a href="#features"><span lang="en">Features</span><span lang="nl">Functies</span></a>
+      <a href="#how"><span lang="en">How it works</span><span lang="nl">Hoe het werkt</span></a>
+      <a href="#faq">FAQ</a>
+      <a href="privacy/">Privacy</a>
+    </nav>
+    <div class="nav-tools">
+      <button class="icon-btn" data-lang-label type="button">NL</button>
+      <button class="icon-btn" data-theme-toggle type="button">☾</button>
+      <a class="btn dark" style="padding:8px 14px" href="#get">
+        <span lang="en">Open app →</span><span lang="nl">Open app →</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="pill">
+          <span lang="en">⛳ Know where your strokes go.</span>
+          <span lang="nl">⛳ Weet waar je slagen blijven.</span>
+        </span>
+        <h1>
+          <span lang="en">Strokes <em class="accent">Gained.</em></span>
+          <span lang="nl">Strokes <em class="accent">Gained.</em></span>
+        </h1>
+        <p class="lead">
+          <span lang="en">Track your round shot by shot and see exactly where you gain and lose strokes, off the tee, on approach, around the green and on the putting surface. Based on Broadie's Strokes Gained model, tuned to your handicap.</span>
+          <span lang="nl">Houd je ronde slag voor slag bij en zie precies waar je slagen wint en verliest: vanaf de tee, op de approach, rond de green en met putten. Gebaseerd op het Strokes Gained-model van Broadie, afgestemd op jouw handicap.</span>
+        </p>
+        <div class="actions" id="get">
+          <!-- Update these two links if the URLs change. -->
+          <a class="btn primary" href="https://github.com/jeroengoudswaard/jeroengoudswaard.github.io/releases/download/strokes-gained/strokes-gained.apk">
+            <span lang="en">Download APK (Android) →</span><span lang="nl">Download APK (Android) →</span>
+          </a>
+          <a class="btn" href="app/">
+            <span lang="en">Open web app</span><span lang="nl">Open web-app</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="phone" aria-label="App preview" role="img">
+        <div class="screen">
+          <div class="sg-head">
+            <small>STROKES GAINED</small>
+            <small>18 HOLES</small>
+          </div>
+          <div class="sg-total">+1.8</div>
+          <div class="sg-sub"><span lang="en">vs. HCP 18 baseline · score 92</span><span lang="nl">t.o.v. HCP 18 · score 92</span></div>
+          <div class="sg-row"><span>TEE</span><div class="bar"><i class="pos" style="width:22%"></i></div><span class="pos-t">+1.4</span></div>
+          <div class="sg-row"><span>APP</span><div class="bar"><i class="neg" style="width:14%"></i></div><span class="neg-t">−0.9</span></div>
+          <div class="sg-row"><span>SGM</span><div class="bar"><i class="pos" style="width:10%"></i></div><span class="pos-t">+0.6</span></div>
+          <div class="sg-row"><span>PUT</span><div class="bar"><i class="pos" style="width:12%"></i></div><span class="pos-t">+0.7</span></div>
+          <div class="hole-card">
+            <div class="top"><span>HOLE 7 · PAR 4</span><span>GPS ●</span></div>
+            <div class="dist">142 m <small><span lang="en">to the pin</span><span lang="nl">tot de vlag</span></small></div>
+            <div style="font-size:12px;color:#b8cdb8"><span lang="en">Fairway · expected 3.0 strokes</span><span lang="nl">Fairway · verwacht 3,0 slagen</span></div>
+          </div>
+          <div class="tabs">
+            <span>Calculator</span><b><span lang="en">Round</span><span lang="nl">Ronde</span></b><span><span lang="en">History</span><span lang="nl">Geschiedenis</span></span><span><span lang="en">Progress</span><span lang="nl">Voortgang</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="features">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow"><span lang="en">What's inside</span><span lang="nl">Wat zit erin</span></p>
+        <h2>
+          <span lang="en">Everything you need.<br><em class="accent">Nothing you don't.</em></span>
+          <span lang="nl">Alles wat je nodig hebt.<br><em class="accent">Niets wat je niet nodig hebt.</em></span>
+        </h2>
+        <p class="section-lead">
+          <span lang="en">The statistics tour pros use, made simple enough to log on the course.</span>
+          <span lang="nl">De statistieken die tourspelers gebruiken, simpel genoeg om op de baan bij te houden.</span>
+        </p>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <span class="emoji">🎯</span>
+          <h3><span lang="en">Target-zone calculator</span><span lang="nl">Doelzone-calculator</span></h3>
+          <p><span lang="en">Pick your lie and distance and see your expected strokes and which zone to aim for.</span><span lang="nl">Kies je ligging en afstand en zie je verwachte aantal slagen en op welke zone je moet mikken.</span></p>
+        </div>
+        <div class="card">
+          <span class="emoji">📍</span>
+          <h3><span lang="en">GPS round tracker</span><span lang="nl">GPS-rondetracker</span></h3>
+          <p><span lang="en">Log every shot hole by hole. GPS measures distances so entering a shot only takes a tap.</span><span lang="nl">Leg elke slag per hole vast. GPS meet de afstanden, dus een slag invoeren is één tik.</span></p>
+        </div>
+        <div class="card">
+          <span class="emoji">🛰️</span>
+          <h3><span lang="en">Bird's-eye view</span><span lang="nl">Birdseye view</span></h3>
+          <p><span lang="en">See the hole from above with your shots plotted, full screen if you like.</span><span lang="nl">Bekijk de hole van bovenaf met je slagen erop, desgewenst schermvullend.</span></p>
+        </div>
+        <div class="card">
+          <span class="emoji">📊</span>
+          <h3><span lang="en">Four SG categories</span><span lang="nl">Vier SG-categorieën</span></h3>
+          <p><span lang="en">Tee, approach, short game and putting, each compared with players of your handicap.</span><span lang="nl">Tee, approach, korte spel en putten, elk vergeleken met spelers van jouw handicap.</span></p>
+        </div>
+        <div class="card">
+          <span class="emoji">📈</span>
+          <h3><span lang="en">Progress over time</span><span lang="nl">Voortgang door de tijd</span></h3>
+          <p><span lang="en">Charts and stats across all your rounds show what's improving and what isn't.</span><span lang="nl">Grafieken en statistieken over al je rondes laten zien wat beter gaat en wat niet.</span></p>
+        </div>
+        <div class="card">
+          <span class="emoji">🏌️</span>
+          <h3><span lang="en">Club distances</span><span lang="nl">Clubafstanden</span></h3>
+          <p><span lang="en">Tag your clubs and get trimmed average and longest distances per club.</span><span lang="nl">Tag je clubs en krijg per club een gecorrigeerde gemiddelde en langste afstand.</span></p>
+        </div>
+        <div class="card">
+          <span class="emoji">🧮</span>
+          <h3><span lang="en">Course handicap</span><span lang="nl">Baanhandicap</span></h3>
+          <p><span lang="en">Look up your playing handicap for courses in the Netherlands and Scotland.</span><span lang="nl">Zoek je baanhandicap op voor banen in Nederland en Schotland.</span></p>
+        </div>
+        <div class="card">
+          <span class="emoji">🤖</span>
+          <h3><span lang="en">AI practice advice</span><span lang="nl">AI-trainingsadvies</span></h3>
+          <p><span lang="en">Optional: get prioritised practice tips based on your numbers, using your own Claude API key.</span><span lang="nl">Optioneel: krijg trainingstips op volgorde van prioriteit op basis van je cijfers, met je eigen Claude API-sleutel.</span></p>
+        </div>
+        <div class="card">
+          <span class="emoji">☁️</span>
+          <h3><span lang="en">Optional cloud backup</span><span lang="nl">Optionele cloudback-up</span></h3>
+          <p><span lang="en">Rounds are backed up automatically. Sign in with Google to get them back on a new device.</span><span lang="nl">Rondes worden automatisch geback-upt. Log in met Google om ze terug te krijgen op een nieuw toestel.</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow"><span lang="en">Simple by design</span><span lang="nl">Simpel ontworpen</span></p>
+        <h2><span lang="en">Play in <em class="accent">3 steps.</em></span><span lang="nl">Spelen in <em class="accent">3 stappen.</em></span></h2>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="num">01</div>
+          <h3><span lang="en">Pick your course</span><span lang="nl">Kies je baan</span></h3>
+          <p><span lang="en">Choose a course and tee, set your handicap and start a full or shorter round.</span><span lang="nl">Kies een baan en tee, stel je handicap in en start een volledige of kortere ronde.</span></p>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step">
+          <div class="num">02</div>
+          <h3><span lang="en">Log each shot</span><span lang="nl">Leg elke slag vast</span></h3>
+          <p><span lang="en">Tap where your ball lies. GPS fills in the distance; add a club if you want.</span><span lang="nl">Tik aan waar je bal ligt. GPS vult de afstand in; voeg desgewenst een club toe.</span></p>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step">
+          <div class="num">03</div>
+          <h3><span lang="en">See what to practise</span><span lang="nl">Zie wat je moet trainen</span></h3>
+          <p><span lang="en">Your round summary shows strokes gained per category plus your best and worst shots of the day.</span><span lang="nl">Je rondeoverzicht toont strokes gained per categorie plus je beste en slechtste slagen van de dag.</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow"><span lang="en">Who it's for</span><span lang="nl">Voor wie</span></p>
+        <h2><span lang="en">Built for <em class="accent">every golfer.</em></span><span lang="nl">Gemaakt voor <em class="accent">elke golfer.</em></span></h2>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <span class="emoji">🌱</span>
+          <h3><span lang="en">Beginners</span><span lang="nl">Beginners</span></h3>
+          <p><span lang="en">Find out early which part of your game costs the most strokes, and start there.</span><span lang="nl">Ontdek vroeg welk deel van je spel de meeste slagen kost, en begin daar.</span></p>
+        </div>
+        <div class="card">
+          <span class="emoji">⛳</span>
+          <h3><span lang="en">Club golfers</span><span lang="nl">Clubgolfers</span></h3>
+          <p><span lang="en">Stop guessing. See if it's really your putting, or those approach shots from 120 metres.</span><span lang="nl">Stop met gokken. Zie of het echt je putten is, of die approach van 120 meter.</span></p>
+        </div>
+        <div class="card">
+          <span class="emoji">🏆</span>
+          <h3><span lang="en">Low handicappers</span><span lang="nl">Lage handicappers</span></h3>
+          <p><span lang="en">Fine-tune with GIR by distance band, club distances and up-and-down percentages.</span><span lang="nl">Verfijn met GIR per afstandsband, clubafstanden en up-and-down-percentages.</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow"><span lang="en">Got questions?</span><span lang="nl">Vragen?</span></p>
+        <h2><span lang="en">Frequently asked <em class="accent">questions.</em></span><span lang="nl">Veelgestelde <em class="accent">vragen.</em></span></h2>
+      </div>
+      <div class="faq">
+        <details>
+          <summary><span lang="en">What is Strokes Gained?</span><span lang="nl">Wat is Strokes Gained?</span></summary>
+          <p><span lang="en">A way to measure each shot against how many strokes a player of your level would normally need from that spot. Gain strokes and your number goes up; lose them and it goes down. It's the method Mark Broadie developed and the PGA Tour uses.</span><span lang="nl">Een manier om elke slag te vergelijken met hoeveel slagen een speler van jouw niveau normaal nodig heeft vanaf die plek. Win je slagen, dan gaat je getal omhoog; verlies je ze, dan omlaag. Het is de methode die Mark Broadie ontwikkelde en die de PGA Tour gebruikt.</span></p>
+        </details>
+        <details>
+          <summary><span lang="en">Is it free?</span><span lang="nl">Is het gratis?</span></summary>
+          <p><span lang="en">Yes. The optional AI advice uses your own Claude API key, which Anthropic bills you for directly.</span><span lang="nl">Ja. Het optionele AI-advies gebruikt je eigen Claude API-sleutel; die rekent Anthropic rechtstreeks met je af.</span></p>
+        </details>
+        <details>
+          <summary><span lang="en">Do I need an account?</span><span lang="nl">Heb ik een account nodig?</span></summary>
+          <p><span lang="en">No. The app backs up your rounds under an anonymous ID automatically. Signing in with Google links that backup to your Google account, so you can restore it on another device.</span><span lang="nl">Nee. De app maakt automatisch een back-up van je rondes onder een anonieme ID. Inloggen met Google koppelt die back-up aan je Google-account, zodat je hem op een ander toestel terugkrijgt.</span></p>
+        </details>
+        <details>
+          <summary><span lang="en">How do I install the APK?</span><span lang="nl">Hoe installeer ik de APK?</span></summary>
+          <p><span lang="en">Open the download on your Android phone and tap the file. Android asks once to allow installs from your browser; allow it and tap Install. To update, download the new APK and install it over the old one; your rounds are kept.</span><span lang="nl">Open de download op je Android-telefoon en tik op het bestand. Android vraagt één keer of je installaties vanuit je browser toestaat; sta dat toe en tik op Installeren. Voor een update download je de nieuwe APK en installeer je die over de oude heen; je rondes blijven bewaard.</span></p>
+        </details>
+        <details>
+          <summary><span lang="en">Can I use it on iPhone?</span><span lang="nl">Werkt het op iPhone?</span></summary>
+          <p><span lang="en">Yes, in Safari. Add it to your home screen (Share → Add to Home Screen) and sign in, so your rounds are kept when Safari closes.</span><span lang="nl">Ja, in Safari. Zet het op je beginscherm (Delen → Zet op beginscherm) en log in, zodat je rondes bewaard blijven als Safari sluit.</span></p>
+        </details>
+        <details>
+          <summary><span lang="en">Metres or yards?</span><span lang="nl">Meters of yards?</span></summary>
+          <p><span lang="en">Both. Switch to yards and feet in the settings.</span><span lang="nl">Allebei. Schakel in de instellingen over naar yards en feet.</span></p>
+        </details>
+        <details>
+          <summary><span lang="en">What happens to my location?</span><span lang="nl">Wat gebeurt er met mijn locatie?</span></summary>
+          <p><span lang="en">GPS is used on your device to measure shot distances. Your coordinates are not stored in your rounds or sent to us. See the <a href="privacy/">privacy policy</a> for details.</span><span lang="nl">GPS wordt op je toestel gebruikt om slagafstanden te meten. Je coördinaten worden niet in je rondes opgeslagen en niet naar ons gestuurd. Zie het <a href="privacy/">privacybeleid</a> voor details.</span></p>
+        </details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="dark-zone">
+  <div class="wrap cta">
+    <h2><span lang="en">Ready to tee off?</span><span lang="nl">Klaar om af te slaan?</span></h2>
+    <p class="lead">
+      <span lang="en">No account needed. Open the app and log your next round.</span>
+      <span lang="nl">Geen account nodig. Open de app en houd je volgende ronde bij.</span>
+    </p>
+    <div class="actions">
+      <a class="btn primary" href="https://github.com/jeroengoudswaard/jeroengoudswaard.github.io/releases/download/strokes-gained/strokes-gained.apk"><span lang="en">Download APK (Android) →</span><span lang="nl">Download APK (Android) →</span></a>
+      <a class="btn" href="app/"><span lang="en">Open web app</span><span lang="nl">Open web-app</span></a>
+    </div>
+  </div>
+  <footer>
+    <div class="wrap">
+      <div class="foot-grid">
+        <div>
+          <a class="brand" href="./"><img src="../assets/strokes-gained.jpg" alt="" width="30" height="30">Strokes Gained</a>
+          <p><span lang="en">Golf statistics that tell you what to practise.</span><span lang="nl">Golfstatistieken die je vertellen wat je moet trainen.</span></p>
+        </div>
+        <div class="foot-col">
+          <h4>App</h4>
+          <a href="#features"><span lang="en">Features</span><span lang="nl">Functies</span></a>
+          <a href="#how"><span lang="en">How it works</span><span lang="nl">Hoe het werkt</span></a>
+          <a href="#faq">FAQ</a>
+        </div>
+        <div class="foot-col">
+          <h4><span lang="en">Legal</span><span lang="nl">Juridisch</span></h4>
+          <a href="privacy/"><span lang="en">Privacy policy</span><span lang="nl">Privacybeleid</span></a>
+        </div>
+        <div class="foot-col">
+          <h4><span lang="en">More</span><span lang="nl">Meer</span></h4>
+          <a href="../"><span lang="en">All apps</span><span lang="nl">Alle apps</span></a>
+          <a href="https://github.com/jeroengoudswaard/strokes_gained/issues"><span lang="en">Report a problem</span><span lang="nl">Probleem melden</span></a>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span>© <span data-year>2026</span> Jeroen Goudswaard</span>
+        <span>Strokes Gained v1.6</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+</body>
+</html>
