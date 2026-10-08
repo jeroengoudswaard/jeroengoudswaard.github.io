@@ -29,3 +29,9 @@ The strokes_gained repo's `Release app` workflow builds the web app and APK,
 uploads them to the `strokes-gained` release in this repo, and triggers a
 redeploy. The APK link is always
 `https://github.com/jeroengoudswaard/jeroengoudswaard.github.io/releases/download/strokes-gained/strokes-gained.apk`.
+
+## Google Search Console
+
+`googleffdf8ada715d6ce6.html` in the root verifies ownership of the site for
+Google Search Console. Don't delete or rename it: Google re-checks it, and the
+site loses its verified status when it's gone.
