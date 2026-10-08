@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://jeroengoudswaard.github.io/sitemap.xml

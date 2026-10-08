@@ -19,6 +19,7 @@ Text is bilingual: write every string as
 
 1. Copy `strokes-gained/` to `<new-app>/` and rewrite the text.
 2. Add a card for it in `index.html` (copy the Strokes Gained `<a class="card tint">`).
+   Add its page (and privacy page) to `sitemap.xml`, and update `<lastmod>` when a page changes.
 3. If it has a web build, add `"<new-app>:<new-app>"` to the loop in
    `.github/workflows/pages.yml` and publish `<new-app>-web.zip` on a release
    tagged `<new-app>` (see the release workflow in the strokes_gained repo).
