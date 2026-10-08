@@ -1,4 +1,4 @@
-# Goudswaard Apps website
+# Shockwave Apps website
 
 Source for https://jeroengoudswaard.github.io, the home of Strokes Gained and
 future apps. Plain HTML/CSS/JS, no build step.
