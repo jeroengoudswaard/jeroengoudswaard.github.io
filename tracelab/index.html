@@ -12,15 +12,20 @@
   <link rel="stylesheet" href="../assets/site.css">
   <script src="../assets/site.js"></script>
   <style>
-    /* Gold accent comes from the shared stylesheet, matching the logo. */
+    /* TraceLab orange, the app's own signal colour. */
+    :root { --accent: #b4501a; --accent-soft: #fbe3d4; }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) { --accent: #ff9650; --accent-soft: #3a2418; }
+    }
+    :root[data-theme="dark"] { --accent: #ff9650; --accent-soft: #3a2418; }
     .beta-pill { border-style: dashed; }
     .scope {
-      background: #1a1a2e; color: #f2efe9; border-radius: 28px; padding: 28px;
+      background: #0b0b0e; color: #f2efe9; border-radius: 28px; padding: 28px;
       box-shadow: 0 30px 60px rgba(27, 27, 43, 0.25); max-width: 380px; margin: 0 auto; width: 100%;
     }
     .scope img { width: 100%; height: auto; display: block; margin: 6px 0 22px; }
-    .scope .stat { display: flex; justify-content: space-between; align-items: baseline; padding: 12px 0; border-top: 1px solid #2e2e44; }
-    .scope .stat b { font-family: var(--serif); font-size: 26px; color: #e2b13c; font-weight: 800; }
+    .scope .stat { display: flex; justify-content: space-between; align-items: baseline; padding: 12px 0; border-top: 1px solid #26262e; }
+    .scope .stat b { font-family: var(--serif); font-size: 26px; color: #ff9650; font-weight: 800; }
     .scope .stat span { color: #b9b7c6; font-size: 13px; text-align: right; max-width: 55%; }
     .scope small { display: block; margin-top: 10px; color: #8d8b9c; font: 12px var(--mono); }
     .notice {
@@ -82,7 +87,7 @@
       </div>
 
       <div class="scope" role="img" aria-label="TraceLab performance figures">
-        <img src="../assets/tracelab-mark.svg" alt="" width="320" height="286">
+        <img src="../assets/tracelab-mark.svg" alt="" width="320" height="320" style="max-width:220px;margin-left:auto;margin-right:auto">
         <div class="stat"><b>~3 GB/s</b><span><span lang="en">IBM-float decode per core (AVX2)</span><span lang="nl">IBM-float decoderen per core (AVX2)</span></span></div>
         <div class="stat"><b>~5×</b><span><span lang="en">faster than plain scalar decoding</span><span lang="nl">sneller dan gewone scalaire decodering</span></span></div>
         <div class="stat"><b>~3 ms</b><span><span lang="en">to lay out a wiggle frame of a 50,000-trace file</span><span lang="nl">voor een wiggle-beeld van een bestand met 50.000 traces</span></span></div>

@@ -11,6 +11,14 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Outfit:wght@400;500;600&family=Playfair+Display:ital,wght@0,700;0,800;1,700;1,800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../assets/site.css">
   <script src="../../assets/site.js"></script>
+  <style>
+    /* TraceLab orange, the app's own signal colour. */
+    :root { --accent: #b4501a; --accent-soft: #fbe3d4; }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) { --accent: #ff9650; --accent-soft: #3a2418; }
+    }
+    :root[data-theme="dark"] { --accent: #ff9650; --accent-soft: #3a2418; }
+  </style>
 </head>
 <body>
 
