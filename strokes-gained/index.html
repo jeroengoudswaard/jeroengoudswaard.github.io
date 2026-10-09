@@ -30,6 +30,10 @@
     .gallery .phone { width: 100%; box-shadow: 0 16px 36px rgba(27, 27, 43, 0.18); }
     .gallery figcaption { margin-top: 16px; font-size: 14px; color: var(--ink-soft); }
     .gallery figcaption strong { display: block; color: var(--ink); font-family: var(--serif); font-size: 16px; margin-bottom: 4px; }
+    .mapper-callout { margin-top: 40px; display: grid !important; grid-template-columns: auto 1fr auto; gap: 20px; align-items: center; }
+    .mapper-callout .app-icon { margin: 0; width: 56px; height: 56px; }
+    .mapper-callout .open { white-space: nowrap; padding-top: 0; margin-top: 0; }
+    @media (max-width: 820px) { .mapper-callout { grid-template-columns: 1fr; gap: 14px; } .mapper-callout .open { grid-column: 1 / -1; } }
     @media (min-width: 1024px) { .gallery { grid-auto-flow: row; grid-template-columns: repeat(4, 1fr); grid-auto-columns: auto; overflow: visible; } }
   </style>
 </head>
@@ -224,6 +228,14 @@
           <p><span lang="en">Your round summary shows strokes gained per category plus your best and worst shots of the day.</span><span lang="nl">Je rondeoverzicht toont strokes gained per categorie plus je beste en slechtste slagen van de dag.</span></p>
         </div>
       </div>
+      <a class="card tint mapper-callout" href="mapper/">
+        <img class="app-icon" src="../assets/course-mapper.svg" alt="" width="44" height="44">
+        <div>
+          <h3><span lang="en">No GPS for your course yet? <em class="accent">Map it yourself.</em></span><span lang="nl">Nog geen GPS voor jouw baan? <em class="accent">Map hem zelf.</em></span></h3>
+          <p><span lang="en">With the Course Mapper you click the tee, the middle of the green and any dogleg of every hole on a satellite map. Download the CSV and import it in the app under More → GPS coordinates. Works best on a computer.</span><span lang="nl">Met de baan-mapper klik je per hole de tee, het midden van de green en eventueel de dogleg aan op een satellietkaart. Download de CSV en importeer hem in de app via Meer → GPS-coördinaten. Werkt het fijnst op een computer.</span></p>
+        </div>
+        <span class="open"><span lang="en">Open Course Mapper →</span><span lang="nl">Open baan-mapper →</span></span>
+      </a>
     </div>
   </section>
 
@@ -285,6 +297,10 @@
           <p><span lang="en">Both. Switch to yards and feet in the settings.</span><span lang="nl">Allebei. Schakel in de instellingen over naar yards en feet.</span></p>
         </details>
         <details>
+          <summary><span lang="en">My course has no GPS coordinates. Now what?</span><span lang="nl">Mijn baan heeft geen GPS-coördinaten. Wat nu?</span></summary>
+          <p><span lang="en">Map it yourself with the <a href="mapper/">Course Mapper</a>: search for your course, click the tee, the middle of the green and any dogleg of every hole, and download the CSV. In the app, go to More → GPS coordinates → Import CSV and enter the same course name.</span><span lang="nl">Map hem zelf met de <a href="mapper/">baan-mapper</a>: zoek je baan op, klik per hole de tee, het midden van de green en eventueel de dogleg aan en download de CSV. Ga in de app naar Meer → GPS-coördinaten → CSV importeren en vul dezelfde baannaam in.</span></p>
+        </details>
+        <details>
           <summary><span lang="en">What happens to my location?</span><span lang="nl">Wat gebeurt er met mijn locatie?</span></summary>
           <p><span lang="en">GPS is used on your device to measure shot distances. Your coordinates are not stored in your rounds or sent to us. See the <a href="privacy/">privacy policy</a> for details.</span><span lang="nl">GPS wordt op je toestel gebruikt om slagafstanden te meten. Je coördinaten worden niet in je rondes opgeslagen en niet naar ons gestuurd. Zie het <a href="privacy/">privacybeleid</a> voor details.</span></p>
         </details>
@@ -317,6 +333,7 @@
           <a href="#features"><span lang="en">Features</span><span lang="nl">Functies</span></a>
           <a href="#how"><span lang="en">How it works</span><span lang="nl">Hoe het werkt</span></a>
           <a href="#faq">FAQ</a>
+          <a href="mapper/"><span lang="en">Course Mapper</span><span lang="nl">Baan-mapper</span></a>
         </div>
         <div class="foot-col">
           <h4><span lang="en">Legal</span><span lang="nl">Juridisch</span></h4>

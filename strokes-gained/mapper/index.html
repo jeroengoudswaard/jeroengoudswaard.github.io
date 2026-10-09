@@ -1,0 +1,716 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Course Mapper</title>
+  <meta name="description" content="Course Mapper for Strokes Gained: click the tee, the middle of the green and an optional dogleg for every hole on a satellite map, and download a CSV the app imports directly.">
+  <link rel="icon" href="../../assets/course-mapper.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Outfit:wght@400;500;600&family=Playfair+Display:ital,wght@0,700;0,800;1,700;1,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="../../assets/site.css">
+  <script src="../../assets/site.js"></script>
+  <style>
+    /* Golf-green accent, same as the Strokes Gained page. */
+    :root { --accent: #2e7d32; --accent-soft: #e3f1e4; --tee: #ffffff; --green: #22c55e; --bend: #f5a524; }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) { --accent: #4ade80; --accent-soft: #15301f; }
+    }
+    :root[data-theme="dark"] { --accent: #4ade80; --accent-soft: #15301f; }
+
+    html, body { height: 100%; }
+    body { display: flex; flex-direction: column; overflow: hidden; }
+    .nav { position: relative; flex-shrink: 0; }
+    .nav .wrap { max-width: none; padding: 0 16px; height: 56px; }
+    .nav-tools { margin-left: auto; }
+    .tool-badge {
+      font: 500 11px var(--mono); padding: 2px 8px; border-radius: 999px;
+      color: var(--accent); background: var(--accent-soft); border: 1px solid var(--accent);
+    }
+
+    .app { flex: 1; min-height: 0; display: grid; grid-template-columns: 380px 1fr; }
+    .panel {
+      overflow-y: auto; border-right: 1px solid var(--line); background: var(--bg);
+      padding: 16px; display: flex; flex-direction: column; gap: 14px;
+    }
+    .card {
+      background: var(--card-raised); border: 1px solid var(--line);
+      border-radius: var(--radius); padding: 14px;
+    }
+    .card h3 { font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--ink-soft); margin: 0 0 10px; }
+    label.field { display: block; font-size: 13px; color: var(--ink-soft); margin-bottom: 4px; }
+    input[type="text"], input[type="search"] {
+      width: 100%; height: 38px; padding: 0 12px; border-radius: 8px;
+      border: 1px solid var(--line); background: var(--bg); color: var(--ink);
+      font: 15px var(--sans);
+    }
+    input:focus { outline: 2px solid var(--accent); outline-offset: -1px; border-color: transparent; }
+    .row { display: flex; gap: 8px; align-items: center; }
+    .row > input { flex: 1; min-width: 0; }
+    .mt { margin-top: 10px; }
+
+    .b {
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+      height: 38px; padding: 0 14px; border-radius: 8px; border: 1px solid var(--line);
+      background: var(--card); color: var(--ink); font: 600 13px var(--sans);
+      cursor: pointer; white-space: nowrap;
+    }
+    .b:hover:not(:disabled) { border-color: var(--ink-soft); }
+    .b:disabled { opacity: 0.45; cursor: default; }
+    .b.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+    .b.ghost { background: transparent; }
+    .b.danger:hover:not(:disabled) { border-color: #d14343; color: #d14343; }
+    .b.sq { width: 38px; padding: 0; font-size: 18px; }
+    .hole-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .hole-actions #nextBig { grid-column: span 2; }
+
+    .results { list-style: none; margin: 8px 0 0; padding: 0; border: 1px solid var(--line);
+      border-radius: 8px; overflow: hidden; }
+    .results:empty { display: none; }
+    .results li { padding: 8px 12px; font-size: 13px; line-height: 1.35; cursor: pointer;
+      border-bottom: 1px solid var(--line); background: var(--bg); }
+    .results li:last-child { border-bottom: 0; }
+    .results li:hover, .results li:focus { background: var(--accent-soft); outline: none; }
+    .results li.msg { cursor: default; color: var(--ink-soft); }
+    .results li.msg:hover { background: var(--bg); }
+
+    /* Current hole */
+    .hole-head { display: flex; align-items: center; gap: 8px; }
+    .hole-title { flex: 1; text-align: center; font-family: var(--serif); font-size: 30px; font-weight: 800; line-height: 1; }
+    .hole-dist { text-align: center; font: 500 13px var(--mono); color: var(--ink-soft); margin-top: 6px; min-height: 1.4em; }
+    .steps-list { list-style: none; margin: 14px 0 12px; padding: 0; display: grid; gap: 6px; }
+    .steps-list li {
+      display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 8px;
+      border: 1px solid var(--line); font-size: 14px; color: var(--ink-soft);
+    }
+    .steps-list li .dot {
+      width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0;
+      display: grid; place-items: center; font: 600 12px var(--sans);
+      border: 2px solid var(--ink-faint); color: var(--ink-soft);
+    }
+    .steps-list li small { margin-left: auto; font-size: 12px; }
+    .steps-list li.done { color: var(--ink); }
+    .steps-list li.done .dot { border-color: var(--accent); background: var(--accent); color: var(--on-accent); }
+    .steps-list li.now { border-color: var(--accent); background: var(--accent-soft); color: var(--ink); font-weight: 600; }
+    .steps-list li.now .dot { border-color: var(--accent); color: var(--accent); }
+    .hint { font-size: 13px; color: var(--ink-soft); margin: 0 0 12px; line-height: 1.45; }
+    kbd { font: 500 11px var(--mono); padding: 1px 5px; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 4px; background: var(--card); }
+
+    /* Hole grid */
+    .holes { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; }
+    .holes button {
+      position: relative; height: 40px; border-radius: 8px; border: 1px solid var(--line);
+      background: var(--bg); color: var(--ink-soft); font: 600 14px var(--sans); cursor: pointer;
+    }
+    .holes button.part { border-style: dashed; border-color: var(--bend); color: var(--ink); }
+    .holes button.ok { background: var(--accent-soft); border-color: var(--accent); color: var(--ink); }
+    .holes button.cur { outline: 2px solid var(--ink); outline-offset: 1px; }
+    .holes button .flag { position: absolute; top: 2px; right: 4px; font-size: 9px; color: var(--bend); }
+    .legend { display: flex; gap: 12px; flex-wrap: wrap; font-size: 12px; color: var(--ink-soft); margin-top: 10px; }
+    .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; border: 1px solid var(--line); }
+    .legend .l-ok { background: var(--accent-soft); border-color: var(--accent); }
+    .legend .l-part { border: 1px dashed var(--bend); }
+
+    /* Export */
+    .csv {
+      margin: 0; max-height: 160px; overflow: auto; padding: 10px 12px; border-radius: 8px;
+      background: var(--bg); border: 1px solid var(--line);
+      font: 12px/1.55 var(--mono); color: var(--ink); white-space: pre;
+    }
+    .csv.empty { color: var(--ink-soft); white-space: normal; font-family: var(--sans); }
+    .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+    .btn-grid .wide { grid-column: span 2; }
+    .note { font-size: 12px; color: var(--ink-soft); margin: 10px 0 0; line-height: 1.5; }
+    .warn { color: #b7791f; }
+
+    /* Map */
+    .map-wrap { position: relative; min-height: 0; }
+    #map { position: absolute; inset: 0; background: #1d2a1f; }
+    .banner {
+      position: absolute; z-index: 500; top: 12px; left: 50%; transform: translateX(-50%);
+      display: flex; align-items: center; gap: 10px; max-width: calc(100% - 120px);
+      padding: 8px 16px 8px 8px; border-radius: 999px;
+      background: rgba(20, 22, 30, 0.86); color: #fff; backdrop-filter: blur(6px);
+      font-size: 14px; box-shadow: 0 6px 20px rgba(0,0,0,0.3); pointer-events: none;
+    }
+    .banner b { white-space: nowrap; }
+    .banner span.t { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .cursor-tip {
+      position: absolute; z-index: 600; pointer-events: none; display: none;
+      padding: 3px 8px; border-radius: 6px; background: rgba(20, 22, 30, 0.86); color: #fff;
+      font: 600 12px var(--sans); white-space: nowrap; transform: translate(14px, 14px);
+    }
+    .toast {
+      position: absolute; z-index: 700; left: 50%; bottom: 28px; transform: translate(-50%, 20px);
+      padding: 10px 16px; border-radius: 10px; background: var(--ink); color: var(--bg);
+      font-size: 14px; opacity: 0; transition: opacity .2s, transform .2s; pointer-events: none;
+    }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+    /* Markers */
+    .pin {
+      width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center;
+      font: 700 12px var(--sans); border: 2px solid #fff; box-shadow: 0 2px 6px rgba(0,0,0,.5);
+    }
+    .pin.tee { background: #fff; color: #1b1b2b; border-color: #1b1b2b; }
+    .pin.green { background: var(--green); color: #06280f; }
+    .pin.bend { background: var(--bend); color: #3a2400; }
+    .pin.dim { width: 18px; height: 18px; font-size: 9px; border-width: 1.5px; opacity: .85; }
+    .hole-no {
+      font: 700 11px var(--sans); color: #fff; background: rgba(20,22,30,.8);
+      border-radius: 999px; padding: 1px 7px; white-space: nowrap; transform: translate(-50%, -150%);
+      display: inline-block; cursor: pointer;
+    }
+    .leaflet-container { font-family: var(--sans); }
+
+    @media (max-width: 860px) {
+      body { overflow: auto; display: block; }
+      .app { display: flex; flex-direction: column-reverse; }
+      .map-wrap { height: 62vh; flex-shrink: 0; }
+      .panel { overflow: visible; border-right: 0; }
+      .banner { font-size: 13px; max-width: calc(100% - 80px); }
+      .cursor-tip { display: none !important; }
+    }
+    @media (max-width: 540px) {
+      .crumb-tool { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a class="crumb-home" href="../../"><img src="../../assets/shockwave.svg" alt="" width="26" height="26"><span class="crumb-label">Shockwave Apps</span></a>
+      <span class="crumb-sep" aria-hidden="true">›</span>
+      <a class="brand" href="../"><img src="../../assets/strokes-gained.svg" alt="" width="30" height="30">Strokes Gained</a>
+      <span class="crumb-sep crumb-tool" aria-hidden="true">›</span>
+      <span class="crumb-current crumb-tool" aria-current="page"><span lang="en">Course Mapper</span><span lang="nl">Baan-mapper</span></span>
+    </nav>
+    <div class="nav-tools">
+      <button class="icon-btn" data-lang-label type="button">NL</button>
+      <button class="icon-btn" data-theme-toggle type="button">☾</button>
+    </div>
+  </div>
+</header>
+
+<div class="app">
+  <aside class="panel">
+
+    <div class="card">
+      <h3><span lang="en">1 · Course</span><span lang="nl">1 · Baan</span></h3>
+      <label class="field" for="course"><span lang="en">Course name</span><span lang="nl">Naam van de baan</span></label>
+      <input type="text" id="course" autocomplete="off" placeholder="Leeuwenbergh">
+      <form id="searchForm" class="row mt" autocomplete="off">
+        <input type="search" id="q" aria-label="Search" data-ph-en="Find a golf course or town…" data-ph-nl="Zoek een golfbaan of plaats…">
+        <button class="b" type="submit"><span lang="en">Find</span><span lang="nl">Zoek</span></button>
+      </form>
+      <ul class="results" id="results"></ul>
+    </div>
+
+    <div class="card">
+      <h3><span lang="en">2 · Click the holes</span><span lang="nl">2 · Klik de holes</span></h3>
+      <div class="hole-head">
+        <button class="b sq ghost" id="prev" type="button" aria-label="Previous hole">‹</button>
+        <div class="hole-title">Hole <span id="holeNo">1</span></div>
+        <button class="b sq ghost" id="next" type="button" aria-label="Next hole">›</button>
+      </div>
+      <div class="hole-dist" id="dist"></div>
+      <ol class="steps-list" id="steps">
+        <li data-k="tee"><span class="dot">T</span><span>Tee</span></li>
+        <li data-k="green"><span class="dot">G</span><span lang="en">Middle of the green</span><span lang="nl">Midden green</span></li>
+        <li data-k="bend"><span class="dot">D</span><span>Dogleg</span><small><span lang="en">optional</span><span lang="nl">optioneel</span></small></li>
+      </ol>
+      <p class="hint" id="hint"></p>
+      <div class="hole-actions">
+        <button class="b" id="undo" type="button" title="Ctrl+Z">↶ <span lang="en">Undo</span><span lang="nl">Ongedaan</span></button>
+        <button class="b danger" id="clearHole" type="button"><span lang="en">Clear hole</span><span lang="nl">Hole wissen</span></button>
+        <button class="b primary" id="nextBig" type="button"><span lang="en">Next hole →</span><span lang="nl">Volgende hole →</span></button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3><span lang="en">Holes</span><span lang="nl">Holes</span> · <span id="count">0/18</span></h3>
+      <div class="holes" id="holes"></div>
+      <div class="legend">
+        <span><i class="l-ok"></i><span lang="en">tee + green</span><span lang="nl">tee + green</span></span>
+        <span><i class="l-part"></i><span lang="en">incomplete</span><span lang="nl">onvolledig</span></span>
+        <span><b style="color:var(--bend)">●</b> dogleg</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3><span lang="en">3 · Export for the app</span><span lang="nl">3 · Exporteer voor de app</span></h3>
+      <pre class="csv" id="csv"></pre>
+      <div class="btn-grid">
+        <button class="b primary wide" id="download" type="button">⤓ <span lang="en">Download CSV</span><span lang="nl">Download CSV</span></button>
+        <button class="b" id="copy" type="button"><span lang="en">Copy</span><span lang="nl">Kopieer</span></button>
+        <button class="b" id="openFile" type="button"><span lang="en">Open CSV…</span><span lang="nl">Open CSV…</span></button>
+        <button class="b danger wide ghost" id="clearAll" type="button"><span lang="en">Start a new course</span><span lang="nl">Begin een nieuwe baan</span></button>
+      </div>
+      <input type="file" id="file" accept=".csv,.txt,text/csv,text/plain" hidden>
+      <p class="note" id="warn"></p>
+      <p class="note">
+        <span lang="en">In Strokes Gained: <b>More → GPS coordinates → Import CSV</b>, enter the same course name and pick the file. Your work is kept in this browser until you start a new course.</span>
+        <span lang="nl">In Strokes Gained: <b>Meer → GPS-coördinaten → CSV importeren</b>, vul dezelfde baannaam in en kies het bestand. Je werk blijft in deze browser bewaard tot je een nieuwe baan begint.</span>
+      </p>
+    </div>
+
+  </aside>
+
+  <div class="map-wrap">
+    <div id="map"></div>
+    <div class="banner" id="banner"><b class="pin tee" id="bannerPin">T</b><span class="t" id="bannerText"></span></div>
+    <div class="cursor-tip" id="tip"></div>
+    <div class="toast" id="toast"></div>
+  </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+(function () {
+  "use strict";
+
+  var HOLES = 18;
+  var STORE = "sg-mapper-v1";
+  var KEYS = ["tee", "green", "bend"];
+  var LETTER = { tee: "T", green: "G", bend: "D" };
+
+  var T = {
+    en: {
+      stepTee: "click the tee",
+      stepGreen: "click the middle of the green",
+      stepBend: "dogleg? click the corner, or press Next",
+      done: "done — drag a pin to adjust",
+      bannerTee: "Hole {h} · click the <b>tee</b>",
+      bannerGreen: "Hole {h} · click the <b>middle of the green</b>",
+      bannerBend: "Hole {h} · <b>dogleg</b>? Click the corner — or press Next",
+      bannerDone: "Hole {h} · done. Drag pins to adjust",
+      hintTee: "Start at the tee box you usually play from.",
+      hintGreen: "Click the middle of the green, not the flag.",
+      hintBend: "Only for a dogleg: click where the fairway bends. Straight hole? Go to the next hole.",
+      hintDone: "All three points set. Drag a pin to move it.",
+      hintKeys: " Keys: <kbd>←</kbd> <kbd>→</kbd> holes, <kbd>Ctrl</kbd>+<kbd>Z</kbd> undo.",
+      empty: "Nothing to export yet. Click a tee and a green on the map.",
+      warnTee: "Hole {l}: no green yet, so it is left out.",
+      copied: "CSV copied",
+      saved: "Downloaded {f}",
+      loaded: "{n} holes loaded",
+      loadErr: "No holes found in this file",
+      confirmNew: "Start a new course? The current holes are removed.",
+      confirmLoad: "Replace the current holes with this file?",
+      searching: "Searching…",
+      noResults: "Nothing found. Try the town name.",
+      searchErr: "Search is unavailable right now.",
+      jumped: "Jumped to coordinates",
+      tipTee: "Hole {h} · Tee",
+      tipGreen: "Hole {h} · Middle of green",
+      tipBend: "Hole {h} · Dogleg",
+      unit: "to the green"
+    },
+    nl: {
+      stepTee: "klik op de tee",
+      stepGreen: "klik op het midden van de green",
+      stepBend: "dogleg? klik op de knik, of druk Volgende",
+      done: "klaar — sleep een punt om te verschuiven",
+      bannerTee: "Hole {h} · klik op de <b>tee</b>",
+      bannerGreen: "Hole {h} · klik op het <b>midden van de green</b>",
+      bannerBend: "Hole {h} · <b>dogleg</b>? Klik op de knik — of druk Volgende",
+      bannerDone: "Hole {h} · klaar. Sleep punten om bij te stellen",
+      hintTee: "Begin bij de tee waar je meestal vanaf speelt.",
+      hintGreen: "Klik op het midden van de green, niet op de vlag.",
+      hintBend: "Alleen bij een dogleg: klik waar de fairway knikt. Rechte hole? Ga door naar de volgende.",
+      hintDone: "Alle drie de punten staan. Sleep een punt om het te verplaatsen.",
+      hintKeys: " Toetsen: <kbd>←</kbd> <kbd>→</kbd> holes, <kbd>Ctrl</kbd>+<kbd>Z</kbd> ongedaan maken.",
+      empty: "Nog niets te exporteren. Klik een tee en een green op de kaart.",
+      warnTee: "Hole {l}: nog geen green, dus die gaat niet mee.",
+      copied: "CSV gekopieerd",
+      saved: "{f} gedownload",
+      loaded: "{n} holes geladen",
+      loadErr: "Geen holes gevonden in dit bestand",
+      confirmNew: "Nieuwe baan beginnen? De huidige holes worden gewist.",
+      confirmLoad: "De huidige holes vervangen door dit bestand?",
+      searching: "Zoeken…",
+      noResults: "Niets gevonden. Probeer de plaatsnaam.",
+      searchErr: "Zoeken lukt nu even niet.",
+      jumped: "Naar coördinaten gesprongen",
+      tipTee: "Hole {h} · Tee",
+      tipGreen: "Hole {h} · Midden green",
+      tipBend: "Hole {h} · Dogleg",
+      unit: "tot de green"
+    }
+  };
+  function lang() { return document.documentElement.getAttribute("data-lang") === "nl" ? "nl" : "en"; }
+  function t(key, vars) {
+    var s = T[lang()][key];
+    if (vars) Object.keys(vars).forEach(function (k) { s = s.split("{" + k + "}").join(vars[k]); });
+    return s;
+  }
+  function $(id) { return document.getElementById(id); }
+
+  // ── State ──
+  var state = { course: "", cur: 1, holes: {}, view: null };
+  var history = [];
+  function hole(n) { return state.holes[n] || (state.holes[n] = {}); }
+  try {
+    var raw = localStorage.getItem(STORE);
+    if (raw) {
+      var s = JSON.parse(raw);
+      if (s && typeof s === "object" && s.holes) state = Object.assign(state, s);
+    }
+  } catch (e) { /* storage unavailable */ }
+  function persist() {
+    state.view = { c: map.getCenter(), z: map.getZoom() };
+    try { localStorage.setItem(STORE, JSON.stringify(state)); } catch (e) { /* ignore */ }
+  }
+
+  // ── Map ──
+  var map = L.map("map", { zoomControl: false, doubleClickZoom: false }).setView([52.2, 5.3], 8);
+  L.control.zoom({ position: "bottomright" }).addTo(map);
+  var imagery = L.tileLayer(
+    "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+    { maxZoom: 20, maxNativeZoom: 19, attribution: "Imagery © Esri, Maxar, Earthstar Geographics" }
+  ).addTo(map);
+  var labels = L.tileLayer(
+    "https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}",
+    { maxZoom: 20, maxNativeZoom: 19 }
+  );
+  var streets = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+    { maxZoom: 20, maxNativeZoom: 19, attribution: "© OpenStreetMap contributors" });
+  L.control.layers({ "Satellite": imagery, "OpenStreetMap": streets }, { "Labels": labels },
+    { position: "topright" }).addTo(map);
+  L.control.scale({ position: "bottomleft", imperial: false }).addTo(map);
+  if (state.view && state.view.c) map.setView(state.view.c, state.view.z);
+  map.attributionControl.addAttribution("Search © OpenStreetMap / Nominatim");
+
+  var layer = L.layerGroup().addTo(map);
+
+  function pinIcon(k, active) {
+    return L.divIcon({
+      className: "", iconSize: active ? [28, 28] : [18, 18],
+      html: '<div class="pin ' + k + (active ? "" : " dim") + '">' + LETTER[k] + "</div>"
+    });
+  }
+  function path(h) {
+    var p = [];
+    if (h.tee) p.push(h.tee);
+    if (h.bend) p.push(h.bend);
+    if (h.green) p.push(h.green);
+    return p;
+  }
+  function metres(pts) {
+    var d = 0;
+    for (var i = 1; i < pts.length; i++) d += L.latLng(pts[i - 1]).distanceTo(L.latLng(pts[i]));
+    return d;
+  }
+
+  function drawMap() {
+    layer.clearLayers();
+    for (var n = 1; n <= HOLES; n++) if (state.holes[n]) drawHole(n);
+  }
+  function drawHole(n) {
+      var h = state.holes[n];
+      var active = n === state.cur;
+      var pts = path(h);
+      if (pts.length > 1) {
+        L.polyline(pts, active
+          ? { color: "#ffffff", weight: 3, opacity: 0.95, dashArray: null }
+          : { color: "#ffffff", weight: 2, opacity: 0.55, dashArray: "4 6" })
+          .on("click", selectFrom(n)).addTo(layer);
+      }
+      KEYS.forEach(function (k) {
+        if (!h[k]) return;
+        var m = L.marker(h[k], { icon: pinIcon(k, active), draggable: active, zIndexOffset: active ? 1000 : 0,
+          title: "Hole " + n + " · " + (k === "tee" ? "Tee" : k === "green" ? (lang() === "nl" ? "Midden green" : "Middle of green") : "Dogleg") });
+        if (active) {
+          m.on("dragstart", function () { history.push({ n: n, k: k, prev: h[k] }); });
+          m.on("drag", function (e) { var ll = e.target.getLatLng(); h[k] = [round(ll.lat), round(ll.lng)]; renderInfo(); });
+          m.on("dragend", function () { refresh(); });
+        } else {
+          m.on("click", selectFrom(n));
+        }
+        m.addTo(layer);
+      });
+      if (!active && pts.length) {
+        var at = h.tee || h.green;
+        L.marker(at, { interactive: true, icon: L.divIcon({ className: "", iconSize: [0, 0], html: '<span class="hole-no">' + n + "</span>" }) })
+          .on("click", selectFrom(n)).addTo(layer);
+      }
+  }
+  function selectFrom(n) { return function (e) { L.DomEvent.stop(e); select(n, true); }; }
+  function round(v) { return Math.round(v * 1e6) / 1e6; }
+
+  function nextKey(h) { return !h.tee ? "tee" : !h.green ? "green" : !h.bend ? "bend" : null; }
+
+  map.on("click", function (e) {
+    var h = hole(state.cur);
+    var k = nextKey(h);
+    if (!k) { toast(t("done")); return; }
+    history.push({ n: state.cur, k: k, prev: undefined });
+    h[k] = [round(e.latlng.lat), round(e.latlng.lng)];
+    if (k === "bend" && state.cur < HOLES) state.cur++;
+    refresh();
+    updateTip(e.containerPoint);
+  });
+
+  // Cursor label: "Hole 3 · Tee" right next to the pointer.
+  var tip = $("tip");
+  function updateTip(pt) {
+    var k = nextKey(hole(state.cur));
+    if (!k || !pt) { tip.style.display = "none"; return; }
+    tip.textContent = t("tip" + k.charAt(0).toUpperCase() + k.slice(1), { h: state.cur });
+    tip.style.left = pt.x + "px"; tip.style.top = pt.y + "px";
+    tip.style.display = "block";
+  }
+  map.on("mousemove", function (e) { updateTip(e.containerPoint); });
+  map.on("mouseout", function () { tip.style.display = "none"; });
+
+  // ── Panel ──
+  function renderInfo() {
+    var h = hole(state.cur);
+    var k = nextKey(h);
+    $("holeNo").textContent = state.cur;
+    $("prev").disabled = state.cur <= 1;
+    $("next").disabled = $("nextBig").disabled = state.cur >= HOLES;
+
+    document.querySelectorAll("#steps li").forEach(function (li) {
+      var key = li.getAttribute("data-k");
+      li.className = h[key] ? "done" : key === k ? "now" : "";
+    });
+
+    var stage = k === "tee" ? "Tee" : k === "green" ? "Green" : k === "bend" ? "Bend" : "Done";
+    $("hint").innerHTML = t("hint" + stage) + (window.matchMedia("(pointer: fine)").matches ? t("hintKeys") : "");
+    $("bannerText").innerHTML = t("banner" + stage, { h: state.cur });
+    var bp = $("bannerPin");
+    bp.className = "pin " + (k || "green");
+    bp.textContent = k ? LETTER[k] : "✓";
+
+    if (h.tee && h.green) {
+      var m = metres(path(h));
+      $("dist").textContent = Math.round(m) + " m · " + Math.round(m / 0.9144) + " yd " + t("unit");
+    } else {
+      $("dist").textContent = "";
+    }
+    $("undo").disabled = history.length === 0;
+    $("clearHole").disabled = !(h.tee || h.green || h.bend);
+  }
+
+  function renderHoles() {
+    var box = $("holes");
+    box.innerHTML = "";
+    var done = 0;
+    for (var n = 1; n <= HOLES; n++) {
+      var h = state.holes[n] || {};
+      var b = document.createElement("button");
+      b.type = "button";
+      b.textContent = n;
+      var ok = h.tee && h.green;
+      if (ok) done++;
+      b.className = (ok ? "ok" : (h.tee || h.green || h.bend) ? "part" : "") + (n === state.cur ? " cur" : "");
+      if (h.bend) b.insertAdjacentHTML("beforeend", '<span class="flag">●</span>');
+      b.addEventListener("click", (function (n) { return function () { select(n, true); }; })(n));
+      box.appendChild(b);
+    }
+    $("count").textContent = done + "/" + HOLES;
+  }
+
+  function csvLines() {
+    var out = [], skipped = [];
+    for (var n = 1; n <= HOLES; n++) {
+      var h = state.holes[n];
+      if (!h) continue;
+      var f = function (p) { return p[0].toFixed(6) + "," + p[1].toFixed(6); };
+      if (h.tee && h.green) out.push(n + "," + f(h.tee) + "," + f(h.green) + (h.bend ? "," + f(h.bend) : ""));
+      else if (h.green) out.push(n + "," + f(h.green));
+      else if (h.tee || h.bend) skipped.push(n);
+    }
+    return { lines: out, skipped: skipped };
+  }
+
+  function renderCsv() {
+    var r = csvLines();
+    var pre = $("csv");
+    if (r.lines.length) { pre.className = "csv"; pre.textContent = r.lines.join("\n"); }
+    else { pre.className = "csv empty"; pre.textContent = t("empty"); }
+    $("download").disabled = $("copy").disabled = r.lines.length === 0;
+    var w = $("warn");
+    w.className = "note warn";
+    w.textContent = r.skipped.length ? t("warnTee", { l: r.skipped.join(", ") }) : "";
+    w.style.display = r.skipped.length ? "" : "none";
+  }
+
+  function refresh() { drawMap(); renderInfo(); renderHoles(); renderCsv(); persist(); }
+
+  function select(n, fly) {
+    state.cur = Math.max(1, Math.min(HOLES, n));
+    refresh();
+    var pts = path(hole(state.cur));
+    if (fly && pts.length) {
+      var b = L.latLngBounds(pts);
+      if (!map.getBounds().pad(-0.1).contains(b)) map.flyToBounds(b, { maxZoom: 18, padding: [80, 80], duration: 0.6 });
+    }
+  }
+
+  $("prev").onclick = function () { select(state.cur - 1, true); };
+  $("next").onclick = $("nextBig").onclick = function () { select(state.cur + 1, true); };
+  $("undo").onclick = undo;
+  function undo() {
+    var a = history.pop();
+    if (!a) return;
+    var h = hole(a.n);
+    if (a.prev === undefined) delete h[a.k]; else h[a.k] = a.prev;
+    state.cur = a.n;
+    refresh();
+  }
+  $("clearHole").onclick = function () {
+    var h = hole(state.cur);
+    KEYS.forEach(function (k) { if (h[k]) history.push({ n: state.cur, k: k, prev: h[k] }); delete h[k]; });
+    refresh();
+  };
+
+  document.addEventListener("keydown", function (e) {
+    var tag = (e.target.tagName || "").toLowerCase();
+    if (tag === "input" || tag === "textarea") return;
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "z") { e.preventDefault(); undo(); }
+    else if (e.key === "ArrowRight" || e.key.toLowerCase() === "n") select(state.cur + 1, true);
+    else if (e.key === "ArrowLeft") select(state.cur - 1, true);
+  });
+
+  // ── Course name ──
+  var course = $("course");
+  course.value = state.course || "";
+  course.addEventListener("input", function () { state.course = course.value; persist(); });
+
+  // ── Search (Nominatim: one request per submit, per its usage policy) ──
+  var results = $("results");
+  function msg(text) { results.innerHTML = ""; var li = document.createElement("li"); li.className = "msg"; li.textContent = text; results.appendChild(li); }
+  $("searchForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var q = $("q").value.trim();
+    if (!q) return;
+    var m = q.match(/^\s*(-?\d+(?:\.\d+)?)\s*[,; ]\s*(-?\d+(?:\.\d+)?)\s*$/);
+    if (m) { map.setView([+m[1], +m[2]], 17); results.innerHTML = ""; toast(t("jumped")); return; }
+    msg(t("searching"));
+    fetch("https://nominatim.openstreetmap.org/search?format=jsonv2&limit=6&q=" + encodeURIComponent(q) +
+          "&accept-language=" + lang())
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function (data) {
+        results.innerHTML = "";
+        if (!data.length) { msg(t("noResults")); return; }
+        data.forEach(function (it) {
+          var li = document.createElement("li");
+          li.tabIndex = 0;
+          li.textContent = it.display_name;
+          function go() {
+            if (it.boundingbox) {
+              var bb = it.boundingbox.map(Number);
+              map.fitBounds([[bb[0], bb[2]], [bb[1], bb[3]]], { maxZoom: 17 });
+            } else map.setView([+it.lat, +it.lon], 16);
+            if (!course.value.trim() && /golf/i.test(it.name || "")) {
+              course.value = state.course = it.name; persist();
+            }
+            results.innerHTML = "";
+          }
+          li.onclick = go;
+          li.onkeydown = function (ev) { if (ev.key === "Enter") go(); };
+          results.appendChild(li);
+        });
+      })
+      .catch(function () { msg(t("searchErr")); });
+  });
+
+  // ── Export / import ──
+  function fileName() {
+    var n = (course.value.trim() || "course").replace(/[\\/:*?"<>|]+/g, "").replace(/\s+/g, "_");
+    return n + "_GPS.csv";
+  }
+  $("download").onclick = function () {
+    var text = csvLines().lines.join("\n") + "\n";
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([text], { type: "text/csv" }));
+    a.download = fileName();
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
+    toast(t("saved", { f: a.download }));
+  };
+  $("copy").onclick = function () {
+    var text = csvLines().lines.join("\n") + "\n";
+    (navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.reject())
+      .then(function () { toast(t("copied")); }, function () {
+        var r = document.createRange(); r.selectNodeContents($("csv"));
+        var s = getSelection(); s.removeAllRanges(); s.addRange(r);
+      });
+  };
+  $("openFile").onclick = function () { $("file").click(); };
+  $("file").onchange = function () {
+    var f = this.files[0];
+    this.value = "";
+    if (!f) return;
+    f.text().then(function (text) {
+      var holes = parse(text);
+      var n = Object.keys(holes).length;
+      if (!n) { toast(t("loadErr")); return; }
+      if (hasData() && !confirm(t("confirmLoad"))) return;
+      state.holes = holes;
+      state.cur = 1;
+      history = [];
+      var name = f.name.replace(/\.(csv|txt)$/i, "").replace(/_GPS$/i, "").replace(/_/g, " ");
+      course.value = state.course = name;
+      refresh();
+      var all = [];
+      Object.keys(holes).forEach(function (k) { all = all.concat(path(holes[k])); });
+      if (all.length) map.fitBounds(L.latLngBounds(all), { padding: [40, 40], maxZoom: 17 });
+      toast(t("loaded", { n: n }));
+    });
+  };
+  // Same rules as the app's importer (lib/screens/meer_screen.dart).
+  function parse(text) {
+    var holes = {};
+    text.split("\n").forEach(function (line) {
+      line = line.trim();
+      if (!line || line.charAt(0) === "#") return;
+      var p = line.split(",").map(function (s) { return s.trim(); });
+      var n = parseInt(p[0], 10);
+      if (!(n >= 1 && n <= HOLES) || String(n) !== p[0]) return;
+      var v = p.slice(1).map(Number);
+      if (v.some(isNaN)) return;
+      if (v.length >= 6) holes[n] = { tee: [v[0], v[1]], green: [v[2], v[3]], bend: [v[4], v[5]] };
+      else if (v.length >= 4) holes[n] = { tee: [v[0], v[1]], green: [v[2], v[3]] };
+      else if (v.length >= 2) holes[n] = { green: [v[0], v[1]] };
+    });
+    return holes;
+  }
+  function hasData() { return Object.keys(state.holes).some(function (k) { var h = state.holes[k]; return h.tee || h.green || h.bend; }); }
+  $("clearAll").onclick = function () {
+    if (hasData() && !confirm(t("confirmNew"))) return;
+    state.holes = {}; state.cur = 1; history = [];
+    course.value = state.course = "";
+    refresh();
+  };
+
+  var toastTimer;
+  function toast(text) {
+    var el = $("toast");
+    el.textContent = text;
+    el.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { el.classList.remove("show"); }, 2200);
+  }
+
+  // Re-render translated bits when the language toggles.
+  new MutationObserver(function () {
+    var q = $("q");
+    q.placeholder = q.getAttribute("data-ph-" + lang());
+    refresh();
+  }).observe(document.documentElement, { attributes: true, attributeFilter: ["data-lang"] });
+  $("q").placeholder = $("q").getAttribute("data-ph-" + lang());
+
+  map.on("moveend", persist);
+  refresh();
+})();
+</script>
+</body>
+</html>
