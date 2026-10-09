@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Course Code</title>
+  <meta name="robots" content="noindex">
+  <meta name="description" content="A golf course's GPS coordinates for Strokes Gained, from the Course Mapper.">
+  <link rel="icon" href="../../assets/course-mapper.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Outfit:wght@400;500;600&family=Playfair+Display:ital,wght@0,700;0,800;1,700;1,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/site.css">
+  <script src="../../assets/site.js"></script>
+  <script src="../../assets/sg-qr.js"></script>
+  <style>
+    :root { --accent: #2e7d32; --accent-soft: #e3f1e4; }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) { --accent: #4ade80; --accent-soft: #15301f; }
+    }
+    :root[data-theme="dark"] { --accent: #4ade80; --accent-soft: #15301f; }
+    main { padding: 56px 0 80px; }
+    .box { max-width: 560px; margin: 0 auto; }
+    .box h1 { font-size: clamp(32px, 7vw, 48px); margin: 16px 0 8px; }
+    .meta { color: var(--ink-soft); font: 500 14px var(--mono); margin: 0 0 28px; }
+    .steps-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 22px; margin-bottom: 24px; }
+    .steps-card h3 { margin-bottom: 8px; }
+    .steps-card ol { margin: 0; padding-left: 20px; color: var(--ink-soft); }
+    .steps-card b { color: var(--ink); }
+    .err { color: var(--ink-soft); }
+  </style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a class="crumb-home" href="../../"><img src="../../assets/shockwave.svg" alt="" width="26" height="26"><span class="crumb-label">Shockwave Apps</span></a>
+      <span class="crumb-sep" aria-hidden="true">›</span>
+      <a class="brand" href="../"><img src="../../assets/strokes-gained.svg" alt="" width="30" height="30">Strokes Gained</a>
+    </nav>
+    <div class="nav-tools">
+      <button class="icon-btn" data-lang-label type="button">NL</button>
+      <button class="icon-btn" data-theme-toggle type="button">☾</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap box">
+    <div id="ok" hidden>
+      <span class="pill"><span lang="en">Course code</span><span lang="nl">Baan-code</span></span>
+      <h1 id="name"></h1>
+      <p class="meta" id="meta"></p>
+      <div class="steps-card">
+        <h3><span lang="en">Add it to the app</span><span lang="nl">Zet hem in de app</span></h3>
+        <ol>
+          <li><span lang="en">Open Strokes Gained (v1.6.3 or newer).</span><span lang="nl">Open Strokes Gained (v1.6.3 of nieuwer).</span></li>
+          <li><span lang="en">Go to <b>More → GPS coordinates → Scan QR code</b>.</span><span lang="nl">Ga naar <b>Meer → GPS-coördinaten → QR-code scannen</b>.</span></li>
+          <li><span lang="en">Scan the code again, this time from the app.</span><span lang="nl">Scan de code opnieuw, nu vanuit de app.</span></li>
+        </ol>
+      </div>
+      <div class="actions">
+        <button class="btn primary" id="dl" type="button"><span lang="en">Download CSV</span><span lang="nl">Download CSV</span></button>
+        <a class="btn" id="edit" href="../mapper/"><span lang="en">Open in Course Mapper</span><span lang="nl">Open in baan-mapper</span></a>
+      </div>
+    </div>
+    <div id="bad" hidden>
+      <h1><span lang="en">No course in this link</span><span lang="nl">Geen baan in deze link</span></h1>
+      <p class="err"><span lang="en">This page shows a course from a Course Mapper QR code. Make one in the <a href="../mapper/">Course Mapper</a>.</span><span lang="nl">Deze pagina toont een baan uit een QR-code van de baan-mapper. Maak er een in de <a href="../mapper/">baan-mapper</a>.</span></p>
+    </div>
+  </div>
+</main>
+
+<script>
+(function () {
+  var c = SgQr.decode(location.hash);
+  if (!c) { document.getElementById("bad").hidden = false; return; }
+  document.getElementById("ok").hidden = false;
+  document.getElementById("name").textContent = c.name;
+  var rows = SgQr.csv(c.holes);
+  var doglegs = Object.keys(c.holes).filter(function (k) { return c.holes[k].bend; }).length;
+  document.getElementById("meta").textContent = rows.length + " holes" + (doglegs ? " · " + doglegs + " dogleg" + (doglegs > 1 ? "s" : "") : "");
+  document.getElementById("edit").href = "../mapper/" + location.hash;
+  document.getElementById("dl").onclick = function () {
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([rows.join("\n") + "\n"], { type: "text/csv" }));
+    a.download = c.name.replace(/[\\/:*?"<>|]+/g, "").replace(/\s+/g, "_") + "_GPS.csv";
+    document.body.appendChild(a); a.click(); a.remove();
+  };
+})();
+</script>
+</body>
+</html>

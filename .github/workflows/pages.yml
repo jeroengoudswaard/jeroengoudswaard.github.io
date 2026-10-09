@@ -39,9 +39,9 @@ jobs:
           rsync -a --exclude '.git' --exclude '.github' --exclude '_site' ./ _site/
 
           # Cache-bust the shared stylesheet and script: browsers otherwise keep
-          # serving an old site.css/site.js next to freshly fetched HTML.
+          # serving an old site.css/site.js/sg-qr.js next to freshly fetched HTML.
           find _site -name '*.html' -not -path '_site/*/app/*' -exec \
-            sed -i -E "s#(assets/site\.(css|js))\"#\1?v=${GITHUB_SHA::7}\"#g" {} +
+            sed -i -E "s#(assets/(site\.(css|js)|sg-qr\.js))\"#\1?v=${GITHUB_SHA::7}\"#g" {} +
 
           # <release tag>:<folder>, one line per app with a web build.
           for entry in "strokes-gained:strokes-gained"; do
