@@ -81,7 +81,7 @@
           <span lang="nl">Op weg om de ultieme SEG-Y QC-tool te worden. Open seismische bestanden van gigabytes in een oogwenk, scroll en zoom zonder haperen, en controleer headers, amplitudes en spectra op één plek. Hij is nog niet af, maar wel al snel, en gratis.</span>
         </p>
         <div class="actions">
-          <a class="btn primary" href="#download"><span lang="en">Get the beta →</span><span lang="nl">Probeer de beta →</span></a>
+          <a class="btn primary" href="#download"><span lang="en">Download the beta →</span><span lang="nl">Download de beta →</span></a>
           <a class="btn" href="https://github.com/jeroengoudswaard/segyread"><span lang="en">Source on GitHub</span><span lang="nl">Broncode op GitHub</span></a>
         </div>
       </div>
@@ -186,12 +186,13 @@
             <li><span lang="en">Text and binary header viewers, trace-header plots</span><span lang="nl">Tekst- en binaire headers, trace-headerplots</span></li>
             <li><span lang="en">Histogram, spectrum and octave bands</span><span lang="nl">Histogram, spectrum en octaafbanden</span></li>
             <li><span lang="en">Split view, calculator, bandpass, save as SEG-Y</span><span lang="nl">Gesplitst beeld, rekenmachine, bandpass, opslaan als SEG-Y</span></li>
+            <li><span lang="en">Ready-made download for Windows</span><span lang="nl">Kant-en-klare download voor Windows</span></li>
           </ul>
         </div>
         <div class="card">
           <h3>🛠️ <span lang="en">On the way</span><span lang="nl">Onderweg</span></h3>
           <ul>
-            <li><span lang="en">Ready-made downloads for Windows and Linux</span><span lang="nl">Kant-en-klare downloads voor Windows en Linux</span></li>
+            <li><span lang="en">A ready-made Linux download</span><span lang="nl">Een kant-en-klare download voor Linux</span></li>
             <li><span lang="en">Selecting and sorting traces by header values</span><span lang="nl">Traces selecteren en sorteren op headerwaarden</span></li>
             <li><span lang="en">Automatic QC notes that flag problems in a line</span><span lang="nl">Automatische QC-notities die problemen in een lijn aanwijzen</span></li>
             <li><span lang="en">More preferences, such as a customisable toolbar</span><span lang="nl">Meer voorkeuren, zoals een aanpasbare werkbalk</span></li>
@@ -208,13 +209,14 @@
         <p class="eyebrow"><span lang="en">Try it</span><span lang="nl">Probeer het</span></p>
         <h2><span lang="en">Get the <em class="accent">beta.</em></span><span lang="nl">Haal de <em class="accent">beta.</em></span></h2>
         <p class="section-lead">
-          <span lang="en">There are no ready-made downloads yet. For now you build it from source with CMake and Qt; the source lives in the <strong>segyread</strong> repository, and the steps for Windows, Ubuntu and Rocky/RHEL 8 are in its README.</span>
-          <span lang="nl">Kant-en-klare downloads zijn er nog niet. Voorlopig bouw je hem zelf uit de broncode met CMake en Qt; die staat in de repository <strong>segyread</strong>, en de stappen voor Windows, Ubuntu en Rocky/RHEL 8 staan in de README daarvan.</span>
+          <span lang="en">For Windows 10/11 there's a ready-made download: unzip it anywhere and double-click <code>TraceLab.exe</code>, no installer needed. On Linux you build it from source with CMake and Qt for now; the source lives in the <strong>segyread</strong> repository, and the steps for Ubuntu and Rocky/RHEL 8 are in its README.</span>
+          <span lang="nl">Voor Windows 10/11 is er een kant-en-klare download: pak hem ergens uit en dubbelklik op <code>TraceLab.exe</code>, zonder installatie. Op Linux bouw je hem voorlopig zelf uit de broncode met CMake en Qt; die staat in de repository <strong>segyread</strong>, en de stappen voor Ubuntu en Rocky/RHEL 8 staan in de README daarvan.</span>
         </p>
       </div>
       <div class="actions">
-        <a class="btn primary" href="https://github.com/jeroengoudswaard/segyread/blob/main/native/README.md"><span lang="en">Build instructions →</span><span lang="nl">Bouwinstructies →</span></a>
-        <a class="btn" href="https://github.com/jeroengoudswaard/segyread"><span lang="en">Source on GitHub</span><span lang="nl">Broncode op GitHub</span></a>
+        <a class="btn primary" href="https://github.com/jeroengoudswaard/segyread/releases/latest/download/Shockwave-TraceLab-windows-x64.zip"><span lang="en">Download for Windows →</span><span lang="nl">Download voor Windows →</span></a>
+        <a class="btn" href="https://github.com/jeroengoudswaard/segyread/blob/main/native/README.md"><span lang="en">Build on Linux</span><span lang="nl">Bouwen op Linux</span></a>
+        <a class="btn" href="https://github.com/jeroengoudswaard/segyread/releases"><span lang="en">All releases</span><span lang="nl">Alle releases</span></a>
       </div>
     </div>
   </section>
@@ -236,7 +238,7 @@
         </details>
         <details>
           <summary><span lang="en">What do I need to run it?</span><span lang="nl">Wat heb ik nodig om hem te draaien?</span></summary>
-          <p><span lang="en">Windows 10/11 or Linux, and a CPU with AVX2 (practically every PC from 2013 onward). Building needs CMake and Qt 6, or Qt 5 on Rocky/RHEL 8.</span><span lang="nl">Windows 10/11 of Linux, en een processor met AVX2 (vrijwel elke pc vanaf 2013). Om hem te bouwen heb je CMake en Qt 6 nodig, of Qt 5 op Rocky/RHEL 8.</span></p>
+          <p><span lang="en">Windows 10/11 or Linux, and a CPU with AVX2 (practically every PC from 2013 onward). The Windows download has everything included. Building it yourself (needed on Linux for now) takes CMake and Qt 6, or Qt 5 on Rocky/RHEL 8. Windows may show a SmartScreen warning the first time, because the beta isn’t code-signed yet: click "More info" and "Run anyway".</span><span lang="nl">Windows 10/11 of Linux, en een processor met AVX2 (vrijwel elke pc vanaf 2013). De Windows-download bevat alles wat nodig is. Zelf bouwen (op Linux voorlopig nodig) vraagt CMake en Qt 6, of Qt 5 op Rocky/RHEL 8. Windows kan de eerste keer een SmartScreen-waarschuwing tonen, omdat de beta nog niet digitaal ondertekend is: klik op "Meer info" en "Toch uitvoeren".</span></p>
         </details>
         <details>
           <summary><span lang="en">Does my data leave my computer?</span><span lang="nl">Gaat mijn data van mijn computer af?</span></summary>
@@ -263,7 +265,7 @@
       <span lang="nl">Probeer de beta op je eigen data en vertel me wat er ontbreekt.</span>
     </p>
     <div class="actions">
-      <a class="btn primary" href="#download"><span lang="en">Get the beta →</span><span lang="nl">Probeer de beta →</span></a>
+      <a class="btn primary" href="#download"><span lang="en">Download the beta →</span><span lang="nl">Download de beta →</span></a>
       <a class="btn" href="https://github.com/jeroengoudswaard/segyread/issues"><span lang="en">Give feedback</span><span lang="nl">Geef feedback</span></a>
     </div>
   </div>
