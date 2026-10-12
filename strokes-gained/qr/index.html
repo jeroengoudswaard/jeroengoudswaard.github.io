@@ -77,7 +77,7 @@
   var c = SgQr.decode(location.hash);
   if (!c) { document.getElementById("bad").hidden = false; return; }
   document.getElementById("ok").hidden = false;
-  document.getElementById("name").textContent = c.name;
+  document.getElementById("name").textContent = c.name + (c.loop ? " · " + c.loop : "");
   var rows = SgQr.csv(c.holes);
   var doglegs = Object.keys(c.holes).filter(function (k) { return c.holes[k].bend; }).length;
   document.getElementById("meta").textContent = rows.length + " holes" + (doglegs ? " · " + doglegs + " dogleg" + (doglegs > 1 ? "s" : "") : "");
@@ -85,7 +85,7 @@
   document.getElementById("dl").onclick = function () {
     var a = document.createElement("a");
     a.href = URL.createObjectURL(new Blob([rows.join("\n") + "\n"], { type: "text/csv" }));
-    a.download = c.name.replace(/[\\/:*?"<>|]+/g, "").replace(/\s+/g, "_") + "_GPS.csv";
+    a.download = (c.name + (c.loop ? " " + c.loop : "")).replace(/[\\/:*?"<>|]+/g, "").replace(/\s+/g, "_") + "_GPS.csv";
     document.body.appendChild(a); a.click(); a.remove();
   };
 })();

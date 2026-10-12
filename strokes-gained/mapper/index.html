@@ -42,12 +42,20 @@
     .card h3 { font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
       text-transform: uppercase; color: var(--ink-soft); margin: 0 0 10px; }
     label.field { display: block; font-size: 13px; color: var(--ink-soft); margin-bottom: 4px; }
-    input[type="text"], input[type="search"] {
+    [hidden] { display: none !important; }
+    input[type="text"], input[type="search"], select {
       width: 100%; height: 38px; padding: 0 12px; border-radius: 8px;
       border: 1px solid var(--line); background: var(--bg); color: var(--ink);
       font: 15px var(--sans);
     }
     input:focus { outline: 2px solid var(--accent); outline-offset: -1px; border-color: transparent; }
+    select { cursor: pointer; }
+    .loops { display: flex; flex-wrap: wrap; gap: 6px; }
+    .loops .b.cur { background: var(--accent-soft); border-color: var(--accent); }
+    .qr-multi { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
+    .qr-one { margin: 0; }
+    .qr-one .qr-frame svg { width: min(200px, 38vw); }
+    .qr-one figcaption { font-size: 13px; color: var(--ink-soft); margin-top: 6px; }
     .row { display: flex; gap: 8px; align-items: center; }
     .row > input { flex: 1; min-width: 0; }
     .mt { margin-top: 10px; }
@@ -219,6 +227,8 @@
       <h3><span lang="en">1 · Course</span><span lang="nl">1 · Baan</span></h3>
       <label class="field" for="course"><span lang="en">Course name</span><span lang="nl">Naam van de baan</span></label>
       <input type="text" id="course" autocomplete="off" placeholder="Leeuwenbergh">
+      <label class="field mt" for="mode"><span lang="en">Layout</span><span lang="nl">Opzet</span></label>
+      <select id="mode" aria-label="Layout"><option value="18"></option><option value="9"></option><option value="loops"></option></select>
       <form id="searchForm" class="row mt" autocomplete="off">
         <input type="search" id="q" aria-label="Search" data-ph-en="Find a golf course or town…" data-ph-nl="Zoek een golfbaan of plaats…">
         <button class="b" type="submit"><span lang="en">Find</span><span lang="nl">Zoek</span></button>
@@ -228,6 +238,15 @@
 
     <div class="card">
       <h3><span lang="en">2 · Click the holes</span><span lang="nl">2 · Klik de holes</span></h3>
+      <div id="loopBar" hidden>
+        <div class="loops" id="loops"></div>
+        <div class="row mt">
+          <button class="b" id="loopAdd" type="button">+ <span lang="en">Loop</span><span lang="nl">Lus</span></button>
+          <button class="b" id="loopRename" type="button"><span lang="en">Rename</span><span lang="nl">Hernoem</span></button>
+          <button class="b danger" id="loopDel" type="button"><span lang="en">Remove</span><span lang="nl">Verwijder</span></button>
+        </div>
+        <p class="note"><span lang="en">Map each loop as holes 1–9. In the app you pick two loops per round.</span><span lang="nl">Meet elke lus als hole 1–9. In de app kies je per ronde twee lussen.</span></p>
+      </div>
       <div class="hole-head">
         <button class="b sq ghost" id="prev" type="button" aria-label="Previous hole">‹</button>
         <div class="hole-title">Hole <span id="holeNo">1</span></div>
@@ -264,11 +283,16 @@
         <button class="b primary wide" id="sendQr" type="button"><span aria-hidden="true">▣</span> <span lang="en">Send to app (QR code)</span><span lang="nl">Naar de app (QR-code)</span></button>
         <button class="b" id="download" type="button">⤓ <span lang="en">Download CSV</span><span lang="nl">Download CSV</span></button>
         <button class="b" id="copy" type="button"><span lang="en">Copy CSV</span><span lang="nl">Kopieer CSV</span></button>
+        <button class="b wide" id="copyIndex" type="button" hidden><span lang="en">Copy courses/index.json entry</span><span lang="nl">Kopieer courses/index.json-regel</span></button>
         <button class="b wide" id="openFile" type="button"><span lang="en">Open CSV…</span><span lang="nl">Open CSV…</span></button>
         <button class="b danger wide ghost" id="clearAll" type="button"><span lang="en">Start a new course</span><span lang="nl">Begin een nieuwe baan</span></button>
       </div>
       <input type="file" id="file" accept=".csv,.txt,text/csv,text/plain" hidden>
       <p class="note" id="warn"></p>
+      <p class="note" id="loopNote" hidden>
+        <span lang="en"><b>Multiple loops:</b> the QR code shows one code per loop (scan them all), and Download saves one CSV per loop. For the website list, put the CSVs in <code>courses/</code> of the website repo and paste the copied entry into <code>courses/index.json</code>.</span>
+        <span lang="nl"><b>Meerdere lussen:</b> de QR-code toont één code per lus (scan ze allemaal) en Download bewaart één CSV per lus. Voor de lijst op de website: zet de CSV's in <code>courses/</code> van de website-repo en plak de gekopieerde regel in <code>courses/index.json</code>.</span>
+      </p>
       <p class="note">
         <span lang="en">Quickest: show the QR code and scan it in Strokes Gained under <b>More → GPS coordinates → Scan QR code</b>. Or download the CSV and use <b>Import CSV</b> there. Your work is kept in this browser until you start a new course.</span>
         <span lang="nl">Het snelst: toon de QR-code en scan hem in Strokes Gained via <b>Meer → GPS-coördinaten → QR-code scannen</b>. Of download de CSV en kies daar <b>CSV importeren</b>. Je werk blijft in deze browser bewaard tot je een nieuwe baan begint.</span>
@@ -292,7 +316,7 @@
     <p class="qr-meta" id="qrMeta"></p>
     <div class="qr-frame" id="qrBox"></div>
     <ol class="qr-steps">
-      <li><span lang="en">Open Strokes Gained on your phone (v1.6.3 or newer).</span><span lang="nl">Open Strokes Gained op je telefoon (v1.6.3 of nieuwer).</span></li>
+      <li><span lang="en">Open Strokes Gained on your phone (v1.6.3 or newer; v1.6.6 for loops).</span><span lang="nl">Open Strokes Gained op je telefoon (v1.6.3 of nieuwer; v1.6.6 voor lussen).</span></li>
       <li><span lang="en">Go to <b>More → GPS coordinates → Scan QR code</b>.</span><span lang="nl">Ga naar <b>Meer → GPS-coördinaten → QR-code scannen</b>.</span></li>
       <li><span lang="en">Point the camera at this code and tap <b>Save</b>.</span><span lang="nl">Richt de camera op deze code en tik op <b>Opslaan</b>.</span></li>
     </ol>
@@ -306,7 +330,7 @@
 (function () {
   "use strict";
 
-  var HOLES = 18;
+  var HOLES = 18; // 18, or 9 for a 9-hole course / one loop
   var STORE = "sg-mapper-v1";
   var KEYS = ["tee", "green", "bend"];
   var LETTER = { tee: "T", green: "G", bend: "D" };
@@ -345,7 +369,18 @@
       needName: "Give the course a name first — the app saves it under that name.",
       qrMeta: "{name} · {n} holes",
       qrLoaded: "Course from QR code loaded",
-      confirmQr: "Replace the current holes with the course from this link?"
+      confirmQr: "Replace the current holes with the course from this link?",
+      mode18: "18 holes",
+      mode9: "9 holes",
+      modeLoops: "Multiple loops (27+ holes)",
+      confirmMode: "Change the layout? The current holes are removed.",
+      loopPrompt: "Name of this loop",
+      loopDup: "Another loop already has that name",
+      loopLabel: "Loop",
+      noLoopData: "Map at least one hole in a loop first.",
+      qrMetaLoops: "{name} · {n} loops. Scan every code.",
+      copiedIndex: "index.json entry copied",
+      savedMany: "{n} CSV files downloaded"
     },
     nl: {
       stepTee: "klik op de tee",
@@ -380,7 +415,18 @@
       needName: "Geef de baan eerst een naam — de app slaat hem onder die naam op.",
       qrMeta: "{name} · {n} holes",
       qrLoaded: "Baan uit QR-code geladen",
-      confirmQr: "De huidige holes vervangen door de baan uit deze link?"
+      confirmQr: "De huidige holes vervangen door de baan uit deze link?",
+      mode18: "18 holes",
+      mode9: "9 holes",
+      modeLoops: "Meerdere lussen (27+ holes)",
+      confirmMode: "De opzet wijzigen? De huidige holes worden gewist.",
+      loopPrompt: "Naam van deze lus",
+      loopDup: "Een andere lus heeft al die naam",
+      loopLabel: "Lus",
+      noLoopData: "Meet eerst minstens één hole in een lus.",
+      qrMetaLoops: "{name} · {n} lussen. Scan elke code.",
+      copiedIndex: "index.json-regel gekopieerd",
+      savedMany: "{n} CSV-bestanden gedownload"
     }
   };
   function lang() { return document.documentElement.getAttribute("data-lang") === "nl" ? "nl" : "en"; }
@@ -392,7 +438,7 @@
   function $(id) { return document.getElementById(id); }
 
   // ── State ──
-  var state = { course: "", cur: 1, holes: {}, view: null };
+  var state = { course: "", cur: 1, holes: {}, view: null, mode: "18", loops: [], loop: 0 };
   var history = [];
   function hole(n) { return state.holes[n] || (state.holes[n] = {}); }
   try {
@@ -402,7 +448,30 @@
       if (s && typeof s === "object" && s.holes) state = Object.assign(state, s);
     }
   } catch (e) { /* storage unavailable */ }
+  function newLoop() {
+    var used = state.loops.map(function (l) { return l.naam.toLowerCase(); });
+    for (var i = 1; ; i++) {
+      var n = t("loopLabel") + " " + i;
+      if (used.indexOf(n.toLowerCase()) < 0) return { naam: n, holes: {} };
+    }
+  }
+  function setMode(m) {
+    state.mode = m; HOLES = m === "18" ? 18 : 9;
+    state.cur = 1; history = []; state.loops = []; state.loop = 0; state.holes = {};
+    if (m === "loops") {
+      for (var i = 0; i < 3; i++) state.loops.push(newLoop());
+      state.holes = state.loops[0].holes;
+    }
+  }
+  if (state.mode !== "18" && state.mode !== "9" && state.mode !== "loops") state.mode = "18";
+  HOLES = state.mode === "18" ? 18 : 9;
+  if (state.mode === "loops") {
+    if (!Array.isArray(state.loops) || state.loops.length < 1) setMode("loops");
+    state.loop = Math.max(0, Math.min(state.loop | 0, state.loops.length - 1));
+    state.holes = state.loops[state.loop].holes || (state.loops[state.loop].holes = {});
+  }
   function persist() {
+    if (state.mode === "loops" && state.loops[state.loop]) state.loops[state.loop].holes = state.holes;
     state.view = { c: map.getCenter(), z: map.getZoom() };
     try { localStorage.setItem(STORE, JSON.stringify(state)); } catch (e) { /* ignore */ }
   }
@@ -557,10 +626,11 @@
     $("count").textContent = done + "/" + HOLES;
   }
 
-  function csvLines() {
+  function csvLines() { return csvLinesFor(state.holes); }
+  function csvLinesFor(holes) {
     var out = [], skipped = [];
     for (var n = 1; n <= HOLES; n++) {
-      var h = state.holes[n];
+      var h = holes[n];
       if (!h) continue;
       var f = function (p) { return p[0].toFixed(6) + "," + p[1].toFixed(6); };
       if (h.tee && h.green) out.push(n + "," + f(h.tee) + "," + f(h.green) + (h.bend ? "," + f(h.bend) : ""));
@@ -575,14 +645,89 @@
     var pre = $("csv");
     if (r.lines.length) { pre.className = "csv"; pre.textContent = r.lines.join("\n"); }
     else { pre.className = "csv empty"; pre.textContent = t("empty"); }
-    $("download").disabled = $("copy").disabled = $("sendQr").disabled = r.lines.length === 0;
+    var any = r.lines.length > 0 || (state.mode === "loops" && state.loops.some(function (l) {
+      return csvLinesFor(l === state.loops[state.loop] ? state.holes : (l.holes || {})).lines.length > 0;
+    }));
+    $("copy").disabled = r.lines.length === 0;
+    $("download").disabled = $("sendQr").disabled = !any;
     var w = $("warn");
     w.className = "note warn";
     w.textContent = r.skipped.length ? t("warnTee", { l: r.skipped.join(", ") }) : "";
     w.style.display = r.skipped.length ? "" : "none";
   }
 
-  function refresh() { drawMap(); renderInfo(); renderHoles(); renderCsv(); persist(); }
+  function doneIn(holes) {
+    var n = 0;
+    Object.keys(holes).forEach(function (k) { var h = holes[k]; if (h.tee && h.green) n++; });
+    return n;
+  }
+  function renderLoops() {
+    var lp = state.mode === "loops";
+    $("loopBar").hidden = !lp;
+    $("copyIndex").hidden = !lp;
+    $("loopNote").hidden = !lp;
+    var sel = $("mode");
+    Array.prototype.forEach.call(sel.options, function (o) { o.textContent = t("mode" + (o.value === "loops" ? "Loops" : o.value)); });
+    sel.value = state.mode;
+    if (!lp) return;
+    var box = $("loops");
+    box.innerHTML = "";
+    state.loops.forEach(function (l, i) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "b" + (i === state.loop ? " cur" : "");
+      b.textContent = l.naam + " · " + doneIn(i === state.loop ? state.holes : (l.holes || {})) + "/9";
+      b.onclick = function () { switchLoop(i); };
+      box.appendChild(b);
+    });
+    $("loopAdd").disabled = state.loops.length >= 8;
+    $("loopDel").disabled = state.loops.length <= 2;
+  }
+  function switchLoop(i) {
+    state.loops[state.loop].holes = state.holes;
+    state.loop = i; state.holes = state.loops[i].holes || (state.loops[i].holes = {});
+    state.cur = 1; history = [];
+    refresh();
+    var pts = path(hole(1));
+    if (!pts.length) { var all = []; Object.keys(state.holes).forEach(function (k) { all = all.concat(path(state.holes[k])); }); pts = all; }
+    if (pts.length) map.flyToBounds(L.latLngBounds(pts), { maxZoom: 17, padding: [80, 80], duration: 0.6 });
+  }
+  function refresh() { drawMap(); renderInfo(); renderHoles(); renderCsv(); renderLoops(); persist(); }
+
+  $("mode").onchange = function () {
+    var m = this.value;
+    if (m === state.mode) return;
+    if (hasData() && !confirm(t("confirmMode"))) { this.value = state.mode; return; }
+    setMode(m);
+    refresh();
+  };
+  $("loopAdd").onclick = function () {
+    if (state.loops.length >= 8) return;
+    state.loops[state.loop].holes = state.holes;
+    state.loops.push(newLoop());
+    switchLoop(state.loops.length - 1);
+  };
+  $("loopRename").onclick = function () {
+    var l = state.loops[state.loop];
+    var n = prompt(t("loopPrompt"), l.naam);
+    if (n === null) return;
+    n = n.replace(/[+\r\n]+/g, " ").trim();
+    if (!n) return;
+    var dup = state.loops.some(function (o, i) { return i !== state.loop && o.naam.toLowerCase() === n.toLowerCase(); });
+    if (dup) { toast(t("loopDup")); return; }
+    l.naam = n;
+    refresh();
+  };
+  $("loopDel").onclick = function () {
+    if (state.loops.length <= 2) return;
+    var l = state.loops[state.loop];
+    if (doneIn(state.holes) && !confirm(l.naam + "?")) return;
+    state.loops.splice(state.loop, 1);
+    state.loop = Math.min(state.loop, state.loops.length - 1);
+    state.holes = state.loops[state.loop].holes || (state.loops[state.loop].holes = {});
+    state.cur = 1; history = [];
+    refresh();
+  };
 
   function select(n, fly) {
     state.cur = Math.max(1, Math.min(HOLES, n));
@@ -667,7 +812,39 @@
     var n = (course.value.trim() || "course").replace(/[\\/:*?"<>|]+/g, "").replace(/\s+/g, "_");
     return n + "_GPS.csv";
   }
+  function slug(s) {
+    return (s || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "course";
+  }
+  function loopFile(l) { return slug(course.value) + "-" + slug(l.naam) + ".csv"; }
+  function saveText(name, text) {
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([text], { type: "text/csv" }));
+    a.download = name;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
+  }
+  function downloadLoops() {
+    var name = course.value.trim();
+    if (!name) { toast(t("needName")); course.focus(); return; }
+    state.loops[state.loop].holes = state.holes;
+    var todo = state.loops.filter(function (l) { return csvLinesFor(l.holes || {}).lines.length; });
+    if (!todo.length) { toast(t("noLoopData")); return; }
+    todo.forEach(function (l, i) {
+      var text = "# baan: " + name + "\n# lus: " + l.naam + "\n" + csvLinesFor(l.holes).lines.join("\n") + "\n";
+      setTimeout(function () { saveText(loopFile(l), text); }, i * 400);
+    });
+    toast(t("savedMany", { n: todo.length }));
+  }
+  $("copyIndex").onclick = function () {
+    var name = course.value.trim();
+    if (!name) { toast(t("needName")); course.focus(); return; }
+    var o = { naam: name, versie: 1, lussen: state.loops.map(function (l) { return { naam: l.naam, bestand: loopFile(l) }; }) };
+    var text = JSON.stringify(o, null, 2);
+    (navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.reject())
+      .then(function () { toast(t("copiedIndex")); }, function () { prompt("index.json", text); });
+  };
   $("download").onclick = function () {
+    if (state.mode === "loops") { downloadLoops(); return; }
     var text = csvLines().lines.join("\n") + "\n";
     var a = document.createElement("a");
     a.href = URL.createObjectURL(new Blob([text], { type: "text/csv" }));
@@ -693,6 +870,25 @@
       var holes = parse(text);
       var n = Object.keys(holes).length;
       if (!n) { toast(t("loadErr")); return; }
+      if (state.mode === "loops") {
+        // Into the loop that is open; take the names from the file's header lines.
+        if (Object.keys(state.holes).length && !confirm(t("confirmLoad"))) return;
+        var hb = /^#\s*baan:\s*(.+)$/mi.exec(text), hl = /^#\s*lus:\s*(.+)$/mi.exec(text);
+        if (hb && !course.value.trim()) course.value = state.course = hb[1].trim();
+        if (hl) {
+          var ln = hl[1].replace(/[+\r\n]+/g, " ").trim();
+          var taken = state.loops.some(function (o, i) { return i !== state.loop && o.naam.toLowerCase() === ln.toLowerCase(); });
+          if (ln && !taken) state.loops[state.loop].naam = ln;
+        }
+        state.holes = holes; state.loops[state.loop].holes = holes;
+        state.cur = 1; history = [];
+        refresh();
+        var allp = [];
+        Object.keys(holes).forEach(function (k) { allp = allp.concat(path(holes[k])); });
+        if (allp.length) map.fitBounds(L.latLngBounds(allp), { padding: [40, 40], maxZoom: 17 });
+        toast(t("loaded", { n: n }));
+        return;
+      }
       if (hasData() && !confirm(t("confirmLoad"))) return;
       state.holes = holes;
       state.cur = 1;
@@ -723,10 +919,13 @@
     });
     return holes;
   }
-  function hasData() { return Object.keys(state.holes).some(function (k) { var h = state.holes[k]; return h.tee || h.green || h.bend; }); }
+  function hasData() {
+    var any = function (hs) { return Object.keys(hs || {}).some(function (k) { var h = hs[k]; return h.tee || h.green || h.bend; }); };
+    return any(state.holes) || state.loops.some(function (l) { return any(l.holes); });
+  }
   $("clearAll").onclick = function () {
     if (hasData() && !confirm(t("confirmNew"))) return;
-    state.holes = {}; state.cur = 1; history = [];
+    setMode(state.mode);
     course.value = state.course = "";
     refresh();
   };
@@ -736,11 +935,35 @@
   $("sendQr").onclick = function () {
     var name = course.value.trim();
     if (!name) { toast(t("needName")); course.focus(); return; }
+    var box = $("qrBox");
+    if (state.mode === "loops") {
+      state.loops[state.loop].holes = state.holes;
+      var todo = state.loops.filter(function (l) { return csvLinesFor(l.holes || {}).lines.length; });
+      if (!todo.length) { toast(t("noLoopData")); return; }
+      box.className = "qr-multi";
+      box.innerHTML = "";
+      todo.forEach(function (l) {
+        var q = qrcode(0, "L");
+        q.addData(SgQr.encode(name, l.holes, l.naam), "Byte");
+        q.make();
+        var fig = document.createElement("figure"); fig.className = "qr-one";
+        var fr = document.createElement("div"); fr.className = "qr-frame";
+        fr.innerHTML = q.createSvgTag({ cellSize: 4, margin: 2, scalable: true });
+        var cap = document.createElement("figcaption");
+        cap.textContent = l.naam + " · " + csvLinesFor(l.holes).lines.length + " holes";
+        fig.appendChild(fr); fig.appendChild(cap); box.appendChild(fig);
+      });
+      $("qrMeta").textContent = t("qrMetaLoops", { name: name, n: todo.length });
+      modal.hidden = false;
+      $("qrClose").focus();
+      return;
+    }
+    box.className = "qr-frame";
     var text = SgQr.encode(name, state.holes);
     var qr = qrcode(0, "L");
     qr.addData(text, "Byte");
     qr.make();
-    $("qrBox").innerHTML = qr.createSvgTag({ cellSize: 4, margin: 2, scalable: true });
+    box.innerHTML = qr.createSvgTag({ cellSize: 4, margin: 2, scalable: true });
     $("qrMeta").textContent = t("qrMeta", { name: name, n: csvLines().lines.length });
     modal.hidden = false;
     $("qrClose").focus();
@@ -757,6 +980,13 @@
     if (!c) return;
     clearHash();
     if (hasData() && !confirm(t("confirmQr"))) return;
+    if (c.loop) {
+      setMode("loops");
+      state.loops[0].naam = c.loop;
+      state.loops[0].holes = c.holes;
+    } else {
+      setMode(Math.max.apply(null, Object.keys(c.holes).map(Number)) > 9 ? "18" : "9");
+    }
     state.holes = c.holes; state.cur = 1; history = [];
     course.value = state.course = c.name;
     refresh();

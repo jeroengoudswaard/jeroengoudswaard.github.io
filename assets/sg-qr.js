@@ -1,7 +1,7 @@
 // Course QR codes for Strokes Gained (the app reads them in
 // Meer → GPS-coördinaten → QR-code scannen).
 // Same format as lib/services/baan_qr.dart in the app — keep them in sync:
-//   https://jeroengoudswaard.github.io/strokes-gained/qr/#sg1&n=<name>&d=<holes>
+//   https://jeroengoudswaard.github.io/strokes-gained/qr/#sg1&n=<name>[&l=<loop>]&d=<holes>
 // holes are "hole,v,v,…" joined by ';' with 2/4/6 values (green |
 // tee,green | tee,green,bend); each value is a lat or lon in micro-degrees,
 // stored as the difference to the previous lat or lon (starting at 0).
@@ -9,7 +9,9 @@ var SgQr = (function () {
   var BASE = "https://jeroengoudswaard.github.io/strokes-gained/qr/";
 
   // holes: {n: {tee:[lat,lon], green:[lat,lon], bend:[lat,lon]}}
-  function encode(name, holes) {
+  // loop (optional): name of one 9-hole loop of a course with several loops;
+  // then `name` is the course and the code adds "&l=<loop>".
+  function encode(name, holes, loop) {
     var pLat = 0, pLon = 0, out = [];
     Object.keys(holes).map(Number).sort(function (a, b) { return a - b; }).forEach(function (n) {
       var h = holes[n], pts;
@@ -24,20 +26,21 @@ var SgQr = (function () {
       });
       out.push(row.join(","));
     });
-    return BASE + "#sg1&n=" + encodeURIComponent(name) + "&d=" + out.join(";");
+    return BASE + "#sg1&n=" + encodeURIComponent(name) + (loop ? "&l=" + encodeURIComponent(loop) : "") + "&d=" + out.join(";");
   }
 
-  // Returns {name, holes} or null.
+  // Returns {name, holes, loop} (loop is null for a normal course) or null.
   function decode(text) {
     var i = text.indexOf("#");
     var parts = (i >= 0 ? text.slice(i + 1) : text).trim().split("&");
     if (parts[0] !== "sg1") return null;
-    var name = null, data = null;
+    var name = null, data = null, loop = null;
     for (var k = 1; k < parts.length; k++) {
       var eq = parts[k].indexOf("=");
       if (eq < 0) continue;
       var key = parts[k].slice(0, eq), val = parts[k].slice(eq + 1);
       if (key === "n") { try { name = decodeURIComponent(val); } catch (e) { return null; } }
+      else if (key === "l") { try { loop = decodeURIComponent(val).trim() || null; } catch (e) { return null; } }
       else if (key === "d") data = val;
     }
     if (name === null || !data) return null;
@@ -60,7 +63,7 @@ var SgQr = (function () {
         : { tee: pts[0], green: pts[1], bend: pts[2] };
       count++;
     }
-    return count ? { name: name.trim(), holes: holes } : null;
+    return count ? { name: name.trim(), holes: holes, loop: loop } : null;
   }
 
   // CSV rows exactly as the app's importer expects.
