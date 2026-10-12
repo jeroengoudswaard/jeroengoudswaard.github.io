@@ -1,0 +1,20 @@
+{
+  "v": 1,
+  "banen": [
+    {
+      "naam": "Leeuwenbergh",
+      "versie": 1,
+      "bestand": "leeuwenbergh.csv"
+    },
+    {
+      "naam": "Domburg",
+      "versie": 1,
+      "bestand": "domburg.csv"
+    },
+    {
+      "naam": "Liemeer",
+      "versie": 1,
+      "bestand": "liemeer.csv"
+    }
+  ]
+}
