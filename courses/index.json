@@ -2,9 +2,34 @@
   "v": 1,
   "banen": [
     {
-      "naam": "Leeuwenbergh",
+      "naam": "Auchmill",
       "versie": 1,
-      "bestand": "leeuwenbergh.csv"
+      "bestand": "auchmill.csv"
+    },
+    {
+      "naam": "Bentwoud",
+      "versie": 1,
+      "lussen": [
+        {
+          "naam": "C",
+          "bestand": "bentwoud-c.csv"
+        }
+      ]
+    },
+    {
+      "naam": "Braemar",
+      "versie": 1,
+      "bestand": "braemar.csv"
+    },
+    {
+      "naam": "BurgGolf Zoetermeer",
+      "versie": 1,
+      "bestand": "burggolf-zoetermeer.csv"
+    },
+    {
+      "naam": "Craibstone",
+      "versie": 1,
+      "bestand": "craibstone.csv"
     },
     {
       "naam": "Domburg",
@@ -12,9 +37,64 @@
       "bestand": "domburg.csv"
     },
     {
+      "naam": "Goese Golf",
+      "versie": 1,
+      "bestand": "goese-golf.csv"
+    },
+    {
+      "naam": "Haagsche",
+      "versie": 1,
+      "bestand": "haagsche.csv"
+    },
+    {
+      "naam": "Hazelhead No. 1",
+      "versie": 1,
+      "bestand": "hazelhead-no-1.csv"
+    },
+    {
+      "naam": "Hazelhead No. 2",
+      "versie": 1,
+      "bestand": "hazelhead-no-2.csv"
+    },
+    {
+      "naam": "Hazlehead 9 Hole",
+      "versie": 1,
+      "bestand": "hazlehead-9-hole.csv"
+    },
+    {
+      "naam": "Leeuwenbergh",
+      "versie": 2,
+      "bestand": "leeuwenbergh.csv"
+    },
+    {
       "naam": "Liemeer",
       "versie": 1,
       "bestand": "liemeer.csv"
+    },
+    {
+      "naam": "Nigg Bay Balnagask",
+      "versie": 1,
+      "bestand": "nigg-bay-balnagask.csv"
+    },
+    {
+      "naam": "Royal Aberdeen Silverburn",
+      "versie": 1,
+      "bestand": "royal-aberdeen-silverburn.csv"
+    },
+    {
+      "naam": "Rozenstein",
+      "versie": 1,
+      "bestand": "rozenstein.csv"
+    },
+    {
+      "naam": "Wouwse Plantage",
+      "versie": 1,
+      "bestand": "wouwse-plantage.csv"
+    },
+    {
+      "naam": "Zeeuwsche",
+      "versie": 1,
+      "bestand": "zeeuwsche.csv"
     }
   ]
 }
