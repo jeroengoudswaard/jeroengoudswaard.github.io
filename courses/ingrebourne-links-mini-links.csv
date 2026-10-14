@@ -1,0 +1,14 @@
+# baan: Ingrebourne Links
+# lus: Mini Links
+# naam: Ingrebourne Links Mini Links
+# bron: 2728_IngrebourneLinksMiniLinks.kml (tee = Tee, green = Pin, bocht = verste landingspunt bij dogleg, drempel 15 m)
+# hole,tee_lat,tee_lon,green_lat,green_lon[,bocht_lat,bocht_lon]
+1,51.508213,0.225203,51.507908,0.226212
+2,51.507966,0.226662,51.508023,0.227797
+3,51.508087,0.228234,51.508139,0.229752
+4,51.508491,0.229704,51.509322,0.229855
+5,51.509227,0.230454,51.508244,0.230495
+6,51.508226,0.230992,51.507664,0.230686
+7,51.507547,0.230056,51.507841,0.228515
+8,51.507694,0.227975,51.507647,0.226738
+9,51.507486,0.226200,51.507780,0.225410

@@ -1,0 +1,14 @@
+# baan: Whittlebury Park
+# lus: Wedgewood
+# naam: Whittlebury Park Wedgewood Course
+# bron: 4562_WhittleburyParkWedgewoodCourse.kml (tee = Tee, green = Pin, bocht = verste landingspunt bij dogleg, drempel 15 m)
+# hole,tee_lat,tee_lon,green_lat,green_lon[,bocht_lat,bocht_lon]
+1,52.076709,-0.999794,52.076145,-1.001469
+2,52.076286,-1.001904,52.074679,-1.004211
+3,52.074339,-1.003973,52.075022,-1.003136
+4,52.075356,-1.002928,52.074740,-1.001981
+5,52.074615,-1.000696,52.074457,-1.002573
+6,52.074832,-1.002789,52.074135,-1.003418
+7,52.073241,-1.002534,52.074381,-1.005031
+8,52.074762,-1.005005,52.076443,-1.002512,52.076283,-1.003066
+9,52.076746,-1.002682,52.076590,-1.001004

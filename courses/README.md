@@ -1,6 +1,10 @@
 # courses/
 
-GPS-coördinaten van golfbanen voor de Strokes Gained-app (Meer → GPS-coördinaten → Banen bijwerken).
+GPS-coördinaten van golfbanen voor de Strokes Gained-app. De app toont de lijst bij Start ronde en haalt
+de GPS van een baan pas op als je er een ronde op start.
+
+Gegenereerd uit `csv/` in de app-repo met `tool/build_courses.js` — pas daar de CSV's aan en draai het
+script opnieuw i.p.v. hier met de hand te wijzigen.
 
 - `index.json` lijst alle banen. Een baan met meer dan 18 holes heeft `lussen`
   (elke lus = 9 holes, hole 1–9 in zijn eigen CSV); een gewone baan heeft één `bestand`.
