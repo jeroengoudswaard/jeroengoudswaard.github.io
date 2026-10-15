@@ -627,6 +627,11 @@
   }
 
   function csvLines() { return csvLinesFor(state.holes); }
+  // Single course: file starts with '# naam:' so the name travels with the CSV.
+  function singleText() {
+    var n = course.value.trim().replace(/[\r\n]+/g, " ");
+    return (n ? "# naam: " + n + "\n" : "") + csvLines().lines.join("\n") + "\n";
+  }
   function csvLinesFor(holes) {
     var out = [], skipped = [];
     for (var n = 1; n <= HOLES; n++) {
@@ -845,7 +850,7 @@
   };
   $("download").onclick = function () {
     if (state.mode === "loops") { downloadLoops(); return; }
-    var text = csvLines().lines.join("\n") + "\n";
+    var text = singleText();
     var a = document.createElement("a");
     a.href = URL.createObjectURL(new Blob([text], { type: "text/csv" }));
     a.download = fileName();
@@ -854,7 +859,7 @@
     toast(t("saved", { f: a.download }));
   };
   $("copy").onclick = function () {
-    var text = csvLines().lines.join("\n") + "\n";
+    var text = singleText();
     (navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.reject())
       .then(function () { toast(t("copied")); }, function () {
         var r = document.createRange(); r.selectNodeContents($("csv"));
@@ -893,7 +898,8 @@
       state.holes = holes;
       state.cur = 1;
       history = [];
-      var name = f.name.replace(/\.(csv|txt)$/i, "").replace(/_GPS$/i, "").replace(/_/g, " ");
+      var hn = /^#\s*naam:\s*(.+)$/mi.exec(text);
+      var name = hn ? hn[1].trim() : f.name.replace(/\.(csv|txt)$/i, "").replace(/_GPS$/i, "").replace(/_/g, " ");
       course.value = state.course = name;
       refresh();
       var all = [];
