@@ -1,4 +1,6 @@
 # naam: Wassenaarse Golf Groendael
+# bron: https://jeroengoudswaard.github.io/strokes-gained/mapper/ (Course Mapper)
+# hole,tee_lat,tee_lon,green_lat,green_lon[,bocht_lat,bocht_lon]
 1,52.109332,4.336327,52.111184,4.339707,52.110189,4.337786
 2,52.111114,4.340104,52.111707,4.341874
 3,52.112057,4.343070,52.111184,4.338253,52.111757,4.340007

@@ -627,11 +627,14 @@
   }
 
   function csvLines() { return csvLinesFor(state.holes); }
-  // Single course: file starts with '# naam:' so the name travels with the CSV.
-  function singleText() {
+  // Every exported CSV: name, source and column description as header lines.
+  var MAPPER_URL = "https://jeroengoudswaard.github.io/strokes-gained/mapper/";
+  var COLS = "# hole,tee_lat,tee_lon,green_lat,green_lon[,bocht_lat,bocht_lon]\n";
+  function headerFor(extra) {
     var n = course.value.trim().replace(/[\r\n]+/g, " ");
-    return (n ? "# naam: " + n + "\n" : "") + csvLines().lines.join("\n") + "\n";
+    return (extra || (n ? "# naam: " + n + "\n" : "")) + "# bron: " + MAPPER_URL + " (Course Mapper)\n" + COLS;
   }
+  function singleText() { return headerFor() + csvLines().lines.join("\n") + "\n"; }
   function csvLinesFor(holes) {
     var out = [], skipped = [];
     for (var n = 1; n <= HOLES; n++) {
@@ -835,7 +838,7 @@
     var todo = state.loops.filter(function (l) { return csvLinesFor(l.holes || {}).lines.length; });
     if (!todo.length) { toast(t("noLoopData")); return; }
     todo.forEach(function (l, i) {
-      var text = "# baan: " + name + "\n# lus: " + l.naam + "\n" + csvLinesFor(l.holes).lines.join("\n") + "\n";
+      var text = headerFor("# baan: " + name + "\n# lus: " + l.naam + "\n") + csvLinesFor(l.holes).lines.join("\n") + "\n";
       setTimeout(function () { saveText(loopFile(l), text); }, i * 400);
     });
     toast(t("savedMany", { n: todo.length }));

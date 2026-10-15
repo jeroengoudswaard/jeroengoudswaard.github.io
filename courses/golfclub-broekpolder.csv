@@ -1,4 +1,6 @@
 # naam: Golfclub Broekpolder
+# bron: https://jeroengoudswaard.github.io/strokes-gained/mapper/ (Course Mapper)
+# hole,tee_lat,tee_lon,green_lat,green_lon[,bocht_lat,bocht_lon]
 1,51.936606,4.314355,51.940072,4.317981,51.938610,4.315685
 2,51.939371,4.317949,51.942347,4.321693,51.940945,4.319676
 3,51.942717,4.321715,51.940568,4.318153,51.941461,4.319301
