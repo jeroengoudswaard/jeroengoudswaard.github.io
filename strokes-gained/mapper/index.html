@@ -226,7 +226,8 @@
     <div class="card">
       <h3><span lang="en">1 · Course</span><span lang="nl">1 · Baan</span></h3>
       <label class="field" for="course"><span lang="en">Course name</span><span lang="nl">Naam van de baan</span></label>
-      <input type="text" id="course" autocomplete="off" placeholder="Leeuwenbergh">
+      <input type="text" id="course" autocomplete="off" placeholder="Leeuwenbergh (NL)">
+      <p class="note"><span lang="en">The region is added automatically from the map: <b>(NL)</b>, <b>(GB)</b>, <b>(US-FL)</b>, <b>(CA-ON)</b>. Type your own tag to override it.</span><span lang="nl">De regio komt automatisch uit de kaart erbij: <b>(NL)</b>, <b>(GB)</b>, <b>(US-FL)</b>, <b>(CA-ON)</b>. Typ zelf een label om het te overschrijven.</span></p>
       <label class="field mt" for="mode"><span lang="en">Layout</span><span lang="nl">Opzet</span></label>
       <select id="mode" aria-label="Layout"><option value="18"></option><option value="9"></option><option value="loops"></option></select>
       <form id="searchForm" class="row mt" autocomplete="off">
@@ -631,7 +632,7 @@
   var MAPPER_URL = "https://jeroengoudswaard.github.io/strokes-gained/mapper/";
   var COLS = "# hole,tee_lat,tee_lon,green_lat,green_lon[,bocht_lat,bocht_lon]\n";
   function headerFor(extra) {
-    var n = course.value.trim().replace(/[\r\n]+/g, " ");
+    var n = exportName().replace(/[\r\n]+/g, " ");
     return (extra || (n ? "# naam: " + n + "\n" : "")) + "# bron: " + MAPPER_URL + " (Course Mapper)\n" + COLS;
   }
   function singleText() { return headerFor() + csvLines().lines.join("\n") + "\n"; }
@@ -775,7 +776,81 @@
   // ── Course name ──
   var course = $("course");
   course.value = state.course || "";
-  course.addEventListener("input", function () { state.course = course.value; persist(); });
+
+  // ── Region label: "(NL)", "(GB)", "(US-FL)", "(CA-ON)" behind the name ──
+  // Countries: international vehicle code; US/Canada: country-state/province.
+  var VEH = {AD:"AND",AE:"UAE",AF:"AFG",AG:"AG",AL:"AL",AM:"AM",AO:"ANG",AR:"RA",AT:"A",AU:"AUS",AW:"ARU",
+    AX:"FIN",AZ:"AZ",BA:"BIH",BB:"BDS",BD:"BD",BE:"B",BF:"BF",BG:"BG",BH:"BRN",BI:"RU",BJ:"DY",BM:"BDA",
+    BN:"BRU",BO:"BOL",BR:"BR",BS:"BS",BT:"BHT",BW:"RB",BY:"BY",BZ:"BH",CD:"CGO",CG:"RCB",CH:"CH",CI:"CI",
+    CL:"RCH",CM:"CAM",CN:"CHN",CO:"CO",CR:"CR",CU:"C",CV:"CV",CY:"CY",CZ:"CZ",DE:"D",DK:"DK",DO:"DOM",
+    DZ:"DZ",EC:"EC",EE:"EST",EG:"ET",ES:"E",ET:"ETH",FI:"FIN",FJ:"FJI",FR:"F",GB:"GB",GE:"GE",GG:"GBG",
+    GH:"GH",GI:"GBZ",GR:"GR",GT:"GCA",GY:"GUY",HK:"HK",HN:"HN",HR:"HR",HT:"RH",HU:"H",ID:"RI",IE:"IRL",
+    IL:"IL",IM:"GBM",IN:"IND",IQ:"IRQ",IR:"IR",IS:"IS",IT:"I",JE:"GBJ",JM:"JA",JO:"HKJ",JP:"J",KE:"EAK",
+    KG:"KS",KH:"K",KP:"KP",KR:"ROK",KW:"KWT",KZ:"KZ",LA:"LAO",LB:"RL",LC:"WL",LI:"FL",LK:"CL",LT:"LT",
+    LU:"L",LV:"LV",MA:"MA",MC:"MC",MD:"MD",ME:"MNE",MF:"F",MG:"RM",MK:"MK",MM:"MYA",MN:"MGL",MO:"MO",
+    MT:"M",MU:"MS",MV:"MV",MX:"MEX",MY:"MAL",MZ:"MOC",NA:"NAM",NG:"WAN",NI:"NIC",NL:"NL",NO:"N",NP:"NEP",
+    NZ:"NZ",OM:"OM",PA:"PA",PE:"PE",PG:"PNG",PH:"RP",PK:"PK",PL:"PL",PT:"P",PY:"PY",QA:"Q",RE:"F",RO:"RO",
+    RS:"SRB",RU:"RUS",RW:"RWA",SA:"KSA",SC:"SY",SE:"S",SG:"SGP",SI:"SLO",SK:"SK",SM:"RSM",SN:"SN",SV:"ES",
+    SY:"SYR",SZ:"SD",TH:"T",TN:"TN",TR:"TR",TT:"TT",TW:"RC",TZ:"EAT",UA:"UA",UG:"EAU",UY:"ROU",UZ:"UZ",
+    VA:"V",VE:"YV",VN:"VN",XK:"RKS",ZA:"ZA",ZM:"Z",ZW:"ZW"};
+  var TAG = /\s*\(((?:[A-Z]{2,3}|[A-Z]{2}-[A-Z]{2}))\)\s*$/;
+  var lastLabel = "", autoLabel = "", manualTag = false;
+  function labelFrom(addr) {
+    if (!addr) return "";
+    var cc = String(addr.country_code || "").toUpperCase();
+    if (!cc) return "";
+    if (cc === "US" || cc === "CA") {
+      var iso = addr["ISO3166-2-lvl4"] || "";
+      return iso.indexOf(cc + "-") === 0 ? iso : "";
+    }
+    return VEH[cc] || cc;
+  }
+  function withLabel(name, label) {
+    name = name.replace(TAG, "").trim();
+    return name && label ? name + " (" + label + ")" : name;
+  }
+  // The name as exported: the typed tag wins, otherwise the detected label.
+  function exportName() {
+    var v = course.value.trim();
+    if (!v || TAG.test(v)) return v;
+    return withLabel(v, lastLabel);
+  }
+  // After the field was filled from a file, QR or a reset.
+  function syncTag() { manualTag = TAG.test(course.value); autoLabel = ""; }
+  function applyLabel(label) {
+    if (!label) return;
+    lastLabel = label;
+    if (manualTag || !course.value.trim()) return;
+    course.value = state.course = withLabel(course.value, label);
+    autoLabel = label;
+    persist();
+  }
+  var geoBusy = false, geoLast = 0, geoCache = {};
+  function detectLabel() {
+    if (manualTag || geoBusy || map.getZoom() < 10) return;
+    var c = map.getCenter();
+    var key = c.lat.toFixed(1) + "," + c.lng.toFixed(1);
+    if (geoCache[key] !== undefined) { applyLabel(geoCache[key]); return; }
+    var wait = Math.max(0, geoLast + 1200 - Date.now());
+    geoBusy = true;
+    setTimeout(function () {
+      geoLast = Date.now();
+      fetch("https://nominatim.openstreetmap.org/reverse?format=jsonv2&zoom=5&addressdetails=1&lat=" +
+            c.lat.toFixed(5) + "&lon=" + c.lng.toFixed(5) + "&accept-language=en")
+        .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+        .then(function (d) { var l = labelFrom(d && d.address); geoCache[key] = l; applyLabel(l); })
+        .catch(function () { /* offline: the name just stays without label */ })
+        .then(function () { geoBusy = false; });
+    }, wait);
+  }
+  var geoTimer = null;
+  map.on("moveend", function () { clearTimeout(geoTimer); geoTimer = setTimeout(detectLabel, 1500); });
+  course.addEventListener("input", function () {
+    var m = TAG.exec(course.value);
+    manualTag = !!m && m[1] !== autoLabel;
+    state.course = course.value; persist();
+    if (!manualTag && course.value.trim()) { clearTimeout(geoTimer); geoTimer = setTimeout(detectLabel, 800); }
+  });
 
   // ── Search (Nominatim: one request per submit, per its usage policy) ──
   var results = $("results");
@@ -787,7 +862,7 @@
     var m = q.match(/^\s*(-?\d+(?:\.\d+)?)\s*[,; ]\s*(-?\d+(?:\.\d+)?)\s*$/);
     if (m) { map.setView([+m[1], +m[2]], 17); results.innerHTML = ""; toast(t("jumped")); return; }
     msg(t("searching"));
-    fetch("https://nominatim.openstreetmap.org/search?format=jsonv2&limit=6&q=" + encodeURIComponent(q) +
+    fetch("https://nominatim.openstreetmap.org/search?format=jsonv2&addressdetails=1&limit=6&q=" + encodeURIComponent(q) +
           "&accept-language=" + lang())
       .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
       .then(function (data) {
@@ -802,9 +877,12 @@
               var bb = it.boundingbox.map(Number);
               map.fitBounds([[bb[0], bb[2]], [bb[1], bb[3]]], { maxZoom: 17 });
             } else map.setView([+it.lat, +it.lon], 16);
+            var lb = labelFrom(it.address);
             if (!course.value.trim() && /golf/i.test(it.name || "")) {
+              manualTag = false;
               course.value = state.course = it.name; persist();
             }
+            if (lb) applyLabel(lb);
             results.innerHTML = "";
           }
           li.onclick = go;
@@ -817,13 +895,13 @@
 
   // ── Export / import ──
   function fileName() {
-    var n = (course.value.trim() || "course").replace(/[\\/:*?"<>|]+/g, "").replace(/\s+/g, "_");
+    var n = (exportName() || "course").replace(/[\\/:*?"<>|]+/g, "").replace(/\s+/g, "_");
     return n + "_GPS.csv";
   }
   function slug(s) {
     return (s || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "course";
   }
-  function loopFile(l) { return slug(course.value) + "-" + slug(l.naam) + ".csv"; }
+  function loopFile(l) { return slug(exportName()) + "-" + slug(l.naam) + ".csv"; }
   function saveText(name, text) {
     var a = document.createElement("a");
     a.href = URL.createObjectURL(new Blob([text], { type: "text/csv" }));
@@ -832,7 +910,7 @@
     setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
   }
   function downloadLoops() {
-    var name = course.value.trim();
+    var name = exportName();
     if (!name) { toast(t("needName")); course.focus(); return; }
     state.loops[state.loop].holes = state.holes;
     var todo = state.loops.filter(function (l) { return csvLinesFor(l.holes || {}).lines.length; });
@@ -844,7 +922,7 @@
     toast(t("savedMany", { n: todo.length }));
   }
   $("copyIndex").onclick = function () {
-    var name = course.value.trim();
+    var name = exportName();
     if (!name) { toast(t("needName")); course.focus(); return; }
     var o = { naam: name, versie: 1, lussen: state.loops.map(function (l) { return { naam: l.naam, bestand: loopFile(l) }; }) };
     var text = JSON.stringify(o, null, 2);
@@ -882,7 +960,7 @@
         // Into the loop that is open; take the names from the file's header lines.
         if (Object.keys(state.holes).length && !confirm(t("confirmLoad"))) return;
         var hb = /^#\s*baan:\s*(.+)$/mi.exec(text), hl = /^#\s*lus:\s*(.+)$/mi.exec(text);
-        if (hb && !course.value.trim()) course.value = state.course = hb[1].trim();
+        if (hb && !course.value.trim()) { course.value = state.course = hb[1].trim(); syncTag(); }
         if (hl) {
           var ln = hl[1].replace(/[+\r\n]+/g, " ").trim();
           var taken = state.loops.some(function (o, i) { return i !== state.loop && o.naam.toLowerCase() === ln.toLowerCase(); });
@@ -903,7 +981,7 @@
       history = [];
       var hn = /^#\s*naam:\s*(.+)$/mi.exec(text);
       var name = hn ? hn[1].trim() : f.name.replace(/\.(csv|txt)$/i, "").replace(/_GPS$/i, "").replace(/_/g, " ");
-      course.value = state.course = name;
+      course.value = state.course = name; syncTag();
       refresh();
       var all = [];
       Object.keys(holes).forEach(function (k) { all = all.concat(path(holes[k])); });
@@ -935,14 +1013,14 @@
   $("clearAll").onclick = function () {
     if (hasData() && !confirm(t("confirmNew"))) return;
     setMode(state.mode);
-    course.value = state.course = "";
+    course.value = state.course = ""; manualTag = false; autoLabel = ""; lastLabel = "";
     refresh();
   };
 
   // ── QR code for the app ──
   var modal = $("qrModal");
   $("sendQr").onclick = function () {
-    var name = course.value.trim();
+    var name = exportName();
     if (!name) { toast(t("needName")); course.focus(); return; }
     var box = $("qrBox");
     if (state.mode === "loops") {
@@ -997,7 +1075,7 @@
       setMode(Math.max.apply(null, Object.keys(c.holes).map(Number)) > 9 ? "18" : "9");
     }
     state.holes = c.holes; state.cur = 1; history = [];
-    course.value = state.course = c.name;
+    course.value = state.course = c.name; syncTag();
     refresh();
     var all = [];
     Object.keys(c.holes).forEach(function (k) { all = all.concat(path(c.holes[k])); });

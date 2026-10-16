@@ -1,0 +1,11 @@
+# baan: Education City (Q)
+# lus: 6 Champ
+# naam: Education City (Q) 6 Champ
+# bron: 2552_EducationCity6HoleChamp.kml (tee = Tee, green = Pin, bocht = verste landingspunt bij dogleg, drempel 15 m)
+# hole,tee_lat,tee_lon,green_lat,green_lon[,bocht_lat,bocht_lon]
+1,25.304444,51.425579,25.306733,51.427411,25.306056,51.427135
+2,25.306762,51.427994,25.305381,51.427448
+3,25.304916,51.426818,25.304628,51.430279,25.305168,51.429258
+4,25.303056,51.430233,25.302812,51.425517,25.303386,51.427667
+5,25.302567,51.426264,25.302729,51.428232
+6,25.301367,51.428602,25.302552,51.424893,25.301960,51.426094
