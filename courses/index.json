@@ -5226,6 +5226,7 @@
   {"naam":"Western Hills (US-CA)","versie":4,"h":"1687a1d4","lat":33.9633,"lon":-117.7668,"bestand":"western-hills-us-ca.csv"},
   {"naam":"Westhampton (US-NY)","versie":4,"h":"ad5e4d2f","lat":40.8097,"lon":-72.658,"bestand":"westhampton-us-ny.csv"},
   {"naam":"Westhaven (US-TN)","versie":4,"h":"7c375b77","lat":35.9359,"lon":-86.9425,"bestand":"westhaven-us-tn.csv"},
+  {"naam":"Westhill (GB)","versie":1,"h":"75a32d05","lat":57.1596,"lon":-2.2915,"bestand":"westhill-gb.csv"},
   {"naam":"Westhoughton (GB)","versie":4,"h":"e2f0e214","lat":53.5516,"lon":-2.5405,"bestand":"westhoughton-gb.csv"},
   {"naam":"Westin Rancho Mirage Pete Dye (US-CA)","versie":4,"h":"2528ec43","lat":33.7974,"lon":-116.4157,"bestand":"westin-rancho-mirage-pete-dye-us-ca.csv"},
   {"naam":"Westlake (US-TX)","versie":4,"h":"c28acbac","lat":30.2769,"lon":-97.8506,"bestand":"westlake-us-tx.csv"},
