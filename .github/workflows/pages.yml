@@ -43,6 +43,17 @@ jobs:
           find _site -name '*.html' -not -path '_site/*/app/*' -exec \
             sed -i -E "s#(assets/(site\.(css|js)|sg-qr\.js))\"#\1?v=${GITHUB_SHA::7}\"#g" {} +
 
+          # Strokes Gained version label: taken from the release body
+          # ("Strokes Gained 1.6.22+24 (built from ...)"), so it follows every
+          # app release without editing the HTML by hand.
+          ver=$(gh release view strokes-gained --repo "$GITHUB_REPOSITORY" \
+                  --json body -q .body | sed -nE 's/^Strokes Gained ([0-9]+\.[0-9]+\.[0-9]+).*/\1/p' || true)
+          if [ -n "$ver" ]; then
+            sed -i -E "s#(data-sg-version>)v[0-9.]+#\1v$ver#g" \
+              _site/index.html _site/strokes-gained/index.html
+            echo "Strokes Gained version label: v$ver"
+          fi
+
           # <release tag>:<folder>, one line per app with a web build.
           for entry in "strokes-gained:strokes-gained"; do
             tag="${entry%%:*}"; dir="${entry##*:}"

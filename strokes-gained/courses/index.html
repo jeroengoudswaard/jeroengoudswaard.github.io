@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Strokes Gained Courses</title>
+  <meta name="description" content="Search all golf courses with GPS coordinates in the Strokes Gained app: tee and green positions for every hole, ready to download in the app.">
+  <link rel="icon" href="../../assets/strokes-gained.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Outfit:wght@400;500;600&family=Playfair+Display:ital,wght@0,700;0,800;1,700;1,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/site.css">
+  <script src="../../assets/site.js"></script>
+  <style>
+    :root { --accent: #2e7d32; --accent-soft: #e3f1e4; }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) { --accent: #4ade80; --accent-soft: #15301f; }
+    }
+    :root[data-theme="dark"] { --accent: #4ade80; --accent-soft: #15301f; }
+
+    .zoek { display: grid; grid-template-columns: 1fr auto; gap: 10px; margin: 28px 0 12px; }
+    .zoek input, .zoek select {
+      font: inherit; font-size: 16px; color: var(--ink); background: var(--card-raised);
+      border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 14px; min-width: 0;
+    }
+    .zoek input:focus, .zoek select:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+    .telling { font-size: 14px; color: var(--ink-soft); margin: 0 0 16px; min-height: 1.4em; }
+    .lijst { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+    .lijst li {
+      display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; align-items: center;
+      padding: 12px 2px; border-bottom: 1px solid var(--line);
+    }
+    .lijst .naam { font-weight: 600; color: var(--ink); overflow-wrap: anywhere; }
+    .lijst .regio { font-size: 13px; color: var(--ink-soft); }
+    .lijst .lussen { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 6px; }
+    .lijst .lus {
+      font-size: 12px; padding: 2px 8px; border-radius: 999px;
+      background: var(--accent-soft); color: var(--ink);
+    }
+    .lijst .links { display: flex; gap: 14px; font-size: 13px; white-space: nowrap; }
+    .lijst .links a { color: var(--accent); font-weight: 600; text-decoration: none; }
+    .lijst .links a:hover { text-decoration: underline; }
+    .meer { margin: 20px 0 0; }
+    .leeg { color: var(--ink-soft); padding: 20px 0; }
+    @media (max-width: 560px) {
+      .zoek { grid-template-columns: 1fr; }
+      .lijst li { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a class="crumb-home" href="../../"><img src="../../assets/shockwave.svg" alt="" width="26" height="26"><span class="crumb-label">Shockwave Apps</span></a>
+      <span class="crumb-sep" aria-hidden="true">›</span>
+      <a class="brand" href="../"><img src="../../assets/strokes-gained.svg" alt="" width="30" height="30">Strokes Gained</a>
+      <span class="crumb-sep crumb-sep-last" aria-hidden="true">›</span>
+      <span class="crumb-current" aria-current="page"><span lang="en">Courses</span><span lang="nl">Banen</span></span>
+    </nav>
+    <nav class="nav-links">
+    </nav>
+    <div class="nav-tools">
+      <button class="icon-btn" data-lang-label type="button">NL</button>
+      <button class="icon-btn" data-theme-toggle type="button">☾</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section>
+    <div class="wrap">
+      <p class="eyebrow"><span lang="en">Course list</span><span lang="nl">Banenlijst</span></p>
+      <h1 style="font-size:clamp(34px,6vw,48px)">
+        <span lang="en">Mapped <em class="accent">courses.</em></span>
+        <span lang="nl">Ingemeten <em class="accent">banen.</em></span>
+      </h1>
+      <p class="lead" style="max-width:720px">
+        <span lang="en">Every course here has GPS positions for the tee and green of each hole. Pick one when you start a round in the app and it downloads automatically. Missing your course? <a href="../mapper/">Map it yourself</a>.</span>
+        <span lang="nl">Elke baan hier heeft GPS-posities van de tee en green van elke hole. Kies hem bij het starten van een ronde in de app en hij wordt vanzelf gedownload. Staat jouw baan er niet bij? <a href="../mapper/">Meet hem zelf in</a>.</span>
+      </p>
+
+      <div class="zoek">
+        <input id="q" type="search" autocomplete="off" spellcheck="false"
+               placeholder="Search by course or place" aria-label="Search courses">
+        <select id="regio" aria-label="Country"></select>
+      </div>
+      <p class="telling" id="telling" aria-live="polite"></p>
+      <ul class="lijst" id="lijst"></ul>
+      <div class="meer" id="meer" hidden>
+        <button class="btn" type="button" id="meerKnop"></button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="dark-zone">
+  <footer>
+    <div class="wrap">
+      <div class="foot-bottom">
+        <span>© <span data-year>2026</span> Jeroen Goudswaard</span>
+        <a href="../">Strokes Gained</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var STAP = 100;
+  // Regio-labels in de baannamen zijn internationale autokenmerken; hier naar
+  // ISO-landcodes, zodat de browser de landnaam in de juiste taal geeft.
+  var ISO = {
+    NL:"NL", GB:"GB", AUS:"AU", E:"ES", IRL:"IE", F:"FR", ZA:"ZA", D:"DE", P:"PT",
+    NZ:"NZ", CH:"CH", S:"SE", CHN:"CN", I:"IT", J:"JP", B:"BE", MEX:"MX", FIN:"FI",
+    DK:"DK", T:"TH", UAE:"AE", A:"AT", MA:"MA", TR:"TR", ROK:"KR", MAL:"MY", IND:"IN",
+    CZ:"CZ", RC:"TW", BR:"BR", SGP:"SG", N:"NO", DOM:"DO", IS:"IS", RP:"PH", RA:"AR",
+    BS:"BS", ET:"EG", MS:"MU", CO:"CO", SK:"SK", MYA:"MM", H:"HU", VN:"VN", PL:"PL",
+    HK:"HK", BDS:"BB", BG:"BG", SLO:"SI", EST:"EE", OM:"OM", CY:"CY", RI:"ID", Q:"QA",
+    EAK:"KE", RUS:"RU", K:"KH", MO:"MO", GBM:"IM", ZW:"ZW", GR:"GR", LT:"LT", CAM:"CM",
+    GBJ:"JE", BDA:"BM", RCH:"CL", KSA:"SA", HKJ:"JO", YV:"VE", PA:"PA", RB:"BW",
+    NEP:"NP", LV:"LV", BOL:"BO", PE:"PE", FJI:"FJ", WL:"LC", KP:"KP", BRN:"BH",
+    GBG:"GG", M:"MT", SD:"SZ", CR:"CR", US:"US", CA:"CA"
+  };
+  var LABEL = /\(([A-Z]{1,3}(?:-[A-Z]{2})?)\)/g;
+  var root = document.documentElement;
+  var banen = [], gekozen = [], getoond = 0, fout = false;
+  var q = document.getElementById("q"), regio = document.getElementById("regio");
+  var lijst = document.getElementById("lijst"), telling = document.getElementById("telling");
+  var meer = document.getElementById("meer"), meerKnop = document.getElementById("meerKnop");
+
+  function nl() { return root.getAttribute("data-lang") === "nl"; }
+  function plat(s) {
+    return s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "")
+            .replace(/[^a-z0-9]+/g, " ").trim();
+  }
+  function landNaam(code) {
+    try {
+      return new Intl.DisplayNames([nl() ? "nl" : "en"], { type: "region" }).of(ISO[code] || code);
+    } catch (e) { return code; }
+  }
+  function regioTekst(b) {
+    if (!b.label) return "";
+    var land = landNaam(b.land);
+    return b.staat ? land + " · " + b.staat : land;
+  }
+
+  function verwerk(raw) {
+    return raw.map(function (b) {
+      var m, laatste = null;
+      LABEL.lastIndex = 0;
+      while ((m = LABEL.exec(b.naam))) laatste = m;
+      var label = laatste ? laatste[1] : "";
+      var deel = label.split("-");
+      var naam = laatste
+        ? (b.naam.slice(0, laatste.index) + b.naam.slice(laatste.index + laatste[0].length))
+            .replace(/\s+/g, " ").trim()
+        : b.naam;
+      var lussen = (b.lussen || []).map(function (l) { return l.naam; });
+      return {
+        naam: naam, label: label, land: deel[0], staat: deel[1] || "",
+        lat: b.lat, lon: b.lon, bestand: b.bestand, lussen: b.lussen || null,
+        sleutel: plat(b.naam + " " + lussen.join(" "))
+      };
+    }).sort(function (a, b) { return a.naam.localeCompare(b.naam); });
+  }
+
+  function vulRegio() {
+    var huidig = regio.value, tel = {};
+    banen.forEach(function (b) { if (b.land) tel[b.land] = (tel[b.land] || 0) + 1; });
+    var landen = Object.keys(tel).sort(function (a, b) {
+      return landNaam(a).localeCompare(landNaam(b));
+    });
+    regio.innerHTML = "";
+    var alle = document.createElement("option");
+    alle.value = ""; alle.textContent = nl() ? "Alle landen" : "All countries";
+    regio.appendChild(alle);
+    landen.forEach(function (c) {
+      var o = document.createElement("option");
+      o.value = c; o.textContent = landNaam(c) + " (" + tel[c] + ")";
+      regio.appendChild(o);
+    });
+    regio.value = huidig;
+  }
+
+  function link(href, tekst, download) {
+    var a = document.createElement("a");
+    a.href = href; a.textContent = tekst;
+    if (download) a.setAttribute("download", "");
+    else { a.target = "_blank"; a.rel = "noopener"; }
+    return a;
+  }
+
+  function rij(b) {
+    var li = document.createElement("li");
+    var links = document.createElement("div");
+    var tekst = document.createElement("div");
+    var n = document.createElement("div");
+    n.className = "naam"; n.textContent = b.naam;
+    var r = document.createElement("div");
+    r.className = "regio"; r.textContent = regioTekst(b);
+    tekst.appendChild(n); tekst.appendChild(r);
+    links.className = "links";
+    if (b.lat != null) {
+      links.appendChild(link("https://www.openstreetmap.org/?mlat=" + b.lat + "&mlon=" + b.lon +
+        "#map=15/" + b.lat + "/" + b.lon, nl() ? "Kaart" : "Map"));
+    }
+    if (b.bestand) links.appendChild(link("../../courses/" + b.bestand, "CSV", true));
+    li.appendChild(tekst); li.appendChild(links);
+    if (b.lussen) {
+      var lw = document.createElement("div");
+      lw.className = "lussen";
+      b.lussen.forEach(function (l) {
+        var s = document.createElement(l.bestand ? "a" : "span");
+        s.className = "lus"; s.textContent = l.naam;
+        if (l.bestand) {
+          s.href = "../../courses/" + l.bestand; s.setAttribute("download", "");
+          s.title = (nl() ? "CSV van lus " : "CSV for loop ") + l.naam;
+          s.style.textDecoration = "none";
+        }
+        lw.appendChild(s);
+      });
+      li.appendChild(lw);
+    }
+    return li;
+  }
+
+  function toon(vanaf) {
+    var tot = Math.min(gekozen.length, vanaf + STAP);
+    var frag = document.createDocumentFragment();
+    for (var i = vanaf; i < tot; i++) frag.appendChild(rij(gekozen[i]));
+    lijst.appendChild(frag);
+    getoond = tot;
+    var rest = gekozen.length - getoond;
+    meer.hidden = rest <= 0;
+    meerKnop.textContent = nl() ? "Toon " + Math.min(rest, STAP) + " meer"
+                                : "Show " + Math.min(rest, STAP) + " more";
+  }
+
+  function filter() {
+    if (fout) {
+      telling.textContent = nl() ? "De banenlijst kon niet worden geladen. Probeer het later opnieuw."
+                                 : "The course list could not be loaded. Please try again later.";
+      return;
+    }
+    if (!banen.length) {
+      telling.textContent = nl() ? "Banen laden…" : "Loading courses…";
+      return;
+    }
+    var woorden = plat(q.value).split(" ").filter(Boolean), land = regio.value;
+    gekozen = banen.filter(function (b) {
+      if (land && b.land !== land) return false;
+      for (var i = 0; i < woorden.length; i++) {
+        if (b.sleutel.indexOf(woorden[i]) < 0) return false;
+      }
+      return true;
+    });
+    var totaal = banen.length.toLocaleString(nl() ? "nl-NL" : "en-GB");
+    var aantal = gekozen.length.toLocaleString(nl() ? "nl-NL" : "en-GB");
+    telling.textContent = (woorden.length || land)
+      ? (nl() ? aantal + " van " + totaal + " banen" : aantal + " of " + totaal + " courses")
+      : (nl() ? totaal + " banen met GPS" : totaal + " courses with GPS");
+    lijst.innerHTML = "";
+    if (!gekozen.length && (woorden.length || land)) {
+      var li = document.createElement("li");
+      li.className = "leeg";
+      li.innerHTML = nl()
+        ? 'Niets gevonden. Je kunt de baan zelf inmeten met de <a href="../mapper/">baan-mapper</a>.'
+        : 'Nothing found. You can map the course yourself with the <a href="../mapper/">Course Mapper</a>.';
+      lijst.appendChild(li);
+    }
+    toon(0);
+  }
+
+  function taalTeksten() {
+    q.placeholder = nl() ? "Zoek op baan of plaats" : "Search by course or place";
+    q.setAttribute("aria-label", nl() ? "Zoek banen" : "Search courses");
+    regio.setAttribute("aria-label", nl() ? "Land" : "Country");
+    vulRegio();
+    filter();
+  }
+
+  var timer;
+  q.addEventListener("input", function () { clearTimeout(timer); timer = setTimeout(filter, 120); });
+  regio.addEventListener("change", filter);
+  meerKnop.addEventListener("click", function () { toon(getoond); });
+  // site.js wisselt de taal via het data-lang-attribuut; teksten die hier in
+  // JS staan volgen die wissel.
+  new MutationObserver(taalTeksten).observe(root, { attributes: true, attributeFilter: ["data-lang"] });
+
+  var start = new URLSearchParams(location.search).get("q");
+  if (start) q.value = start;
+  taalTeksten();
+
+  fetch("../../courses/index.json", { cache: "no-cache" })
+    .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function (j) { banen = verwerk(j.banen || []); taalTeksten(); })
+    .catch(function () { fout = true; filter(); });
+})();
+</script>
+</body>
+</html>
