@@ -2539,7 +2539,7 @@
   {"naam":"Ledgemont (US-MA)","versie":4,"h":"a01ccdc5","lat":41.8669,"lon":-71.3206,"bestand":"ledgemont-us-ma.csv"},
   {"naam":"Ledgeview (CA-BC)","versie":4,"h":"92e8b23c","lat":49.0739,"lon":-122.23,"bestand":"ledgeview-ca-bc.csv"},
   {"naam":"Leek Golf Club (GB)","versie":4,"h":"db23a070","lat":53.0894,"lon":-2.0263,"bestand":"leek-golf-club-gb.csv"},
-  {"naam":"Leeuwenbergh (NL)","versie":4,"h":"460e7379","lat":52.0559,"lon":4.361,"bestand":"leeuwenbergh-nl.csv"},
+  {"naam":"Leeuwenbergh (NL)","versie":5,"h":"4cc6e248","lat":52.0559,"lon":4.361,"bestand":"leeuwenbergh-nl.csv"},
   {"naam":"Legacy (US-FL)","versie":4,"h":"41ac497c","lat":27.3335,"lon":-80.4274,"bestand":"legacy-us-fl.csv"},
   {"naam":"Legacy Club at Alaqua Lakes (US-FL)","versie":4,"h":"51d3aadf","lat":28.755,"lon":-81.3898,"bestand":"legacy-club-at-alaqua-lakes-us-fl.csv"},
   {"naam":"Legacy Golf Links (US-NC)","versie":4,"h":"a4d958af","lat":35.0959,"lon":-79.4212,"bestand":"legacy-golf-links-us-nc.csv"},
