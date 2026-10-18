@@ -284,6 +284,7 @@
         <button class="b primary wide" id="sendQr" type="button"><span aria-hidden="true">▣</span> <span lang="en">Send to app (QR code)</span><span lang="nl">Naar de app (QR-code)</span></button>
         <button class="b" id="download" type="button">⤓ <span lang="en">Download CSV</span><span lang="nl">Download CSV</span></button>
         <button class="b" id="copy" type="button"><span lang="en">Copy CSV</span><span lang="nl">Kopieer CSV</span></button>
+        <button class="b wide" id="share" type="button" hidden>✉ <span lang="en">Share with the developer</span><span lang="nl">Deel met de ontwikkelaar</span></button>
         <button class="b wide" id="copyIndex" type="button" hidden><span lang="en">Copy courses/index.json entry</span><span lang="nl">Kopieer courses/index.json-regel</span></button>
         <button class="b wide" id="openFile" type="button"><span lang="en">Open CSV…</span><span lang="nl">Open CSV…</span></button>
         <button class="b danger wide ghost" id="clearAll" type="button"><span lang="en">Start a new course</span><span lang="nl">Begin een nieuwe baan</span></button>
@@ -381,7 +382,11 @@
       noLoopData: "Map at least one hole in a loop first.",
       qrMetaLoops: "{name} · {n} loops. Scan every code.",
       copiedIndex: "index.json entry copied",
-      savedMany: "{n} CSV files downloaded"
+      savedMany: "{n} CSV files downloaded",
+      shareConfirm: "Send this course to the developer so it can be added to the course list? Only the course name and the coordinates you mapped are sent.",
+      shareOk: "Thanks! Your course was sent.",
+      shareErr: "Sending failed. Download the CSV instead.",
+      shareBusy: "Sending…"
     },
     nl: {
       stepTee: "klik op de tee",
@@ -427,7 +432,11 @@
       noLoopData: "Meet eerst minstens één hole in een lus.",
       qrMetaLoops: "{name} · {n} lussen. Scan elke code.",
       copiedIndex: "index.json-regel gekopieerd",
-      savedMany: "{n} CSV-bestanden gedownload"
+      savedMany: "{n} CSV-bestanden gedownload",
+      shareConfirm: "Deze baan naar de ontwikkelaar sturen zodat hij aan de banenlijst kan worden toegevoegd? Alleen de naam van de baan en de coördinaten die je hebt gemeten worden verstuurd.",
+      shareOk: "Bedankt! Je baan is verstuurd.",
+      shareErr: "Versturen mislukt. Download de CSV in plaats daarvan.",
+      shareBusy: "Versturen…"
     }
   };
   function lang() { return document.documentElement.getAttribute("data-lang") === "nl" ? "nl" : "en"; }
@@ -658,7 +667,7 @@
       return csvLinesFor(l === state.loops[state.loop] ? state.holes : (l.holes || {})).lines.length > 0;
     }));
     $("copy").disabled = r.lines.length === 0;
-    $("download").disabled = $("sendQr").disabled = !any;
+    $("download").disabled = $("sendQr").disabled = $("share").disabled = !any;
     var w = $("warn");
     w.className = "note warn";
     w.textContent = r.skipped.length ? t("warnTee", { l: r.skipped.join(", ") }) : "";
@@ -921,6 +930,47 @@
     });
     toast(t("savedMany", { n: todo.length }));
   }
+  // ── Share with the developer (mail via Web3Forms) ──
+  // The access key is public by design: it only lets this page submit the form;
+  // the developer's e-mail address stays on the Web3Forms side and is not in
+  // this page. Empty key = button stays hidden.
+  var SHARE_KEY = "";
+  if (SHARE_KEY) $("share").hidden = false;
+  $("share").onclick = function () {
+    var name = exportName();
+    if (!name) { toast(t("needName")); course.focus(); return; }
+    var btn = this;
+    var parts;
+    if (state.mode === "loops") {
+      state.loops[state.loop].holes = state.holes;
+      parts = state.loops.filter(function (l) { return csvLinesFor(l.holes || {}).lines.length; }).map(function (l) {
+        return "### " + loopFile(l) + "\n" + headerFor("# baan: " + name + "\n# lus: " + l.naam + "\n") + csvLinesFor(l.holes).lines.join("\n") + "\n";
+      });
+      if (!parts.length) { toast(t("noLoopData")); return; }
+    } else {
+      parts = ["### " + fileName() + "\n" + singleText()];
+    }
+    var body = parts.join("\n");
+    if (body.length > 200000 || !confirm(t("shareConfirm"))) return;
+    btn.disabled = true;
+    toast(t("shareBusy"));
+    fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify({
+        access_key: SHARE_KEY,
+        subject: "Strokes Gained: nieuwe baan \u2013 " + name,
+        from_name: "Course Mapper",
+        botcheck: "",
+        baan: name,
+        csv: body
+      })
+    }).then(function (r) { return r.json(); }).then(function (j) {
+      toast(t(j && j.success ? "shareOk" : "shareErr"));
+    }, function () { toast(t("shareErr")); }).then(function () {
+      setTimeout(function () { btn.disabled = false; }, 30000);
+    });
+  };
   $("copyIndex").onclick = function () {
     var name = exportName();
     if (!name) { toast(t("needName")); course.focus(); return; }
