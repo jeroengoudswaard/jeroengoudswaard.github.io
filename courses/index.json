@@ -368,7 +368,7 @@
   {"naam":"Bent Tree Country Club Florida (US-FL)","versie":4,"h":"d0766cba","lat":27.2917,"lon":-82.4177,"bestand":"bent-tree-country-club-florida-us-fl.csv"},
   {"naam":"Bentham (GB)","versie":4,"h":"d4a0c700","lat":54.1276,"lon":-2.5006,"bestand":"bentham-gb.csv"},
   {"naam":"Bentwinds (US-NC)","versie":4,"h":"480ce0f9","lat":35.6266,"lon":-78.7674,"bestand":"bentwinds-us-nc.csv"},
-  {"naam":"Bentwoud (NL)","versie":4,"h":"79645fc7","lat":52.0701,"lon":4.569,"lussen":[{"naam":"C","bestand":"bentwoud-nl-c.csv"}]},
+  {"naam":"Bentwoud (NL)","versie":5,"h":"92baefcd","lat":52.0701,"lon":4.5736,"lussen":[{"naam":"A","bestand":"bentwoud-nl-a.csv"},{"naam":"B","bestand":"bentwoud-nl-b.csv"},{"naam":"C","bestand":"bentwoud-nl-c.csv"}]},
   {"naam":"Beowulf (US-ND)","versie":4,"h":"d7c6f4a5","lat":48.1944,"lon":-101.2614,"bestand":"beowulf-us-nd.csv"},
   {"naam":"Bergen Point (US-NY)","versie":4,"h":"09f8a143","lat":40.6778,"lon":-73.3441,"bestand":"bergen-point-us-ny.csv"},
   {"naam":"Bergkramerhof (D)","versie":4,"h":"e2cf9b78","lat":47.9123,"lon":11.4053,"bestand":"bergkramerhof-d.csv"},
