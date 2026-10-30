@@ -1113,6 +1113,27 @@
       toast(t("libLoaded", { name: b.naam }));
     }).catch(function () { toast(t("libErr")); }).then(function () { libBusy = false; });
   }
+  // Dots on the map for every course in the library (from zoom 9): click one to open it.
+  var libMarks = L.layerGroup().addTo(map);
+  var libCanvas = L.canvas({ padding: 0.3 });
+  function libMarkers() {
+    libMarks.clearLayers();
+    if (!libIndex || map.getZoom() < 9) return;
+    var bnd = map.getBounds().pad(0.1), n = 0;
+    for (var i = 0; i < libIndex.length && n < 400; i++) {
+      var b = libIndex[i];
+      if (typeof b.lat !== "number" || typeof b.lon !== "number" || !bnd.contains([b.lat, b.lon])) continue;
+      n++;
+      L.circleMarker([b.lat, b.lon], {
+        renderer: libCanvas, radius: 8, weight: 3, color: "#ffffff", fillColor: "#f59e0b", fillOpacity: 1,
+        bubblingMouseEvents: false
+      }).bindTooltip(b.naam, { direction: "top" }).on("click", (function (bb) {
+        return function () { libOpen(bb); };
+      })(b)).addTo(libMarks);
+    }
+  }
+  map.on("moveend", libMarkers);
+  libLoad().then(libMarkers, function () { /* offline: the list just stays hidden */ });
   // Same rules as the app's importer (lib/screens/meer_screen.dart).
   function parse(text) {
     var holes = {};
