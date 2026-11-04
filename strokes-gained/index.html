@@ -30,11 +30,18 @@
     .gallery .phone { width: 100%; box-shadow: 0 16px 36px rgba(27, 27, 43, 0.18); }
     .gallery figcaption { margin-top: 16px; font-size: 14px; color: var(--ink-soft); }
     .gallery figcaption strong { display: block; color: var(--ink); font-family: var(--serif); font-size: 16px; margin-bottom: 4px; }
-    .mapper-callout { margin-top: 40px; display: grid !important; grid-template-columns: auto 1fr auto; gap: 20px; align-items: center; }
-    .mapper-callout .app-icon { margin: 0; width: 56px; height: 56px; }
-    .mapper-callout .open { white-space: nowrap; padding-top: 0; margin-top: 0; }
-    @media (max-width: 820px) { .mapper-callout { grid-template-columns: 1fr; gap: 14px; } .mapper-callout .open { grid-column: 1 / -1; } }
-    @media (min-width: 1024px) { .gallery { grid-auto-flow: row; grid-template-columns: repeat(4, 1fr); grid-auto-columns: auto; overflow: visible; } }
+    .new-list { list-style: none; margin: 24px 0 0; padding: 0; display: grid; gap: 14px; }
+    .new-list li { display: grid; grid-template-columns: 40px 1fr; gap: 14px; align-items: start; }
+    .new-list .ico { width: 40px; height: 40px; border-radius: 10px; background: var(--accent-soft); display: grid; place-items: center; font-size: 19px; }
+    .new-list strong { display: block; color: var(--ink); }
+    .new-list span.d { color: var(--ink-soft); font-size: 15px; }
+    #new .phone { width: 300px; }
+    .course-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .course-grid ul { margin: 12px 0 0; padding-left: 18px; color: var(--ink-soft); font-size: 14px; }
+    .course-grid li { margin: 4px 0; }
+    .stat { font: 800 40px/1 var(--serif); color: var(--accent); margin: 4px 0 6px; }
+    @media (max-width: 820px) { .course-grid { grid-template-columns: 1fr; } #new .phone { width: 260px; } }
+    @media (min-width: 1024px) { .gallery { grid-auto-flow: row; grid-template-columns: repeat(3, 1fr); grid-auto-columns: auto; overflow: visible; column-gap: 40px; row-gap: 48px; } .gallery .phone { max-width: 270px; } }
   </style>
 </head>
 <body>
@@ -47,9 +54,10 @@
       <a class="brand" href="./" aria-current="page"><img src="../assets/strokes-gained.svg" alt="" width="30" height="30">Strokes Gained</a>
     </nav>
     <nav class="nav-links">
+      <a href="#new"><span lang="en">New</span><span lang="nl">Nieuw</span></a>
       <a href="#features"><span lang="en">Features</span><span lang="nl">Functies</span></a>
       <a href="#screens"><span lang="en">Screenshots</span><span lang="nl">Screenshots</span></a>
-      <a href="#how"><span lang="en">How it works</span><span lang="nl">Hoe het werkt</span></a>
+      <a href="#courses"><span lang="en">Courses</span><span lang="nl">Banen</span></a>
       <a href="#faq">FAQ</a>
       <a href="privacy/">Privacy</a>
     </nav>
@@ -97,6 +105,26 @@
     </div>
   </section>
 
+  <section id="new">
+    <div class="wrap story">
+      <div>
+        <p class="eyebrow"><span lang="en">New this autumn</span><span lang="nl">Nieuw dit najaar</span></p>
+        <h2><span lang="en">Less fiddling. <em class="accent">More golf.</em></span><span lang="nl">Minder gepriegel. <em class="accent">Meer golf.</em></span></h2>
+        <ul class="new-list">
+          <li><span class="ico">⬛</span><div><strong><span lang="en">Score on the black screen</span><span lang="nl">Score op het zwarte scherm</span></strong><span class="d"><span lang="en">The battery saver shows the hole, the distance to the green and the numbers 1–9. Tap your score and the app jumps to the next hole. The pencil opens the full score entry.</span><span lang="nl">De batterijspaarstand toont de hole, de afstand tot de green en de cijfers 1–9. Tik je score en de app springt naar de volgende hole. Het potlood opent de volledige invoer.</span></span></div></li>
+          <li><span class="ico">⌖</span><div><strong><span lang="en">Viewfinder on the map</span><span lang="nl">Zoeker op de kaart</span></strong><span class="d"><span lang="en">Slide the map until the cross is on your ball and tap “Ball here”. The distance to the green shows right under it.</span><span lang="nl">Schuif de kaart tot het kruis op je bal staat en tik op “Bal hier”. De afstand tot de green staat er direct onder.</span></span></div></li>
+          <li><span class="ico">⛳</span><div><strong><span lang="en">Putt panel</span><span lang="nl">Putt-paneel</span></strong><span class="d"><span lang="en">On the green, pick the first-putt distance (1 to 20 m, or feet) and tap the number of putts. Done.</span><span lang="nl">Op de green kies je de afstand van de eerste putt (1 tot 20 m, of feet) en tik je het aantal putts. Klaar.</span></span></div></li>
+          <li><span class="ico">📍</span><div><strong><span lang="en">Your course, found for you</span><span lang="nl">Je baan, vanzelf gevonden</span></strong><span class="d"><span lang="en">Tap the course name and the six nearest courses appear, with distance. On 27-hole courses you pick which two nines you play.</span><span lang="nl">Tik op de baannaam en de zes dichtstbijzijnde banen verschijnen, met afstand. Op 27-holes banen kies je welke twee lussen je speelt.</span></span></div></li>
+          <li><span class="ico">🌬️</span><div><strong><span lang="en">Wind and GPS quality at a glance</span><span lang="nl">Wind en GPS-kwaliteit in één oogopslag</span></strong><span class="d"><span lang="en">A wind needle on the hole map, and a GPS dot that turns blue, yellow or red, with an accuracy circle.</span><span lang="nl">Een windnaald op de holekaart, en een GPS-stip die blauw, geel of rood kleurt, met een nauwkeurigheidscirkel.</span></span></div></li>
+        </ul>
+      </div>
+      <div class="phone">
+        <img class="shot" lang="en" src="screens/en-black.jpg" width="540" height="1169" loading="lazy" alt="Battery-saver screen: hole 1, par 3, 166 yards to the green and buttons 1 to 9 plus a pencil to enter the score">
+        <img class="shot" lang="nl" src="screens/nl-black.jpg" width="540" height="1169" loading="lazy" alt="Zwart spaarscherm: hole 1, par 3, 152 meter tot de green en knoppen 1 tot 9 plus een potlood om de score in te voeren">
+      </div>
+    </div>
+  </section>
+
   <section class="band" id="features">
     <div class="wrap">
       <div class="section-head">
@@ -119,12 +147,12 @@
         <div class="card">
           <span class="emoji">📍</span>
           <h3><span lang="en">GPS round tracker</span><span lang="nl">GPS-rondetracker</span></h3>
-          <p><span lang="en">Log every shot hole by hole. GPS measures distances so entering a shot only takes a tap.</span><span lang="nl">Leg elke slag per hole vast. GPS meet de afstanden, dus een slag invoeren is één tik.</span></p>
+          <p><span lang="en">Log every shot hole by hole. GPS measures the distances; a putt panel handles the green.</span><span lang="nl">Leg elke slag per hole vast. GPS meet de afstanden; een putt-paneel regelt de green.</span></p>
         </div>
         <div class="card">
           <span class="emoji">🛰️</span>
           <h3><span lang="en">Bird's-eye view</span><span lang="nl">Birdseye view</span></h3>
-          <p><span lang="en">See the hole from above with your shots plotted, full screen if you like.</span><span lang="nl">Bekijk de hole van bovenaf met je slagen erop, desgewenst schermvullend.</span></p>
+          <p><span lang="en">The hole from above with your shots plotted. Opens by itself at the tee; log shots with the viewfinder.</span><span lang="nl">De hole van bovenaf met je slagen erop. Opent vanzelf op de tee; leg slagen vast met de zoeker.</span></p>
         </div>
         <div class="card">
           <span class="emoji">📊</span>
@@ -153,13 +181,13 @@
         </div>
         <div class="card">
           <span class="emoji">☁️</span>
-          <h3><span lang="en">Optional cloud backup</span><span lang="nl">Optionele cloudback-up</span></h3>
-          <p><span lang="en">Rounds are backed up automatically. Sign in with Google to get them back on a new device.</span><span lang="nl">Rondes worden automatisch geback-upt. Log in met Google om ze terug te krijgen op een nieuw toestel.</span></p>
+          <h3><span lang="en">Your data, your choice</span><span lang="nl">Jouw data, jouw keuze</span></h3>
+          <p><span lang="en">Sign in with Google to keep rounds and courses online on every device, or keep everything on your phone. Export any time.</span><span lang="nl">Log in met Google om rondes en banen online op elk toestel te hebben, of houd alles op je telefoon. Exporteren kan altijd.</span></p>
         </div>
         <div class="card">
           <span class="emoji">🔋</span>
           <h3><span lang="en">Battery saver</span><span lang="nl">Batterijspaarstand</span></h3>
-          <p><span lang="en">After 15 seconds without a touch the screen goes black and shows only the distance to the flag. Tap to wake. On by default; switch it off in More → Battery.</span><span lang="nl">Na 15 seconden zonder aanraking wordt het scherm zwart en toont het alleen de afstand tot de vlag. Tik om het beeld terug te krijgen. Staat standaard aan; uitzetten kan in Meer → Batterij.</span></p>
+          <p><span lang="en">After 15 seconds without a touch the screen goes black: hole, distance to the green and score buttons. Tap to wake. Switch it off in More → Battery.</span><span lang="nl">Na 15 seconden zonder aanraking wordt het scherm zwart: hole, afstand tot de green en scoreknoppen. Tik om het beeld terug te krijgen. Uitzetten kan in Meer → Batterij.</span></p>
         </div>
         <div class="card">
           <span class="emoji">🌬️</span>
@@ -169,7 +197,7 @@
         <a class="card" href="courses/">
           <span class="emoji">🗺️</span>
           <h3><span lang="en">Thousands of courses</span><span lang="nl">Duizenden banen</span></h3>
-          <p><span lang="en">Over 5,000 courses worldwide with GPS for every tee and green, downloaded when you start a round.</span><span lang="nl">Ruim 5.000 banen wereldwijd met GPS voor elke tee en green, gedownload zodra je een ronde start.</span></p>
+          <p><span lang="en">Over 5,000 courses worldwide with GPS for every tee and green. The list updates itself when courses are added.</span><span lang="nl">Ruim 5.000 banen wereldwijd met GPS voor elke tee en green. De lijst werkt zichzelf bij als er banen bijkomen.</span></p>
           <span class="open"><span lang="en">Search the course list →</span><span lang="nl">Zoek in de banenlijst →</span></span>
         </a>
       </div>
@@ -187,6 +215,20 @@
         </p>
       </div>
       <div class="gallery">
+        <figure>
+          <div class="phone">
+            <img class="shot" lang="en" src="screens/en-nearby.jpg" width="540" height="1169" loading="lazy" alt="Round setup listing the six nearest courses with their distance">
+            <img class="shot" lang="nl" src="screens/nl-nearby.jpg" width="540" height="1169" loading="lazy" alt="Ronde instellen met de zes dichtstbijzijnde banen en hun afstand">
+          </div>
+          <figcaption><strong><span lang="en">Nearest courses</span><span lang="nl">Banen in de buurt</span></strong><span lang="en">Tap the course name and the closest courses appear, with distance.</span><span lang="nl">Tik op de baannaam en de dichtstbijzijnde banen verschijnen, met afstand.</span></figcaption>
+        </figure>
+        <figure>
+          <div class="phone">
+            <img class="shot" lang="en" src="screens/en-loops.jpg" width="540" height="1169" loading="lazy" alt="Round setup at Bentwoud, a 27-hole course: loop A for holes 1 to 9 and loop B for holes 10 to 18">
+            <img class="shot" lang="nl" src="screens/nl-loops.jpg" width="540" height="1169" loading="lazy" alt="Ronde instellen op Bentwoud, een 27-holes baan: lus A voor hole 1 tot 9 en lus B voor hole 10 tot 18">
+          </div>
+          <figcaption><strong><span lang="en">27-hole courses</span><span lang="nl">27-holes banen</span></strong><span lang="en">Pick which two nines you play; the GPS for each loop comes from the online list.</span><span lang="nl">Kies welke twee lussen je speelt; de GPS per lus komt uit de online lijst.</span></figcaption>
+        </figure>
         <figure>
           <div class="phone">
             <img class="shot" lang="en" src="screens/en-detail.jpg" width="540" height="1169" loading="lazy" alt="Round summary">
@@ -229,13 +271,13 @@
         <div class="step">
           <div class="num">01</div>
           <h3><span lang="en">Pick your course</span><span lang="nl">Kies je baan</span></h3>
-          <p><span lang="en">Choose a course and tee, set your handicap and start a full or shorter round.</span><span lang="nl">Kies een baan en tee, stel je handicap in en start een volledige of kortere ronde.</span></p>
+          <p><span lang="en">Nearby courses appear by themselves. Pick your tee, and on a 27-hole course your two nines.</span><span lang="nl">Banen in de buurt verschijnen vanzelf. Kies je tee, en op een 27-holes baan je twee lussen.</span></p>
         </div>
         <div class="step-arrow">→</div>
         <div class="step">
           <div class="num">02</div>
           <h3><span lang="en">Log each shot</span><span lang="nl">Leg elke slag vast</span></h3>
-          <p><span lang="en">Tap where your ball lies. GPS fills in the distance; add a club if you want.</span><span lang="nl">Tik aan waar je bal ligt. GPS vult de afstand in; voeg desgewenst een club toe.</span></p>
+          <p><span lang="en">Put the viewfinder on your ball, or just tap your score on the black screen. GPS fills in the distances.</span><span lang="nl">Zet de zoeker op je bal, of tik gewoon je score op het zwarte scherm. GPS vult de afstanden in.</span></p>
         </div>
         <div class="step-arrow">→</div>
         <div class="step">
@@ -244,18 +286,46 @@
           <p><span lang="en">Your round summary shows strokes gained per category plus your best and worst shots of the day.</span><span lang="nl">Je rondeoverzicht toont strokes gained per categorie plus je beste en slechtste slagen van de dag.</span></p>
         </div>
       </div>
-      <a class="card tint mapper-callout" href="mapper/">
-        <img class="app-icon" src="../assets/course-mapper.svg" alt="" width="44" height="44">
-        <div>
-          <h3><span lang="en">No GPS for your course yet? <em class="accent">Map it yourself.</em></span><span lang="nl">Nog geen GPS voor jouw baan? <em class="accent">Map hem zelf.</em></span></h3>
-          <p><span lang="en">With the Course Mapper you click the tee, the middle of the green and any dogleg of every hole on a satellite map. Then scan the QR code it shows with the app (More → GPS coordinates → Scan QR code), or import the CSV. Works best on a computer.</span><span lang="nl">Met de baan-mapper klik je per hole de tee, het midden van de green en eventueel de dogleg aan op een satellietkaart. Scan daarna de QR-code die hij toont met de app (Meer → GPS-coördinaten → QR-code scannen), of importeer de CSV. Werkt het fijnst op een computer.</span></p>
-        </div>
-        <span class="open"><span lang="en">Open Course Mapper →</span><span lang="nl">Open baan-mapper →</span></span>
-      </a>
     </div>
   </section>
 
-  <section class="band">
+  <section class="band" id="courses">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow"><span lang="en">Courses</span><span lang="nl">Banen</span></p>
+        <h2><span lang="en">Your course is probably <em class="accent">already there.</em></span><span lang="nl">Jouw baan staat er <em class="accent">waarschijnlijk al in.</em></span></h2>
+        <p class="section-lead"><span lang="en">And if it isn't, you add it yourself in a few minutes.</span><span lang="nl">En zo niet, dan zet je hem er in een paar minuten zelf in.</span></p>
+      </div>
+      <div class="course-grid">
+        <a class="card tint" href="courses/">
+          <span class="emoji">🗺️</span>
+          <h3><span lang="en">The course list</span><span lang="nl">De banenlijst</span></h3>
+          <div class="stat"><span lang="en">5,000+</span><span lang="nl">5.000+</span></div>
+          <p><span lang="en">Courses worldwide with GPS for every tee, green and dogleg.</span><span lang="nl">Banen wereldwijd met GPS voor elke tee, green en dogleg.</span></p>
+          <ul>
+            <li><span lang="en">Downloaded when you start a round, so the app stays small.</span><span lang="nl">Gedownload als je een ronde start, zodat de app klein blijft.</span></li>
+            <li><span lang="en">Updates itself: new and improved courses arrive automatically.</span><span lang="nl">Werkt zichzelf bij: nieuwe en verbeterde banen komen vanzelf binnen.</span></li>
+            <li><span lang="en">27-hole courses with each loop separately.</span><span lang="nl">27-holes banen met elke lus apart.</span></li>
+          </ul>
+          <span class="open"><span lang="en">Search the course list →</span><span lang="nl">Zoek in de banenlijst →</span></span>
+        </a>
+        <a class="card tint" href="mapper/">
+          <img class="app-icon" src="../assets/course-mapper.svg" alt="" width="44" height="44">
+          <h3><span lang="en">The Course Mapper</span><span lang="nl">De baan-mapper</span></h3>
+          <p><span lang="en">Click the tee, the middle of the green and any dogleg of every hole on a satellite map. Works best on a computer.</span><span lang="nl">Klik per hole de tee, het midden van de green en eventueel de dogleg aan op een satellietkaart. Werkt het fijnst op een computer.</span></p>
+          <ul>
+            <li><span lang="en">Orange dots show every course already in the list; click one to open and improve it.</span><span lang="nl">Oranje puntjes tonen alle banen die al in de lijst staan; klik er een aan om hem te openen en te verbeteren.</span></li>
+            <li><span lang="en">18 holes, 9 holes, or several loops for 27+ holes.</span><span lang="nl">18 holes, 9 holes, of meerdere lussen voor 27+ holes.</span></li>
+            <li><span lang="en">Scan the QR code with the app (More → GPS coordinates), or download the CSV.</span><span lang="nl">Scan de QR-code met de app (Meer → GPS-coördinaten), of download de CSV.</span></li>
+            <li><span lang="en"><b>Share with the developer</b> and your course is added to the list for everyone.</span><span lang="nl"><b>Deel met de ontwikkelaar</b> en je baan komt in de lijst voor iedereen.</span></li>
+          </ul>
+          <span class="open"><span lang="en">Open the Course Mapper →</span><span lang="nl">Open de baan-mapper →</span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section>
     <div class="wrap">
       <div class="section-head">
         <p class="eyebrow"><span lang="en">Who it's for</span><span lang="nl">Voor wie</span></p>
@@ -298,7 +368,7 @@
         </details>
         <details>
           <summary><span lang="en">Do I need an account?</span><span lang="nl">Heb ik een account nodig?</span></summary>
-          <p><span lang="en">No. The app backs up your rounds under an anonymous ID automatically. Signing in with Google links that backup to your Google account, so you can restore it on another device.</span><span lang="nl">Nee. De app maakt automatisch een back-up van je rondes onder een anonieme ID. Inloggen met Google koppelt die back-up aan je Google-account, zodat je hem op een ander toestel terugkrijgt.</span></p>
+          <p><span lang="en">No. When you first open the app you choose: sign in with Google, so your rounds and courses are kept online and available on every device, or use it locally without an account. You can switch later under More → Account. Using it locally? Export your rounds now and then, because they are gone if you remove the app.</span><span lang="nl">Nee. Bij de eerste start kies je: inloggen met Google, zodat je rondes en banen online bewaard blijven en op elk toestel beschikbaar zijn, of lokaal gebruiken zonder account. Wisselen kan later via Meer → Account. Gebruik je hem lokaal? Exporteer je rondes dan af en toe, want ze zijn weg als je de app verwijdert.</span></p>
         </details>
         <details>
           <summary><span lang="en">How do I install the APK?</span><span lang="nl">Hoe installeer ik de APK?</span></summary>
@@ -314,7 +384,15 @@
         </details>
         <details>
           <summary><span lang="en">My course has no GPS coordinates. Now what?</span><span lang="nl">Mijn baan heeft geen GPS-coördinaten. Wat nu?</span></summary>
-          <p><span lang="en">First check the <a href="courses/">course list</a>: over 5,000 courses are ready to use. Not there? Map it yourself with the <a href="mapper/">Course Mapper</a>: search for your course, click the tee, the middle of the green and any dogleg of every hole, and tap <b>Send to app</b>. In the app, go to More → GPS coordinates → Scan QR code and point your phone at the screen. Prefer a file? Download the CSV and use Import CSV instead.</span><span lang="nl">Kijk eerst in de <a href="courses/">banenlijst</a>: ruim 5.000 banen staan klaar. Staat hij er niet bij? Map hem zelf met de <a href="mapper/">baan-mapper</a>: zoek je baan op, klik per hole de tee, het midden van de green en eventueel de dogleg aan en klik op <b>Naar de app</b>. Ga in de app naar Meer → GPS-coördinaten → QR-code scannen en richt je telefoon op het scherm. Liever een bestand? Download de CSV en kies CSV importeren.</span></p>
+          <p><span lang="en">First check the <a href="courses/">course list</a>: over 5,000 courses are ready to use. Not there? Map it yourself with the <a href="mapper/">Course Mapper</a>: search for your course, click the tee, the middle of the green and any dogleg of every hole, and tap <b>Send to app</b>. In the app, go to More → GPS coordinates → Scan QR code and point your phone at the screen. Tap <b>Share with the developer</b> as well, and the course is added to the list for every player.</span><span lang="nl">Kijk eerst in de <a href="courses/">banenlijst</a>: ruim 5.000 banen staan klaar. Staat hij er niet bij? Map hem zelf met de <a href="mapper/">baan-mapper</a>: zoek je baan op, klik per hole de tee, het midden van de green en eventueel de dogleg aan en klik op <b>Naar de app</b>. Ga in de app naar Meer → GPS-coördinaten → QR-code scannen en richt je telefoon op het scherm. Klik ook op <b>Deel met de ontwikkelaar</b>, dan komt de baan in de lijst voor iedereen.</span></p>
+        </details>
+        <details>
+          <summary><span lang="en">The GPS of a course is a bit off. Can I fix it?</span><span lang="nl">De GPS van een baan klopt niet helemaal. Kan ik dat verbeteren?</span></summary>
+          <p><span lang="en">Yes. On the course, move the tee or green with the icons on the right of the map. For the whole course, open it in the <a href="mapper/">Course Mapper</a> (click its orange dot), drag the pins to the right place and share it with the developer, so everyone gets the better version.</span><span lang="nl">Ja. Op de baan verschuif je de tee of green met de icoontjes rechts op de kaart. Voor de hele baan open je hem in de <a href="mapper/">baan-mapper</a> (klik op het oranje puntje), sleep de punten naar de juiste plek en deel hem met de ontwikkelaar, zodat iedereen de betere versie krijgt.</span></p>
+        </details>
+        <details>
+          <summary><span lang="en">Which languages?</span><span lang="nl">Welke talen?</span></summary>
+          <p><span lang="en">The app is in English and Dutch. The built-in help is also available in German, French and Spanish.</span><span lang="nl">De app is in het Nederlands en Engels. De ingebouwde hulp is er ook in het Duits, Frans en Spaans.</span></p>
         </details>
         <details>
           <summary><span lang="en">What happens to my location?</span><span lang="nl">Wat gebeurt er met mijn locatie?</span></summary>
@@ -347,6 +425,7 @@
         <div class="foot-col">
           <h4>App</h4>
           <a href="#features"><span lang="en">Features</span><span lang="nl">Functies</span></a>
+          <a href="#new"><span lang="en">What's new</span><span lang="nl">Nieuw</span></a>
           <a href="#how"><span lang="en">How it works</span><span lang="nl">Hoe het werkt</span></a>
           <a href="#faq">FAQ</a>
           <a href="courses/"><span lang="en">Course list</span><span lang="nl">Banenlijst</span></a>
@@ -364,7 +443,7 @@
       </div>
       <div class="foot-bottom">
         <span>© <span data-year>2026</span> Jeroen Goudswaard</span>
-        <span>Strokes Gained <span data-sg-version>v1.6.28</span></span>
+        <span>Strokes Gained <span data-sg-version>v1.6.29</span></span>
       </div>
     </div>
   </footer>
