@@ -9,6 +9,8 @@ assets/site.css, site.js       shared styles, theme + language toggles
 strokes-gained/index.html      app landing page
 strokes-gained/privacy/        privacy policy (NL + EN)
 strokes-gained/app/            web app (filled in at deploy time)
+verenigd/index.html            Verenigd landing page (screens/ is updated by its release workflow)
+verenigd/app/                  Verenigd web app for group leaders (filled in at deploy time)
 .github/workflows/pages.yml    deploys to GitHub Pages
 ```
 
@@ -36,3 +38,11 @@ redeploy. The APK link is always
 `googleffdf8ada715d6ce6.html` in the root verifies ownership of the site for
 Google Search Console. Don't delete or rename it: Google re-checks it, and the
 site loses its verified status when it's gone.
+
+## Verenigd
+
+The (private) verenigd repo's `Release` workflow runs on a version tag. It uploads
+`Verenigd.msi` (plus a versioned copy) and `verenigd-web.zip` to the `verenigd`
+release in this repo, commits fresh screenshots (made from a demo database with
+made-up data) to `verenigd/screens/`, and triggers a redeploy. The MSI link is always
+`https://github.com/jeroengoudswaard/jeroengoudswaard.github.io/releases/download/verenigd/Verenigd.msi`.

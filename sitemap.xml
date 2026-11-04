@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://jeroengoudswaard.github.io/</loc>
-    <lastmod>2026-10-12</lastmod>
+    <lastmod>2026-11-04</lastmod>
   </url>
   <url>
     <loc>https://jeroengoudswaard.github.io/strokes-gained/</loc>
@@ -27,5 +27,9 @@
   <url>
     <loc>https://jeroengoudswaard.github.io/tracelab/privacy/</loc>
     <lastmod>2026-10-09</lastmod>
+  </url>
+  <url>
+    <loc>https://jeroengoudswaard.github.io/verenigd/</loc>
+    <lastmod>2026-11-04</lastmod>
   </url>
 </urlset>

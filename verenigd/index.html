@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Verenigd</title>
+  <meta name="description" content="Verenigd (beta): leden, contributie en een complete boekhouding voor een scoutinggroep, in één Windows-app. Met SEPA-incasso, bankimport, begroting en een webapp voor de leiding.">
+  <link rel="icon" href="../assets/verenigd.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Outfit:wght@400;500;600&family=Playfair+Display:ital,wght@0,700;0,800;1,700;1,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script src="../assets/site.js"></script>
+  <style>
+    /* Verenigd green, the app's own colour. */
+    :root { --accent: #2e7d32; --accent-soft: #e2f0e2; }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) { --accent: #7cc47f; --accent-soft: #1d2e1e; }
+    }
+    :root[data-theme="dark"] { --accent: #7cc47f; --accent-soft: #1d2e1e; }
+    .beta-pill { border-style: dashed; }
+    .notice {
+      border: 1px dashed var(--accent); background: var(--accent-soft); border-radius: var(--radius);
+      padding: 24px 28px; display: grid; grid-template-columns: auto 1fr; gap: 18px; align-items: start;
+    }
+    .notice .emoji { font-size: 28px; line-height: 1; }
+    .notice h3 { margin-bottom: 6px; }
+    .notice p { margin: 0; color: var(--ink-soft); }
+    .notice + .notice { margin-top: 16px; }
+
+    /* Screenshots: light or dark, following the site theme. */
+    .shot-hero { width: 100%; height: auto; display: block; border-radius: 14px; box-shadow: 0 30px 60px rgba(27, 27, 43, 0.25); }
+    .shot-hero.telefoon { width: 300px; max-width: 100%; margin: 0 auto; border-radius: 28px; }
+    .gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+    .gallery figure { margin: 0; }
+    .gallery img { width: 100%; height: auto; display: block; border-radius: 12px; border: 1px solid var(--line, rgba(0,0,0,.08)); }
+    .gallery figcaption { margin-top: 10px; color: var(--ink-soft); font-size: 15px; }
+    .phones { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; }
+    .phones img { width: 240px; max-width: 100%; height: auto; border-radius: 24px; border: 1px solid var(--line, rgba(0,0,0,.08)); box-shadow: 0 20px 40px rgba(27, 27, 43, 0.18); }
+    .dark-shot { display: none; }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) .light-shot { display: none; }
+      :root:not([data-theme="light"]) .dark-shot { display: block; }
+    }
+    :root[data-theme="dark"] .light-shot { display: none; }
+    :root[data-theme="dark"] .dark-shot { display: block; }
+    .stappen { margin: 12px 0 0; padding-left: 22px; color: var(--ink-soft); }
+    .stappen li { margin: 6px 0; }
+    @media (max-width: 820px) { .gallery { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a class="crumb-home" href="../"><img src="../assets/shockwave.svg" alt="" width="26" height="26"><span class="crumb-label">Shockwave Apps</span></a>
+      <span class="crumb-sep" aria-hidden="true">›</span>
+      <a class="brand" href="./" aria-current="page"><img src="../assets/verenigd.svg" alt="" width="30" height="30">Verenigd</a>
+    </nav>
+    <nav class="nav-links">
+      <a href="#features"><span lang="en">Features</span><span lang="nl">Functies</span></a>
+      <a href="#screens"><span lang="en">Screenshots</span><span lang="nl">Schermen</span></a>
+      <a href="#download">Download</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-tools">
+      <button class="icon-btn" data-lang-label type="button">NL</button>
+      <button class="icon-btn" data-theme-toggle type="button">☾</button>
+      <a class="btn dark" style="padding:8px 14px" href="#download">Download →</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="pill beta-pill">
+          <span lang="en">β · v0.15 · Final version coming soon</span>
+          <span lang="nl">β · v0.15 · Binnenkort definitief</span>
+        </span>
+        <h1>
+          <span lang="en">Your club's books, <em class="accent">sorted.</em></span>
+          <span lang="nl">De administratie van je club, <em class="accent">geregeld.</em></span>
+        </h1>
+        <p class="lead">
+          <span lang="en">Verenigd keeps members, membership fees and a complete double-entry bookkeeping together in one calm Windows app. Collect fees by SEPA direct debit, read in your bank statements, make the budget and the annual report, and let your group leaders look up their own members on their phones.</span>
+          <span lang="nl">Verenigd houdt leden, contributie en een complete dubbele boekhouding bij elkaar in één rustige Windows-app. Incasseer de contributie met SEPA, lees je bankafschriften in, maak de begroting en het jaarverslag, en laat de leiding hun eigen leden opzoeken op de telefoon.</span>
+        </p>
+        <div class="actions">
+          <a class="btn primary" href="#download"><span lang="en">Download the beta →</span><span lang="nl">Download de bèta →</span></a>
+          <a class="btn" href="#screens"><span lang="en">See the screens</span><span lang="nl">Bekijk de schermen</span></a>
+        </div>
+      </div>
+
+      <div>
+        <!-- Tot de eerste release de desktopschermen levert, toont de held de webapp. -->
+        <img class="shot-hero light-shot" src="screens/verenigd-start-licht.png" alt="Verenigd: de startpagina met kerncijfers en wat er te doen is" width="1280" height="800" onerror="this.onerror=null;this.src='screens/verenigd-webapp-leden-licht.png';this.classList.add('telefoon')">
+        <img class="shot-hero dark-shot" src="screens/verenigd-start-donker.png" alt="Verenigd: de startpagina in donkere modus" width="1280" height="800" onerror="this.onerror=null;this.src='screens/verenigd-webapp-leden-donker.png';this.classList.add('telefoon')">
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="notice">
+        <span class="emoji">🚧</span>
+        <div>
+          <h3><span lang="en">Beta: almost there</span><span lang="nl">Bèta: bijna klaar</span></h3>
+          <p><span lang="en">Verenigd is in daily use, and the final version follows soon. Until then you may still meet rough edges. Make a backup now and then (File › Backup), and please report what you find.</span><span lang="nl">Verenigd wordt al dagelijks gebruikt, en de definitieve versie volgt binnenkort. Tot die tijd kun je nog ruwe randjes tegenkomen. Maak af en toe een back-up (Bestand › Back-up maken), en meld gerust wat je tegenkomt.</span></p>
+        </div>
+      </div>
+      <div class="notice">
+        <span class="emoji">⚜️</span>
+        <div>
+          <h3><span lang="en">Made for scouting, for now</span><span lang="nl">Voorlopig voor scouting</span></h3>
+          <p><span lang="en">Verenigd will grow into a general bookkeeping program for clubs and foundations. For now it is built around scouting: it imports members from Scouting Nederland's SOL3, and it knows age sections such as Beavers, Cubs and Scouts.</span><span lang="nl">Op termijn wordt Verenigd een algemeen boekhoudprogramma voor verenigingen en stichtingen. Voorlopig is het gemaakt voor scouting: het leest leden in uit SOL3 van Scouting Nederland en kent speltakken zoals Bevers, Welpen en Scouts.</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="features">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow"><span lang="en">What it does</span><span lang="nl">Wat het doet</span></p>
+        <h2>
+          <span lang="en">Everything the treasurer does.<br><em class="accent">In one place.</em></span>
+          <span lang="nl">Alles wat de penningmeester doet.<br><em class="accent">Op één plek.</em></span>
+        </h2>
+        <p class="section-lead">
+          <span lang="en">A native Windows app with the look of Windows 11, light and dark. Your data stays on your own PC, in one encrypted file.</span>
+          <span lang="nl">Een echte Windows-app met de uitstraling van Windows 11, licht en donker. Je gegevens blijven op je eigen pc, in één versleuteld bestand.</span>
+        </p>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <span class="emoji">👥</span>
+          <h3><span lang="en">Members from SOL3</span><span lang="nl">Leden uit SOL3</span></h3>
+          <p><span lang="en">Import four SOL3 exports with a preview first. Guardians, roles and sections are recognised; new members get a welcome e-mail if you like.</span><span lang="nl">Lees vier SOL3-exports in, met eerst een voorbeeld. Voogden, functies en speltakken worden herkend; nieuwe leden krijgen desgewenst een welkomstmail.</span></p>
+        </div>
+        <div class="card">
+          <span class="emoji">💶</span>
+          <h3><span lang="en">Fees by SEPA direct debit</span><span lang="nl">Contributie met SEPA-incasso</span></h3>
+          <p><span lang="en">A monthly collection run per payer, missed months included, as a pain.008 file for your bank. Returned debits stay visible until they are paid.</span><span lang="nl">Elke maand een incassorun per betaler, gemiste maanden inbegrepen, als pain.008-bestand voor je bank. Storneringen blijven in beeld tot ze betaald zijn.</span></p>
+        </div>
+        <div class="card">
+          <span class="emoji">📒</span>
+          <h3><span lang="en">Real double-entry bookkeeping</span><span lang="nl">Echte dubbele boekhouding</span></h3>
+          <p><span lang="en">Chart of accounts, journal, ledger, balance sheet and profit &amp; loss, with a ready-made chart for scouting groups and a plain-language "Simple" view.</span><span lang="nl">Rekeningschema, journaal, grootboek, balans en winst- en verliesrekening, met een kant-en-klaar schema voor scoutinggroepen en een weergave "Eenvoudig" in gewone taal.</span></p>
+        </div>
+        <div class="card">
+          <span class="emoji">🏦</span>
+          <h3><span lang="en">Bank statements in, booked</span><span lang="nl">Bankafschriften erin, geboekt</span></h3>
+          <p><span lang="en">Read CAMT.053 files from your bank. Rules you make once book recurring transactions for you; you only check and confirm.</span><span lang="nl">Lees CAMT.053-bestanden van je bank in. Regels die je één keer maakt boeken terugkerende transacties voor je; jij controleert en bevestigt.</span></p>
+        </div>
+        <div class="card">
+          <span class="emoji">🧾</span>
+          <h3><span lang="en">Receipts and invoices</span><span lang="nl">Bonnen en facturen</span></h3>
+          <p><span lang="en">Drop receipts in the inbox and Verenigd suggests the matching transaction. Send invoices as PDF with a payment QR code, by Gmail.</span><span lang="nl">Zet bonnen in het postvak en Verenigd stelt de passende boeking voor. Verstuur facturen als pdf met een betaal-QR-code, via Gmail.</span></p>
+        </div>
+        <div class="card">
+          <span class="emoji">📊</span>
+          <h3><span lang="en">Budget and long-term plan</span><span lang="nl">Begroting en meerjarenplan</span></h3>
+          <p><span lang="en">A yearly budget for the club, compared with reality as you go, and a ten-year plan for the foundation that owns the building.</span><span lang="nl">Een jaarbegroting voor de vereniging, onderweg vergeleken met de werkelijkheid, en een tienjarenplan voor de stichting met het gebouw.</span></p>
+        </div>
+        <div class="card">
+          <span class="emoji">📱</span>
+          <h3><span lang="en">A web app for the leaders</span><span lang="nl">Een webapp voor de leiding</span></h3>
+          <p><span lang="en">Leaders see the members of their own section on their phone, call a parent in one tap, and suggest changes that you approve. No financial data ever leaves your PC.</span><span lang="nl">De leiding ziet de leden van de eigen speltak op de telefoon, belt een ouder met één tik en stelt wijzigingen voor die jij goedkeurt. Financiële gegevens gaan nooit van je pc af.</span></p>
+        </div>
+        <div class="card">
+          <span class="emoji">🔒</span>
+          <h3><span lang="en">Private by design</span><span lang="nl">Privacy vanaf het begin</span></h3>
+          <p><span lang="en">One password-protected, encrypted database with a recovery key, made for the GDPR: children's data and bank accounts are kept safe.</span><span lang="nl">Eén versleutelde database met wachtwoord en herstelsleutel, gemaakt met de AVG in gedachten: gegevens van kinderen en rekeningnummers blijven veilig.</span></p>
+        </div>
+        <div class="card">
+          <span class="emoji">🏛️</span>
+          <h3><span lang="en">Club and foundation</span><span lang="nl">Vereniging en stichting</span></h3>
+          <p><span lang="en">Two separate administrations in one app, each with its own books, bank accounts and colour. Switch with one click.</span><span lang="nl">Twee aparte administraties in één app, elk met een eigen boekhouding, eigen bankrekeningen en een eigen kleur. Wisselen met één klik.</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="screens">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow"><span lang="en">Take a look</span><span lang="nl">Kijk even rond</span></p>
+        <h2><span lang="en">Calm screens. <em class="accent">One clear next step.</em></span><span lang="nl">Rustige schermen. <em class="accent">Steeds één duidelijke volgende stap.</em></span></h2>
+        <p class="section-lead">
+          <span lang="en">All screenshots come from a demo group with made-up members and amounts. Switch the theme at the top right to see dark mode.</span>
+          <span lang="nl">Alle schermafbeeldingen komen uit een demogroep met verzonnen leden en bedragen. Wissel rechtsboven van thema om de donkere modus te zien.</span>
+        </p>
+      </div>
+      <div class="gallery">
+        <figure>
+          <img class="light-shot" src="screens/verenigd-leden-licht.png" alt="Leden: de ledenlijst per speltak" width="1280" height="800" loading="lazy" onerror="this.closest('figure').remove()">
+          <img class="dark-shot" src="screens/verenigd-leden-donker.png" alt="Leden in donkere modus" width="1280" height="800" loading="lazy" onerror="this.remove()">
+          <figcaption><span lang="en">Members, grouped by section, straight from SOL3.</span><span lang="nl">Leden, per speltak, rechtstreeks uit SOL3.</span></figcaption>
+        </figure>
+        <figure>
+          <img class="light-shot" src="screens/verenigd-boekhouding-licht.png" alt="Boekhouding: het journaal" width="1280" height="800" loading="lazy" onerror="this.closest('figure').remove()">
+          <img class="dark-shot" src="screens/verenigd-boekhouding-donker.png" alt="Boekhouding in donkere modus" width="1280" height="800" loading="lazy" onerror="this.remove()">
+          <figcaption><span lang="en">The journal: every transaction, draft or booked.</span><span lang="nl">Het journaal: elke boeking, als concept of geboekt.</span></figcaption>
+        </figure>
+        <figure>
+          <img class="light-shot" src="screens/verenigd-rapport-licht.png" alt="Rapporten: balans en winst- en verliesrekening" width="1280" height="800" loading="lazy" onerror="this.closest('figure').remove()">
+          <img class="dark-shot" src="screens/verenigd-rapport-donker.png" alt="Rapporten in donkere modus" width="1280" height="800" loading="lazy" onerror="this.remove()">
+          <figcaption><span lang="en">Reports for the annual meeting, printable and exportable to Excel.</span><span lang="nl">Rapporten voor de ALV, af te drukken en te exporteren naar Excel.</span></figcaption>
+        </figure>
+      </div>
+
+      <div class="section-head" style="margin-top:56px">
+        <h3><span lang="en">And on the leaders' phones</span><span lang="nl">En op de telefoon van de leiding</span></h3>
+      </div>
+      <div class="phones">
+        <img class="light-shot" src="screens/verenigd-webapp-leden-licht.png" alt="Webapp: de leden van de eigen speltak" width="390" height="844" loading="lazy">
+        <img class="dark-shot" src="screens/verenigd-webapp-leden-donker.png" alt="Webapp: leden in donkere modus" width="390" height="844" loading="lazy">
+        <img class="light-shot" src="screens/verenigd-webapp-lid-licht.png" alt="Webapp: een lid met de knoppen Bellen, Bericht en E-mail" width="390" height="844" loading="lazy">
+        <img class="dark-shot" src="screens/verenigd-webapp-lid-donker.png" alt="Webapp: een lid in donkere modus" width="390" height="844" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="download">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow"><span lang="en">Try it</span><span lang="nl">Probeer het</span></p>
+        <h2><span lang="en">Get the <em class="accent">beta.</em></span><span lang="nl">Haal de <em class="accent">bèta.</em></span></h2>
+        <p class="section-lead">
+          <span lang="en">For Windows 10 and 11 (64-bit). The installer contains everything, including .NET; no other downloads needed. Updating works the same way: install the new version over the old one, your data stays where it is.</span>
+          <span lang="nl">Voor Windows 10 en 11 (64-bit). Het installatiebestand bevat alles, ook .NET; je hoeft niets anders te downloaden. Bijwerken gaat op dezelfde manier: installeer de nieuwe versie over de oude heen, je gegevens blijven staan.</span>
+        </p>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="https://github.com/jeroengoudswaard/jeroengoudswaard.github.io/releases/download/verenigd/Verenigd.msi"><span lang="en">Download for Windows (.msi) →</span><span lang="nl">Download voor Windows (.msi) →</span></a>
+        <a class="btn" href="https://github.com/jeroengoudswaard/jeroengoudswaard.github.io/releases/tag/verenigd"><span lang="en">Release notes</span><span lang="nl">Releaseinformatie</span></a>
+      </div>
+      <div class="notice" style="margin-top:32px">
+        <span class="emoji">🛡️</span>
+        <div>
+          <h3><span lang="en">"Windows protected your PC"?</span><span lang="nl">"Windows heeft uw pc beschermd"?</span></h3>
+          <p><span lang="en">The beta is not code-signed yet, so Windows SmartScreen may warn about an unknown publisher the first time. That is expected:</span><span lang="nl">De bèta is nog niet digitaal ondertekend, daarom kan Windows SmartScreen de eerste keer waarschuwen voor een onbekende uitgever. Dat is verwacht:</span></p>
+          <ol class="stappen">
+            <li><span lang="en">Click <strong>More info</strong> in the blue window.</span><span lang="nl">Klik in het blauwe venster op <strong>Meer informatie</strong>.</span></li>
+            <li><span lang="en">Check that the file is <code>Verenigd.msi</code>, then click <strong>Run anyway</strong>.</span><span lang="nl">Controleer dat het bestand <code>Verenigd.msi</code> heet en klik dan op <strong>Toch uitvoeren</strong>.</span></li>
+            <li><span lang="en">Your browser may also ask whether to keep the download: choose <strong>Keep</strong>.</span><span lang="nl">Ook je browser kan vragen of je de download wilt bewaren: kies <strong>Behouden</strong>.</span></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow"><span lang="en">Got questions?</span><span lang="nl">Vragen?</span></p>
+        <h2><span lang="en">Frequently asked <em class="accent">questions.</em></span><span lang="nl">Veelgestelde <em class="accent">vragen.</em></span></h2>
+      </div>
+      <div class="faq">
+        <details>
+          <summary><span lang="en">Is it free?</span><span lang="nl">Is het gratis?</span></summary>
+          <p><span lang="en">Yes. No licence fee, no subscription.</span><span lang="nl">Ja. Geen licentiekosten, geen abonnement.</span></p>
+        </details>
+        <details>
+          <summary><span lang="en">Can my club use it if we are not a scouting group?</span><span lang="nl">Kan mijn club het gebruiken als we geen scoutinggroep zijn?</span></summary>
+          <p><span lang="en">Not yet comfortably. The bookkeeping itself is general, but importing members depends on SOL3, the system of Scouting Nederland. A general version for other clubs and foundations is the plan for later.</span><span lang="nl">Nog niet prettig. De boekhouding zelf is algemeen, maar het inlezen van leden hangt af van SOL3, het systeem van Scouting Nederland. Een algemene versie voor andere verenigingen en stichtingen staat op de planning voor later.</span></p>
+        </details>
+        <details>
+          <summary><span lang="en">Where is my data stored?</span><span lang="nl">Waar staan mijn gegevens?</span></summary>
+          <p><span lang="en">On your own PC, in one encrypted database file with a password, next to a key file. A backup holds both. Only if you switch on the web app for the leaders does a copy of names, birth dates, phone numbers and e-mail addresses go to a server in the EU; addresses and anything financial never leave your PC.</span><span lang="nl">Op je eigen pc, in één versleuteld databasebestand met wachtwoord, met een sleutelbestand ernaast. Een back-up bevat beide. Alleen als je de webapp voor de leiding aanzet, gaat een kopie van namen, geboortedata, telefoonnummers en e-mailadressen naar een server in de EU; adressen en alles wat financieel is gaan nooit van je pc af.</span></p>
+        </details>
+        <details>
+          <summary><span lang="en">Which banks are supported?</span><span lang="nl">Welke banken worden ondersteund?</span></summary>
+          <p><span lang="en">Bank statements in CAMT.053 format, tested with Rabobank. Direct-debit files are pain.008.001.08, made for a Rabobank collection contract. ING follows after a test with a real ING file.</span><span lang="nl">Bankafschriften in CAMT.053-formaat, getest met de Rabobank. Incassobestanden zijn pain.008.001.08, gemaakt voor een incassocontract bij de Rabobank. ING volgt na een test met een echt ING-bestand.</span></p>
+        </details>
+        <details>
+          <summary><span lang="en">Where is the web app for leaders?</span><span lang="nl">Waar is de webapp voor de leiding?</span></summary>
+          <p><span lang="en">It lives at <a href="app/">jeroengoudswaard.github.io/verenigd/app</a>. The link with the server is not set up yet, so you can look at the login screen but not sign in. That follows soon.</span><span lang="nl">Die staat op <a href="app/">jeroengoudswaard.github.io/verenigd/app</a>. De koppeling met de server is nog niet ingericht, dus je ziet het inlogscherm maar kunt nog niet inloggen. Dat volgt binnenkort.</span></p>
+        </details>
+        <details>
+          <summary><span lang="en">I forgot my password. Now what?</span><span lang="nl">Ik ben mijn wachtwoord vergeten. Wat nu?</span></summary>
+          <p><span lang="en">When you create a database, Verenigd shows a recovery key once. Keep it somewhere safe: with it you can choose a new password. Without the password or the recovery key, nobody can open the data, not even the maker.</span><span lang="nl">Bij het aanmaken van een database toont Verenigd één keer een herstelsleutel. Bewaar die op een veilige plek: daarmee kies je een nieuw wachtwoord. Zonder wachtwoord of herstelsleutel kan niemand de gegevens openen, ook de maker niet.</span></p>
+        </details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="dark-zone">
+  <div class="wrap cta">
+    <h2><span lang="en">Less admin. More time for scouting.</span><span lang="nl">Minder administratie. Meer tijd voor scouting.</span></h2>
+    <p class="lead">
+      <span lang="en">Try the beta with your own group and tell me what you miss.</span>
+      <span lang="nl">Probeer de bèta met je eigen groep en vertel me wat je mist.</span>
+    </p>
+    <div class="actions">
+      <a class="btn primary" href="#download"><span lang="en">Download the beta →</span><span lang="nl">Download de bèta →</span></a>
+    </div>
+  </div>
+  <footer>
+    <div class="wrap">
+      <div class="foot-grid">
+        <div>
+          <a class="brand" href="./"><img src="../assets/verenigd.svg" alt="" width="30" height="30">Verenigd</a>
+          <p><span lang="en">Members, fees and bookkeeping for a scouting group.</span><span lang="nl">Leden, contributie en boekhouding voor een scoutinggroep.</span></p>
+        </div>
+        <div class="foot-col">
+          <h4>App</h4>
+          <a href="#features"><span lang="en">Features</span><span lang="nl">Functies</span></a>
+          <a href="#screens"><span lang="en">Screenshots</span><span lang="nl">Schermen</span></a>
+          <a href="#download">Download</a>
+          <a href="#faq">FAQ</a>
+        </div>
+        <div class="foot-col">
+          <h4><span lang="en">Web app</span><span lang="nl">Webapp</span></h4>
+          <a href="app/"><span lang="en">For group leaders</span><span lang="nl">Voor de leiding</span></a>
+        </div>
+        <div class="foot-col">
+          <h4><span lang="en">More</span><span lang="nl">Meer</span></h4>
+          <a href="../">Shockwave Apps (home)</a>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span>© <span data-year>2026</span> Jeroen Goudswaard</span>
+        <span>Verenigd v0.15 (beta)</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+</body>
+</html>
