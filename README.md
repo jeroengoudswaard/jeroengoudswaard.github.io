@@ -9,7 +9,7 @@ assets/site.css, site.js       shared styles, theme + language toggles
 strokes-gained/index.html      app landing page
 strokes-gained/privacy/        privacy policy (NL + EN)
 strokes-gained/app/            web app (filled in at deploy time)
-verenigd/index.html            Verenigd landing page (screens/ is updated by its release workflow)
+verenigd/index.html            Verenigd landing page; icon assets/verenigd.png is made from the app icon (screens/ is updated by its release workflow)
 verenigd/app/                  Verenigd web app for group leaders (filled in at deploy time)
 .github/workflows/pages.yml    deploys to GitHub Pages
 ```
