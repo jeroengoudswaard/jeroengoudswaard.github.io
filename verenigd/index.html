@@ -37,13 +37,14 @@
     .gallery figcaption { margin-top: 10px; color: var(--ink-soft); font-size: 15px; }
     .phones { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; }
     .phones img { width: 240px; max-width: 100%; height: auto; border-radius: 24px; border: 1px solid var(--line, rgba(0,0,0,.08)); box-shadow: 0 20px 40px rgba(27, 27, 43, 0.18); }
-    .dark-shot { display: none; }
+    /* !important: these rules must win over .gallery img / .phones img. */
+    .dark-shot { display: none !important; }
     @media (prefers-color-scheme: dark) {
-      :root:not([data-theme="light"]) .light-shot { display: none; }
-      :root:not([data-theme="light"]) .dark-shot { display: block; }
+      :root:not([data-theme="light"]) .light-shot { display: none !important; }
+      :root:not([data-theme="light"]) .dark-shot { display: block !important; }
     }
-    :root[data-theme="dark"] .light-shot { display: none; }
-    :root[data-theme="dark"] .dark-shot { display: block; }
+    :root[data-theme="dark"] .light-shot { display: none !important; }
+    :root[data-theme="dark"] .dark-shot { display: block !important; }
     .stappen { margin: 12px 0 0; padding-left: 22px; color: var(--ink-soft); }
     .stappen li { margin: 6px 0; }
     @media (max-width: 820px) { .gallery { grid-template-columns: 1fr; } }
@@ -96,8 +97,8 @@
 
       <div>
         <!-- Tot de eerste release de desktopschermen levert, toont de held de webapp. -->
-        <img class="shot-hero light-shot" src="screens/verenigd-start-licht.png" alt="Verenigd: de startpagina met kerncijfers en wat er te doen is" width="1280" height="800" onerror="this.onerror=null;this.src='screens/verenigd-webapp-leden-licht.png';this.classList.add('telefoon')">
-        <img class="shot-hero dark-shot" src="screens/verenigd-start-donker.png" alt="Verenigd: de startpagina in donkere modus" width="1280" height="800" onerror="this.onerror=null;this.src='screens/verenigd-webapp-leden-donker.png';this.classList.add('telefoon')">
+        <img class="shot-hero light-shot" src="screens/verenigd-start-licht.png" alt="Verenigd: de startpagina met kerncijfers en wat er te doen is" width="984" height="680" onerror="this.onerror=null;this.src='screens/verenigd-webapp-leden-licht.png';this.classList.add('telefoon')">
+        <img class="shot-hero dark-shot" src="screens/verenigd-start-donker.png" alt="Verenigd: de startpagina in donkere modus" width="984" height="680" onerror="this.onerror=null;this.src='screens/verenigd-webapp-leden-donker.png';this.classList.add('telefoon')">
       </div>
     </div>
   </section>
@@ -196,18 +197,18 @@
       </div>
       <div class="gallery">
         <figure>
-          <img class="light-shot" src="screens/verenigd-leden-licht.png" alt="Leden: de ledenlijst per speltak" width="1280" height="800" loading="lazy" onerror="this.closest('figure').remove()">
-          <img class="dark-shot" src="screens/verenigd-leden-donker.png" alt="Leden in donkere modus" width="1280" height="800" loading="lazy" onerror="this.remove()">
+          <img class="light-shot" src="screens/verenigd-leden-licht.png" alt="Leden: de ledenlijst per speltak" width="984" height="680" loading="lazy" onerror="this.closest('figure').remove()">
+          <img class="dark-shot" src="screens/verenigd-leden-donker.png" alt="Leden in donkere modus" width="984" height="680" loading="lazy" onerror="this.remove()">
           <figcaption><span lang="en">Members, grouped by section, straight from SOL3.</span><span lang="nl">Leden, per speltak, rechtstreeks uit SOL3.</span></figcaption>
         </figure>
         <figure>
-          <img class="light-shot" src="screens/verenigd-boekhouding-licht.png" alt="Boekhouding: het journaal" width="1280" height="800" loading="lazy" onerror="this.closest('figure').remove()">
-          <img class="dark-shot" src="screens/verenigd-boekhouding-donker.png" alt="Boekhouding in donkere modus" width="1280" height="800" loading="lazy" onerror="this.remove()">
+          <img class="light-shot" src="screens/verenigd-boekhouding-licht.png" alt="Boekhouding: het journaal" width="984" height="680" loading="lazy" onerror="this.closest('figure').remove()">
+          <img class="dark-shot" src="screens/verenigd-boekhouding-donker.png" alt="Boekhouding in donkere modus" width="984" height="680" loading="lazy" onerror="this.remove()">
           <figcaption><span lang="en">The journal: every transaction, draft or booked.</span><span lang="nl">Het journaal: elke boeking, als concept of geboekt.</span></figcaption>
         </figure>
         <figure>
-          <img class="light-shot" src="screens/verenigd-rapport-licht.png" alt="Rapporten: balans en winst- en verliesrekening" width="1280" height="800" loading="lazy" onerror="this.closest('figure').remove()">
-          <img class="dark-shot" src="screens/verenigd-rapport-donker.png" alt="Rapporten in donkere modus" width="1280" height="800" loading="lazy" onerror="this.remove()">
+          <img class="light-shot" src="screens/verenigd-rapport-licht.png" alt="Rapporten: balans en winst- en verliesrekening" width="984" height="680" loading="lazy" onerror="this.closest('figure').remove()">
+          <img class="dark-shot" src="screens/verenigd-rapport-donker.png" alt="Rapporten in donkere modus" width="984" height="680" loading="lazy" onerror="this.remove()">
           <figcaption><span lang="en">Reports for the annual meeting, printable and exportable to Excel.</span><span lang="nl">Rapporten voor de ALV, af te drukken en te exporteren naar Excel.</span></figcaption>
         </figure>
       </div>
