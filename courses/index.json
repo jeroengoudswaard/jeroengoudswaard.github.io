@@ -1758,6 +1758,7 @@
   {"naam":"Golfbaan Delfland (NL)","versie":4,"h":"bbc00015","lat":51.9767,"lon":4.3261,"lussen":[{"naam":"Blauw","bestand":"golfbaan-delfland-nl-blauw.csv"},{"naam":"Geel","bestand":"golfbaan-delfland-nl-geel.csv"},{"naam":"Rood","bestand":"golfbaan-delfland-nl-rood.csv"}]},
   {"naam":"Golfbaan Hitland (NL)","versie":1,"h":"48242d3b","lat":51.9482,"lon":4.6181,"bestand":"golfbaan-hitland-nl.csv"},
   {"naam":"Golfbaan Kralingen (NL)","versie":1,"h":"68431ca4","lat":51.9336,"lon":4.5311,"bestand":"golfbaan-kralingen-nl.csv"},
+  {"naam":"Golfbaan Tespelduyn (NL)","versie":1,"h":"e0d9fe2b","lat":52.2801,"lon":4.5272,"bestand":"golfbaan-tespelduyn-nl.csv"},
   {"naam":"Golfclub Broekpolder (NL)","versie":4,"h":"ed34ce95","lat":51.9388,"lon":4.3181,"bestand":"golfclub-broekpolder-nl.csv"},
   {"naam":"Golfclub Capelle (NL)","versie":1,"h":"30744036","lat":51.942,"lon":4.5918,"bestand":"golfclub-capelle-nl.csv"},
   {"naam":"Golfclub Cromstrijen (NL)","versie":1,"h":"6425dba1","lat":51.7272,"lon":4.4132,"bestand":"golfclub-cromstrijen-nl.csv"},
