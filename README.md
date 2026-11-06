@@ -42,7 +42,8 @@ site loses its verified status when it's gone.
 ## Verenigd
 
 The (private) verenigd repo's `Release` workflow runs on a version tag. It uploads
-`Verenigd.msi` (plus a versioned copy) and `verenigd-web.zip` to the `verenigd`
-release in this repo, commits fresh screenshots (made from a demo database with
-made-up data) to `verenigd/screens/`, and triggers a redeploy. The MSI link is always
-`https://github.com/jeroengoudswaard/jeroengoudswaard.github.io/releases/download/verenigd/Verenigd.msi`.
+`Verenigd-<version>.msi` and `verenigd-web.zip` to the `verenigd` release in this repo,
+commits fresh screenshots (made from a demo database with made-up data) to
+`verenigd/screens/`, updates the version label in `index.html` and the download button
+in `verenigd/index.html`, and triggers a redeploy. The workflow fails if it cannot find
+the label or the button, so keep their markup recognisable when redesigning.
