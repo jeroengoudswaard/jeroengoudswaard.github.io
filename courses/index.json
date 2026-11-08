@@ -1760,6 +1760,7 @@
   {"naam":"Golfbaan Hitland (NL)","versie":1,"h":"48242d3b","lat":51.9482,"lon":4.6181,"bestand":"golfbaan-hitland-nl.csv"},
   {"naam":"Golfbaan Kralingen (NL)","versie":1,"h":"68431ca4","lat":51.9336,"lon":4.5311,"bestand":"golfbaan-kralingen-nl.csv"},
   {"naam":"Golfbaan Noordeloos (NL)","versie":1,"h":"94162865","lat":51.8976,"lon":4.9294,"bestand":"golfbaan-noordeloos-nl.csv"},
+  {"naam":"Golfbaan Schinkelshoek (NL)","versie":1,"h":"e4bc8217","lat":51.91,"lon":4.3051,"lussen":[{"naam":"Delfland","bestand":"golfbaan-schinkelshoek-nl-delfland.csv"},{"naam":"Waterland","bestand":"golfbaan-schinkelshoek-nl-waterland.csv"},{"naam":"Westland","bestand":"golfbaan-schinkelshoek-nl-westland.csv"}]},
   {"naam":"Golfbaan Tespelduyn (NL)","versie":1,"h":"e0d9fe2b","lat":52.2801,"lon":4.5272,"bestand":"golfbaan-tespelduyn-nl.csv"},
   {"naam":"Golfbaan Waterland Amsterdam (NL)","versie":1,"h":"514250dd","lat":52.4058,"lon":4.951,"bestand":"golfbaan-waterland-amsterdam-nl.csv"},
   {"naam":"Golfclub Broekpolder (NL)","versie":4,"h":"ed34ce95","lat":51.9388,"lon":4.3181,"bestand":"golfclub-broekpolder-nl.csv"},
