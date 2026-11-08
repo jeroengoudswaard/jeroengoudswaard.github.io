@@ -1756,6 +1756,7 @@
   {"naam":"Golf Son Vida (E)","versie":4,"h":"411e09d4","lat":39.5882,"lon":2.5943,"bestand":"golf-son-vida-e.csv"},
   {"naam":"Golfbaan Catharinenburg (NL)","versie":1,"h":"1b2fba03","lat":51.7705,"lon":4.0534,"bestand":"golfbaan-catharinenburg-nl.csv"},
   {"naam":"Golfbaan Delfland (NL)","versie":4,"h":"bbc00015","lat":51.9767,"lon":4.3261,"lussen":[{"naam":"Blauw","bestand":"golfbaan-delfland-nl-blauw.csv"},{"naam":"Geel","bestand":"golfbaan-delfland-nl-geel.csv"},{"naam":"Rood","bestand":"golfbaan-delfland-nl-rood.csv"}]},
+  {"naam":"Golfbaan Het Wedde (NL)","versie":1,"h":"9ee8398c","lat":52.1402,"lon":4.4529,"bestand":"golfbaan-het-wedde-nl.csv"},
   {"naam":"Golfbaan Hitland (NL)","versie":1,"h":"48242d3b","lat":51.9482,"lon":4.6181,"bestand":"golfbaan-hitland-nl.csv"},
   {"naam":"Golfbaan Kralingen (NL)","versie":1,"h":"68431ca4","lat":51.9336,"lon":4.5311,"bestand":"golfbaan-kralingen-nl.csv"},
   {"naam":"Golfbaan Tespelduyn (NL)","versie":1,"h":"e0d9fe2b","lat":52.2801,"lon":4.5272,"bestand":"golfbaan-tespelduyn-nl.csv"},
