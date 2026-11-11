@@ -11,6 +11,9 @@ strokes-gained/privacy/        privacy policy (NL + EN)
 strokes-gained/app/            web app (filled in at deploy time)
 verenigd/index.html            Verenigd landing page; icon assets/verenigd.png is made from the app icon (screens/ is updated by its release workflow)
 verenigd/app/                  Verenigd web app for group leaders (filled in at deploy time)
+gym-tracker/index.html         Gym Tracker landing page; screens/ are made from the app with demo data
+gym-tracker/privacy/           privacy policy (NL + EN)
+gym-tracker/app/               Gym Tracker web app (filled in at deploy time, release tag gym-tracker)
 btw-boeker/index.html          BTW-Boeker landing page; icon assets/btw-boeker.png is made from the app icon (screens/ is updated by its release workflow)
 .github/workflows/pages.yml    deploys to GitHub Pages
 ```

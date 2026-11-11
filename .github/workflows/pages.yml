@@ -55,7 +55,7 @@ jobs:
           fi
 
           # <release tag>:<folder>, one line per app with a web build.
-          for entry in "strokes-gained:strokes-gained" "verenigd:verenigd"; do
+          for entry in "strokes-gained:strokes-gained" "verenigd:verenigd" "gym-tracker:gym-tracker"; do
             tag="${entry%%:*}"; dir="${entry##*:}"
             if gh release download "$tag" --repo "$GITHUB_REPOSITORY" \
                  --pattern "${tag}-web.zip" --dir "/tmp/$tag"; then

@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gym Tracker</title>
+  <meta name="description" content="Gym Tracker: build workout plans, get guided through every set with a rest timer, and see your progress and personal records in clear charts.">
+  <link rel="icon" href="../assets/gym-tracker.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Outfit:wght@400;500;600&family=Playfair+Display:ital,wght@0,700;0,800;1,700;1,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script src="../assets/site.js"></script>
+  <style>
+    /* Warm orange accent for this app, matching the app's own theme. */
+    :root { --accent: #c2510b; --accent-soft: #fdecdf; }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) { --accent: #ff8a3d; --accent-soft: #33200f; }
+    }
+    :root[data-theme="dark"] { --accent: #ff8a3d; --accent-soft: #33200f; }
+
+    .phone .shot { display: block; width: 100%; height: auto; border-radius: 28px; }
+    .hero .phone { width: 300px; }
+    .gallery {
+      display: grid; grid-auto-flow: column; grid-auto-columns: 240px; gap: 24px;
+      overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px 4px 20px;
+      margin: 0 -4px;
+    }
+    .gallery figure { margin: 0; scroll-snap-align: start; }
+    .gallery .phone { width: 100%; box-shadow: 0 16px 36px rgba(27, 27, 43, 0.18); }
+    .gallery figcaption { margin-top: 16px; font-size: 14px; color: var(--ink-soft); }
+    .gallery figcaption strong { display: block; color: var(--ink); font-family: var(--serif); font-size: 16px; margin-bottom: 4px; }
+    @media (min-width: 1024px) { .gallery { grid-auto-flow: row; grid-template-columns: repeat(4, 1fr); grid-auto-columns: auto; overflow: visible; column-gap: 32px; } .gallery .phone { max-width: 240px; } }
+  </style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a class="crumb-home" href="../"><img src="../assets/shockwave.svg" alt="" width="26" height="26"><span class="crumb-label">Shockwave Apps</span></a>
+      <span class="crumb-sep" aria-hidden="true">›</span>
+      <a class="brand" href="./" aria-current="page"><img src="../assets/gym-tracker.svg" alt="" width="30" height="30">Gym Tracker</a>
+    </nav>
+    <nav class="nav-links">
+      <a href="#features"><span lang="en">Features</span><span lang="nl">Functies</span></a>
+      <a href="#screens"><span lang="en">Screenshots</span><span lang="nl">Screenshots</span></a>
+      <a href="#faq">FAQ</a>
+      <a href="privacy/">Privacy</a>
+    </nav>
+    <div class="nav-tools">
+      <button class="icon-btn" data-lang-label type="button">NL</button>
+      <button class="icon-btn" data-theme-toggle type="button">☾</button>
+      <a class="btn dark" style="padding:8px 14px" href="#get">
+        <span lang="en">Open app →</span><span lang="nl">Open app →</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="pill">
+          <span lang="en">🏋️ Every set counts.</span>
+          <span lang="nl">🏋️ Elke set telt.</span>
+        </span>
+        <h1>
+          <span lang="en">Gym <em class="accent">Tracker.</em></span>
+          <span lang="nl">Gym <em class="accent">Tracker.</em></span>
+        </h1>
+        <p class="lead">
+          <span lang="en">Build your workout plans, get guided through every exercise with a rest timer, and see your strength go up. The app remembers what you lifted last time, so you always know what to beat.</span>
+          <span lang="nl">Maak je trainingsschema's, laat je door elke oefening begeleiden met een rusttimer, en zie je kracht groeien. De app onthoudt wat je de vorige keer tilde, dus je weet altijd wat je moet verbeteren.</span>
+        </p>
+        <div class="actions" id="get">
+          <a class="btn primary" href="app/">
+            <span lang="en">Open web app →</span><span lang="nl">Open web-app →</span>
+          </a>
+          <!-- Android: add the APK button here once the first signed APK is on the
+               gym-tracker release:
+               https://github.com/jeroengoudswaard/jeroengoudswaard.github.io/releases/download/gym-tracker/gym-tracker.apk -->
+        </div>
+      </div>
+
+      <div class="phone">
+        <img class="shot" lang="en" src="screens/en-actief.jpg" width="540" height="1169" alt="Active workout: Bench Press with weight and reps input, two logged sets and a rest timer at 1:09">
+        <img class="shot" lang="nl" src="screens/nl-actief.jpg" width="540" height="1169" alt="Lopende workout: Bench Press met invoer voor gewicht en reps, twee afgevinkte sets en een rusttimer op 1:09">
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="features">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow"><span lang="en">What's inside</span><span lang="nl">Wat zit erin</span></p>
+        <h2>
+          <span lang="en">Train. Log. <em class="accent">Improve.</em></span>
+          <span lang="nl">Trainen. Loggen. <em class="accent">Beter worden.</em></span>
+        </h2>
+        <p class="section-lead">
+          <span lang="en">Fast enough to use between sets, with the stats to show it's working.</span>
+          <span lang="nl">Snel genoeg om tussen je sets door te gebruiken, met de cijfers die laten zien dat het werkt.</span>
+        </p>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <span class="emoji">📋</span>
+          <h3><span lang="en">Workout plans</span><span lang="nl">Trainingsschema's</span></h3>
+          <p><span lang="en">Push, pull, legs or your own split. Set sets, reps (like 8-12 or AMRAP), a target weight, rest time and notes per exercise.</span><span lang="nl">Push, pull, legs of je eigen indeling. Stel per oefening sets, reps (zoals 8-12 of AMRAP), een streefgewicht, rusttijd en notities in.</span></p>
+        </div>
+        <div class="card">
+          <span class="emoji">🏋️</span>
+          <h3><span lang="en">Guided workouts</span><span lang="nl">Begeleide workouts</span></h3>
+          <p><span lang="en">One exercise at a time. Weight and reps are filled in from last time; adjust with big + and − buttons and log the set.</span><span lang="nl">Eén oefening tegelijk. Gewicht en reps staan al klaar van de vorige keer; pas aan met grote + en − knoppen en log de set.</span></p>
+        </div>
+        <div class="card">
+          <span class="emoji">⏱️</span>
+          <h3><span lang="en">Rest timer</span><span lang="nl">Rusttimer</span></h3>
+          <p><span lang="en">Starts by itself after every set, with the rest time from your plan. Add or skip 15 seconds; your phone buzzes when it's time.</span><span lang="nl">Start vanzelf na elke set, met de rusttijd uit je schema. 15 seconden erbij of eraf; je telefoon trilt als het tijd is.</span></p>
+        </div>
+        <div class="card">
+          <span class="emoji">🏆</span>
+          <h3><span lang="en">Personal records</span><span lang="nl">Persoonlijke records</span></h3>
+          <p><span lang="en">Heaviest set and estimated one-rep max per exercise. New PRs are highlighted right after your workout.</span><span lang="nl">Zwaarste set en geschat 1-rep-max per oefening. Nieuwe PR's zie je direct na je workout.</span></p>
+        </div>
+        <div class="card">
+          <span class="emoji">📈</span>
+          <h3><span lang="en">Progress charts</span><span lang="nl">Progressiegrafieken</span></h3>
+          <p><span lang="en">Max weight, estimated 1RM or volume per exercise over 3 months to all time, plus volume per week and your muscle-group split.</span><span lang="nl">Max gewicht, geschat 1RM of volume per oefening over 3 maanden tot alles, plus volume per week en je verdeling over spiergroepen.</span></p>
+        </div>
+        <div class="card">
+          <span class="emoji">📚</span>
+          <h3><span lang="en">Exercise library</span><span lang="nl">Oefeningenbibliotheek</span></h3>
+          <p><span lang="en">Over 30 exercises with technique notes and a video link, filtered by muscle group. Add your own, with a GIF if you like.</span><span lang="nl">Meer dan 30 oefeningen met techniekuitleg en een videolink, te filteren op spiergroep. Voeg je eigen oefeningen toe, desnoods met een GIF.</span></p>
+        </div>
+        <div class="card">
+          <span class="emoji">💾</span>
+          <h3><span lang="en">Never lose a set</span><span lang="nl">Nooit een set kwijt</span></h3>
+          <p><span lang="en">Every set is saved the moment you log it. Close the app mid-workout and pick up where you left off.</span><span lang="nl">Elke set wordt opgeslagen zodra je hem logt. Sluit je de app midden in je workout, dan ga je verder waar je was.</span></p>
+        </div>
+        <div class="card">
+          <span class="emoji">⚖️</span>
+          <h3><span lang="en">kg or lbs</span><span lang="nl">kg of lbs</span></h3>
+          <p><span lang="en">Switch units any time; your history converts with it. Light and dark theme, Dutch and English.</span><span lang="nl">Wissel op elk moment van eenheid; je geschiedenis rekent mee. Licht en donker thema, Nederlands en Engels.</span></p>
+        </div>
+        <div class="card">
+          <span class="emoji">🔒</span>
+          <h3><span lang="en">Your data stays with you</span><span lang="nl">Jouw data blijft bij jou</span></h3>
+          <p><span lang="en">No account, no tracking. Everything is stored on your device; export a backup file whenever you want.</span><span lang="nl">Geen account, geen tracking. Alles staat op je toestel; exporteer een back-upbestand wanneer je wilt.</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="screens">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow"><span lang="en">See it in action</span><span lang="nl">Zie het in actie</span></p>
+        <h2><span lang="en">Real screens, <em class="accent">real progress.</em></span><span lang="nl">Echte schermen, <em class="accent">echte progressie.</em></span></h2>
+        <p class="section-lead">
+          <span lang="en">Screenshots from the app with 12 weeks of demo workouts loaded.</span>
+          <span lang="nl">Schermafbeeldingen uit de app met 12 weken demo-workouts geladen.</span>
+        </p>
+      </div>
+      <div class="gallery">
+        <figure>
+          <div class="phone">
+            <img class="shot" lang="en" src="screens/en-schemas.jpg" width="540" height="1169" loading="lazy" alt="My plans: Push Day, Pull Day and Leg Day, each with a Start button">
+            <img class="shot" lang="nl" src="screens/nl-schemas.jpg" width="540" height="1169" loading="lazy" alt="Mijn schema's: Push Day, Pull Day en Leg Day, elk met een Start-knop">
+          </div>
+          <figcaption><strong><span lang="en">Your plans</span><span lang="nl">Je schema's</span></strong><span lang="en">See when you last did each one and start with one tap.</span><span lang="nl">Zie wanneer je elk schema het laatst deed en start met één tik.</span></figcaption>
+        </figure>
+        <figure>
+          <div class="phone">
+            <img class="shot" lang="en" src="screens/en-progress.jpg" width="540" height="1169" loading="lazy" alt="Progress: workouts, volume and week streak, personal records and a progress chart">
+            <img class="shot" lang="nl" src="screens/nl-progress.jpg" width="540" height="1169" loading="lazy" alt="Progress: workouts, volume en weken op rij, persoonlijke records en een progressiegrafiek">
+          </div>
+          <figcaption><strong><span lang="en">Progress</span><span lang="nl">Progressie</span></strong><span lang="en">Your records, volume per week and how your training is split.</span><span lang="nl">Je records, volume per week en hoe je training verdeeld is.</span></figcaption>
+        </figure>
+        <figure>
+          <div class="phone">
+            <img class="shot" lang="en" src="screens/en-stats.jpg" width="540" height="1169" loading="lazy" alt="Bench Press statistics: heaviest set, estimated 1RM and a chart of max weight over six months">
+            <img class="shot" lang="nl" src="screens/nl-stats.jpg" width="540" height="1169" loading="lazy" alt="Statistieken Bench Press: zwaarste set, geschat 1RM en een grafiek van max gewicht over zes maanden">
+          </div>
+          <figcaption><strong><span lang="en">Per exercise</span><span lang="nl">Per oefening</span></strong><span lang="en">Max weight, estimated 1RM or volume, over any period.</span><span lang="nl">Max gewicht, geschat 1RM of volume, over elke periode.</span></figcaption>
+        </figure>
+        <figure>
+          <div class="phone">
+            <img class="shot" lang="en" src="screens/en-library.jpg" width="540" height="1169" loading="lazy" alt="Exercise library with search and muscle-group filters">
+            <img class="shot" lang="nl" src="screens/nl-library.jpg" width="540" height="1169" loading="lazy" alt="Oefeningenbibliotheek met zoeken en filters per spiergroep">
+          </div>
+          <figcaption><strong><span lang="en">Exercise library</span><span lang="nl">Oefeningen</span></strong><span lang="en">Search, filter by muscle group, or add your own.</span><span lang="nl">Zoek, filter op spiergroep, of voeg je eigen oefening toe.</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow"><span lang="en">Simple by design</span><span lang="nl">Simpel ontworpen</span></p>
+        <h2><span lang="en">Train in <em class="accent">3 steps.</em></span><span lang="nl">Trainen in <em class="accent">3 stappen.</em></span></h2>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="num">01</div>
+          <h3><span lang="en">Make a plan</span><span lang="nl">Maak een schema</span></h3>
+          <p><span lang="en">Pick exercises from the library and set sets, reps and rest. Or skip it and start a free workout.</span><span lang="nl">Kies oefeningen uit de bibliotheek en stel sets, reps en rust in. Of sla het over en start een vrije workout.</span></p>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step">
+          <div class="num">02</div>
+          <h3><span lang="en">Log every set</span><span lang="nl">Log elke set</span></h3>
+          <p><span lang="en">Check the numbers, tap Log set, rest while the timer runs. Next exercise.</span><span lang="nl">Controleer de getallen, tik op Set opslaan, rust terwijl de timer loopt. Volgende oefening.</span></p>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step">
+          <div class="num">03</div>
+          <h3><span lang="en">Watch it grow</span><span lang="nl">Zie het groeien</span></h3>
+          <p><span lang="en">Finish to see your summary and new PRs. The Progress tab shows the long-term trend.</span><span lang="nl">Rond af en zie je samenvatting en nieuwe PR's. Het tabblad Progress toont de trend op lange termijn.</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow"><span lang="en">Got questions?</span><span lang="nl">Vragen?</span></p>
+        <h2><span lang="en">Frequently asked <em class="accent">questions.</em></span><span lang="nl">Veelgestelde <em class="accent">vragen.</em></span></h2>
+      </div>
+      <div class="faq">
+        <details>
+          <summary><span lang="en">Is it free?</span><span lang="nl">Is het gratis?</span></summary>
+          <p><span lang="en">Yes. No subscriptions, no ads, no in-app purchases.</span><span lang="nl">Ja. Geen abonnementen, geen reclame, geen in-app aankopen.</span></p>
+        </details>
+        <details>
+          <summary><span lang="en">Do I need an account?</span><span lang="nl">Heb ik een account nodig?</span></summary>
+          <p><span lang="en">No. Everything is stored on your device (in the web app: in your browser). Export a backup now and then under More → Export data, because your data is gone if you remove the app or clear your browser data.</span><span lang="nl">Nee. Alles staat op je toestel (in de web-app: in je browser). Maak af en toe een back-up via Meer → Exporteer data, want je gegevens zijn weg als je de app verwijdert of je browsergegevens wist.</span></p>
+        </details>
+        <details>
+          <summary><span lang="en">Can I move my data to another device?</span><span lang="nl">Kan ik mijn gegevens naar een ander toestel zetten?</span></summary>
+          <p><span lang="en">Yes. Export on the old device, then Import data on the new one. Importing merges with what's already there; for the same item, the newest version wins.</span><span lang="nl">Ja. Exporteer op het oude toestel en kies Importeer data op het nieuwe. Importeren voegt samen met wat er al staat; bij hetzelfde item wint de nieuwste versie.</span></p>
+        </details>
+        <details>
+          <summary><span lang="en">Can I use it on iPhone?</span><span lang="nl">Werkt het op iPhone?</span></summary>
+          <p><span lang="en">Yes, in Safari. Add it to your home screen (Share → Add to Home Screen) so it opens like an app.</span><span lang="nl">Ja, in Safari. Zet het op je beginscherm (Delen → Zet op beginscherm), dan opent het als een app.</span></p>
+        </details>
+        <details>
+          <summary><span lang="en">How is the one-rep max estimated?</span><span lang="nl">Hoe wordt het 1-rep-max geschat?</span></summary>
+          <p><span lang="en">With the Epley formula: weight × (1 + reps ÷ 30). It's an estimate, most reliable for sets of up to about 10 reps.</span><span lang="nl">Met de formule van Epley: gewicht × (1 + reps ÷ 30). Het is een schatting, het betrouwbaarst bij sets tot ongeveer 10 reps.</span></p>
+        </details>
+        <details>
+          <summary><span lang="en">Can I try it without logging anything?</span><span lang="nl">Kan ik het proberen zonder iets te loggen?</span></summary>
+          <p><span lang="en">Yes. Turn on Demo mode under More: Progress and History fill with 12 weeks of sample workouts. Your own data is not touched.</span><span lang="nl">Ja. Zet Demo-modus aan onder Meer: Progress en Geschiedenis vullen zich met 12 weken voorbeeldworkouts. Je eigen gegevens blijven onaangeroerd.</span></p>
+        </details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="dark-zone">
+  <div class="wrap cta">
+    <h2><span lang="en">Ready for your next set?</span><span lang="nl">Klaar voor je volgende set?</span></h2>
+    <p class="lead">
+      <span lang="en">No account needed. Open the app and plan your first workout.</span>
+      <span lang="nl">Geen account nodig. Open de app en plan je eerste workout.</span>
+    </p>
+    <div class="actions">
+      <a class="btn primary" href="app/"><span lang="en">Open web app →</span><span lang="nl">Open web-app →</span></a>
+    </div>
+  </div>
+  <footer>
+    <div class="wrap">
+      <div class="foot-grid">
+        <div>
+          <a class="brand" href="./"><img src="../assets/gym-tracker.svg" alt="" width="30" height="30">Gym Tracker</a>
+          <p><span lang="en">Plans, guided workouts and progress, in one app.</span><span lang="nl">Schema's, begeleide workouts en progressie, in één app.</span></p>
+        </div>
+        <div class="foot-col">
+          <h4>App</h4>
+          <a href="#features"><span lang="en">Features</span><span lang="nl">Functies</span></a>
+          <a href="#screens">Screenshots</a>
+          <a href="#how"><span lang="en">How it works</span><span lang="nl">Hoe het werkt</span></a>
+          <a href="#faq">FAQ</a>
+        </div>
+        <div class="foot-col">
+          <h4><span lang="en">Legal</span><span lang="nl">Juridisch</span></h4>
+          <a href="privacy/"><span lang="en">Privacy policy</span><span lang="nl">Privacybeleid</span></a>
+        </div>
+        <div class="foot-col">
+          <h4><span lang="en">More</span><span lang="nl">Meer</span></h4>
+          <a href="../">Shockwave Apps (home)</a>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span>© <span data-year>2026</span> Jeroen Goudswaard</span>
+        <span>Gym Tracker v1.0.0</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+</body>
+</html>
