@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BTW-Boeker</title>
+  <meta name="description" content="BTW-Boeker (bèta): een complete dubbele boekhouding voor de verhuur van een vakantiewoning, in één Windows-app. Met bankafschriften, bonnen, rapporten en straks een btw-overzicht per maand.">
+  <link rel="icon" href="../assets/btw-boeker-32.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Outfit:wght@400;500;600&family=Playfair+Display:ital,wght@0,700;0,800;1,700;1,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/site.css">
+  <script src="../assets/site.js"></script>
+  <style>
+    /* BTW-Boeker green, the colour of the app icon. */
+    :root { --accent: #00804f; --accent-soft: #dff2ea; }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) { --accent: #5cc79a; --accent-soft: #15291f; }
+    }
+    :root[data-theme="dark"] { --accent: #5cc79a; --accent-soft: #15291f; }
+    .beta-pill { border-style: dashed; }
+    .notice {
+      border: 1px dashed var(--accent); background: var(--accent-soft); border-radius: var(--radius);
+      padding: 24px 28px; display: grid; grid-template-columns: auto 1fr; gap: 18px; align-items: start;
+    }
+    .notice .emoji { font-size: 28px; line-height: 1; }
+    .notice h3 { margin-bottom: 6px; }
+    .notice p { margin: 0; color: var(--ink-soft); }
+    .notice + .notice { margin-top: 16px; }
+    .soon-tag { font-size: 13px; font-weight: 500; color: var(--accent); white-space: nowrap; }
+
+    /* Screenshots: light or dark, following the site theme. */
+    .shot-hero { width: 100%; height: auto; display: block; border-radius: 14px; box-shadow: 0 30px 60px rgba(27, 27, 43, 0.25); }
+    .gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+    .gallery figure { margin: 0; }
+    .gallery img { width: 100%; height: auto; display: block; border-radius: 12px; border: 1px solid var(--line, rgba(0,0,0,.08)); }
+    .gallery figcaption { margin-top: 10px; color: var(--ink-soft); font-size: 15px; }
+    /* !important: these rules must win over .gallery img. */
+    .dark-shot { display: none !important; }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) .light-shot { display: none !important; }
+      :root:not([data-theme="light"]) .dark-shot { display: block !important; }
+    }
+    :root[data-theme="dark"] .light-shot { display: none !important; }
+    :root[data-theme="dark"] .dark-shot { display: block !important; }
+    .stappen { margin: 12px 0 0; padding-left: 22px; color: var(--ink-soft); }
+    .stappen li { margin: 6px 0; }
+    @media (max-width: 820px) { .gallery { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a class="crumb-home" href="../"><img src="../assets/shockwave.svg" alt="" width="26" height="26"><span class="crumb-label">Shockwave Apps</span></a>
+      <span class="crumb-sep" aria-hidden="true">›</span>
+      <a class="brand" href="./" aria-current="page"><img src="../assets/btw-boeker.png" alt="" width="30" height="30">BTW-Boeker</a>
+    </nav>
+    <nav class="nav-links">
+      <a href="#features"><span lang="en">Features</span><span lang="nl">Functies</span></a>
+      <a href="#screens"><span lang="en">Screenshots</span><span lang="nl">Schermen</span></a>
+      <a href="#download">Download</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-tools">
+      <button class="icon-btn" data-lang-label type="button">NL</button>
+      <button class="icon-btn" data-theme-toggle type="button">☾</button>
+      <a class="btn dark" style="padding:8px 14px" href="#download">Download →</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="pill beta-pill">
+          <span lang="en">β · In development</span>
+          <span lang="nl">β · In ontwikkeling</span>
+        </span>
+        <h1>
+          <span lang="en">The books of your holiday home, <em class="accent">in order.</em></span>
+          <span lang="nl">De boekhouding van je vakantiehuis, <em class="accent">op orde.</em></span>
+        </h1>
+        <p class="lead">
+          <span lang="en">BTW-Boeker keeps a complete double-entry bookkeeping for renting out a holiday home, in one calm Windows app. Read in your bank statements, keep receipts and bills with the right entry, and make the balance sheet and profit &amp; loss. A monthly VAT overview for your return is on its way.</span>
+          <span lang="nl">BTW-Boeker houdt een complete dubbele boekhouding bij voor de verhuur van een vakantiewoning, in één rustige Windows-app. Lees je bankafschriften in, bewaar bonnen en nota's bij de juiste boeking, en maak de balans en de winst- en verliesrekening. Een btw-overzicht per maand voor je aangifte is onderweg.</span>
+        </p>
+        <div class="actions">
+          <a class="btn primary" href="#download"><span lang="en">Download the beta →</span><span lang="nl">Download de bèta →</span></a>
+          <a class="btn" href="#screens"><span lang="en">See the screens</span><span lang="nl">Bekijk de schermen</span></a>
+        </div>
+      </div>
+
+      <div>
+        <img class="shot-hero light-shot" src="screens/btw-boeker-start-licht.png" alt="BTW-Boeker: de startpagina met het resultaat en wat er te doen is" width="1440" height="900">
+        <img class="shot-hero dark-shot" src="screens/btw-boeker-start-donker.png" alt="BTW-Boeker: de startpagina in donkere modus" width="1440" height="900">
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="notice">
+        <span class="emoji">🚧</span>
+        <div>
+          <h3><span lang="en">Beta: in development</span><span lang="nl">Bèta: in ontwikkeling</span></h3>
+          <p><span lang="en">The bookkeeping itself works. The VAT part and switching over from e-Boekhouden are being built. Make a backup now and then (File › Backup), and please report what you find.</span><span lang="nl">De boekhouding zelf werkt. Het btw-deel en het overstappen vanuit e-Boekhouden worden nu gebouwd. Maak af en toe een back-up (Bestand › Back-up maken), en meld gerust wat je tegenkomt.</span></p>
+        </div>
+      </div>
+      <div class="notice">
+        <span class="emoji">🏡</span>
+        <div>
+          <h3><span lang="en">Made for renting out a holiday home</span><span lang="nl">Gemaakt voor de verhuur van een vakantiewoning</span></h3>
+          <p><span lang="en">BTW-Boeker is built around one situation: a holiday home rented out in the Netherlands, for example through a holiday park, with Dutch VAT on short stays. Reverse-charge VAT, EU transactions and foreign platforms are out of scope.</span><span lang="nl">BTW-Boeker is gemaakt voor één situatie: een vakantiewoning die in Nederland wordt verhuurd, bijvoorbeeld via een vakantiepark, met Nederlandse btw op kortdurend verblijf. Verlegde btw, EU-transacties en buitenlandse platforms vallen erbuiten.</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="features">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow"><span lang="en">What it does</span><span lang="nl">Wat het doet</span></p>
+        <h2>
+          <span lang="en">Your rental bookkeeping.<br><em class="accent">In one place.</em></span>
+          <span lang="nl">De boekhouding van je verhuur.<br><em class="accent">Op één plek.</em></span>
+        </h2>
+        <p class="section-lead">
+          <span lang="en">A native Windows app with the look of Windows 11, light and dark. Your data stays on your own PC, in one encrypted file.</span>
+          <span lang="nl">Een echte Windows-app met de uitstraling van Windows 11, licht en donker. Je gegevens blijven op je eigen pc, in één versleuteld bestand.</span>
+        </p>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <span class="emoji">📒</span>
+          <h3><span lang="en">Real double-entry bookkeeping</span><span lang="nl">Echte dubbele boekhouding</span></h3>
+          <p><span lang="en">Chart of accounts, journal, ledger, balance sheet and profit &amp; loss, with year closing. With a plain-language "Simple" view next to the formal one.</span><span lang="nl">Rekeningschema, journaal, grootboek, balans en winst- en verliesrekening, met jaarafsluiting. Met een weergave "Eenvoudig" in gewone taal naast de formele.</span></p>
+        </div>
+        <div class="card">
+          <span class="emoji">🏦</span>
+          <h3><span lang="en">Bank statements in, booked</span><span lang="nl">Bankafschriften erin, geboekt</span></h3>
+          <p><span lang="en">Read CAMT.053 files from your bank. Rules you make once book recurring transactions, such as the park fee or energy advance; you only check and confirm.</span><span lang="nl">Lees CAMT.053-bestanden van je bank in. Regels die je één keer maakt boeken terugkerende transacties, zoals de parkbijdrage of het voorschot energie; jij controleert en bevestigt.</span></p>
+        </div>
+        <div class="card">
+          <span class="emoji">🧾</span>
+          <h3><span lang="en">Receipts and bills</span><span lang="nl">Bonnen en nota's</span></h3>
+          <p><span lang="en">Drop receipts and bills (PDF or photo) in the inbox and BTW-Boeker suggests the matching entry. A filter shows payments that still lack a receipt.</span><span lang="nl">Zet bonnen en nota's (pdf of foto) in het postvak en BTW-Boeker stelt de passende boeking voor. Een filter toont betalingen waar nog geen bon bij zit.</span></p>
+        </div>
+        <div class="card">
+          <span class="emoji">📊</span>
+          <h3><span lang="en">Reports and annual accounts</span><span lang="nl">Rapporten en jaarrekening</span></h3>
+          <p><span lang="en">Trial balance, balance sheet, profit &amp; loss and annual accounts with last year alongside. Print them, save as PDF, or export to Excel.</span><span lang="nl">Saldibalans, balans, winst- en verliesrekening en jaarrekening, met vorig jaar ernaast. Afdrukken, opslaan als pdf of exporteren naar Excel.</span></p>
+        </div>
+        <div class="card">
+          <span class="emoji">🧮</span>
+          <h3><span lang="en">VAT per month <span class="soon-tag">· coming soon</span></span><span lang="nl">Btw per maand <span class="soon-tag">· binnenkort</span></span></h3>
+          <p><span lang="en">VAT rate per entry line, with the stay date deciding between 9% and 21%, and a monthly overview you copy into your return at the Tax Administration. BTW-Boeker never files anything by itself.</span><span lang="nl">Het btw-tarief per boekingsregel, waarbij de verblijfsdatum bepaalt of het 9% of 21% is, en een overzicht per maand dat je overneemt in je aangifte bij de Belastingdienst. BTW-Boeker dient zelf nooit iets in.</span></p>
+        </div>
+        <div class="card">
+          <span class="emoji">🔁</span>
+          <h3><span lang="en">Switch from e-Boekhouden <span class="soon-tag">· coming soon</span></span><span lang="nl">Overstappen vanuit e-Boekhouden <span class="soon-tag">· binnenkort</span></span></h3>
+          <p><span lang="en">Read in the audit files (XAF) of all your years: chart of accounts, opening balance, every entry and its VAT code, checked year by year.</span><span lang="nl">Lees de auditfiles (XAF) van al je jaren in: rekeningschema, openingsbalans, elke boeking met de btw-code, jaar voor jaar gecontroleerd.</span></p>
+        </div>
+        <div class="card">
+          <span class="emoji">🔒</span>
+          <h3><span lang="en">Private by design</span><span lang="nl">Privacy vanaf het begin</span></h3>
+          <p><span lang="en">One password-protected, encrypted database with a recovery key. No account, no server, no cloud: nothing leaves your PC.</span><span lang="nl">Eén versleutelde database met wachtwoord en herstelsleutel. Geen account, geen server, geen cloud: er gaat niets van je pc af.</span></p>
+        </div>
+        <div class="card">
+          <span class="emoji">🔓</span>
+          <h3><span lang="en">No lock-in</span><span lang="nl">Je zit nergens aan vast</span></h3>
+          <p><span lang="en">Export any year as an XML Auditfile Financieel (XAF), the Dutch standard that other bookkeeping packages and accountants read in.</span><span lang="nl">Exporteer elk boekjaar als XML Auditfile Financieel (XAF), de Nederlandse standaard die andere boekhoudpakketten en accountants inlezen.</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="screens">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow"><span lang="en">Take a look</span><span lang="nl">Kijk even rond</span></p>
+        <h2><span lang="en">Calm screens. <em class="accent">One clear next step.</em></span><span lang="nl">Rustige schermen. <em class="accent">Steeds één duidelijke volgende stap.</em></span></h2>
+        <p class="section-lead">
+          <span lang="en">All screenshots come from a demo holiday home with made-up amounts. Switch the theme at the top right to see dark mode.</span>
+          <span lang="nl">Alle schermafbeeldingen komen uit een demovakantiehuis met verzonnen bedragen. Wissel rechtsboven van thema om de donkere modus te zien.</span>
+        </p>
+      </div>
+      <div class="gallery">
+        <figure>
+          <img class="light-shot" src="screens/btw-boeker-boekhouding-licht.png" alt="Boekhouding: het journaal" width="1440" height="900" loading="lazy">
+          <img class="dark-shot" src="screens/btw-boeker-boekhouding-donker.png" alt="Boekhouding in donkere modus" width="1440" height="900" loading="lazy">
+          <figcaption><span lang="en">The journal: every entry, draft or booked.</span><span lang="nl">Het journaal: elke boeking, als concept of geboekt.</span></figcaption>
+        </figure>
+        <figure>
+          <img class="light-shot" src="screens/btw-boeker-rapport-licht.png" alt="Rapporten: de saldibalans" width="1440" height="900" loading="lazy">
+          <img class="dark-shot" src="screens/btw-boeker-rapport-donker.png" alt="Rapporten in donkere modus" width="1440" height="900" loading="lazy">
+          <figcaption><span lang="en">Reports, printable and exportable to Excel.</span><span lang="nl">Rapporten, af te drukken en te exporteren naar Excel.</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="download">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow"><span lang="en">Try it</span><span lang="nl">Probeer het</span></p>
+        <h2><span lang="en">Get the <em class="accent">beta.</em></span><span lang="nl">Haal de <em class="accent">bèta.</em></span></h2>
+        <p class="section-lead">
+          <span lang="en">For Windows 10 and 11 (64-bit). The installer contains everything, including .NET; no other downloads needed. Updating works the same way: install the new version over the old one, your data stays where it is.</span>
+          <span lang="nl">Voor Windows 10 en 11 (64-bit). Het installatiebestand bevat alles, ook .NET; je hoeft niets anders te downloaden. Bijwerken gaat op dezelfde manier: installeer de nieuwe versie over de oude heen, je gegevens blijven staan.</span>
+        </p>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="https://github.com/jeroengoudswaard/jeroengoudswaard.github.io/releases/download/btw-boeker/BtwBoeker-0.19.0.msi"><span lang="en">Download for Windows (.msi) →</span><span lang="nl">Download voor Windows (.msi) →</span></a>
+        <a class="btn" href="https://github.com/jeroengoudswaard/jeroengoudswaard.github.io/releases/tag/btw-boeker"><span lang="en">Release notes</span><span lang="nl">Releaseinformatie</span></a>
+      </div>
+      <div class="notice" style="margin-top:32px">
+        <span class="emoji">🛡️</span>
+        <div>
+          <h3><span lang="en">"Windows protected your PC"?</span><span lang="nl">"Windows heeft uw pc beschermd"?</span></h3>
+          <p><span lang="en">The beta is not code-signed yet, so Windows SmartScreen may warn about an unknown publisher the first time. That is expected:</span><span lang="nl">De bèta is nog niet digitaal ondertekend, daarom kan Windows SmartScreen de eerste keer waarschuwen voor een onbekende uitgever. Dat is verwacht:</span></p>
+          <ol class="stappen">
+            <li><span lang="en">Click <strong>More info</strong> in the blue window.</span><span lang="nl">Klik in het blauwe venster op <strong>Meer informatie</strong>.</span></li>
+            <li><span lang="en">Check that the file name starts with <code>BtwBoeker-</code> and ends in <code>.msi</code>, then click <strong>Run anyway</strong>.</span><span lang="nl">Controleer dat de bestandsnaam begint met <code>BtwBoeker-</code> en eindigt op <code>.msi</code>, en klik dan op <strong>Toch uitvoeren</strong>.</span></li>
+            <li><span lang="en">Your browser may also ask whether to keep the download: choose <strong>Keep</strong>.</span><span lang="nl">Ook je browser kan vragen of je de download wilt bewaren: kies <strong>Behouden</strong>.</span></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow"><span lang="en">Got questions?</span><span lang="nl">Vragen?</span></p>
+        <h2><span lang="en">Frequently asked <em class="accent">questions.</em></span><span lang="nl">Veelgestelde <em class="accent">vragen.</em></span></h2>
+      </div>
+      <div class="faq">
+        <details>
+          <summary><span lang="en">Is it free?</span><span lang="nl">Is het gratis?</span></summary>
+          <p><span lang="en">Yes. No licence fee, no subscription.</span><span lang="nl">Ja. Geen licentiekosten, geen abonnement.</span></p>
+        </details>
+        <details>
+          <summary><span lang="en">Does it file my VAT return?</span><span lang="nl">Doet het mijn btw-aangifte?</span></summary>
+          <p><span lang="en">No. BTW-Boeker will prepare a monthly overview with the amounts per rate; you enter them yourself in Mijn Belastingdienst Zakelijk. Nothing is sent anywhere automatically.</span><span lang="nl">Nee. BTW-Boeker maakt straks een overzicht per maand met de bedragen per tarief; die vul je zelf in bij Mijn Belastingdienst Zakelijk. Er wordt nergens automatisch iets naartoe gestuurd.</span></p>
+        </details>
+        <details>
+          <summary><span lang="en">Is my situation covered?</span><span lang="nl">Past het bij mijn situatie?</span></summary>
+          <p><span lang="en">If you rent out a holiday home in the Netherlands and charge Dutch VAT on short stays, yes. Private use of the house can be corrected by hand. Reverse-charge VAT, EU transactions and fees from foreign platforms are not handled.</span><span lang="nl">Als je een vakantiewoning in Nederland verhuurt en Nederlandse btw rekent over kortdurend verblijf, ja. Privégebruik van de woning corrigeer je met de hand. Verlegde btw, EU-transacties en kosten van buitenlandse platforms worden niet verwerkt.</span></p>
+        </details>
+        <details>
+          <summary><span lang="en">Can I take my bookkeeping elsewhere?</span><span lang="nl">Kan ik mijn boekhouding meenemen naar een ander pakket?</span></summary>
+          <p><span lang="en">Yes. Under File › Export › Auditfile (XAF) you save a year as XAF 3.2, the Dutch standard for exchanging bookkeeping data. It contains the chart of accounts, the opening balance, all booked entries and your relations. Most Dutch bookkeeping packages can read it, and your accountant can use it too.</span><span lang="nl">Ja. Via Bestand › Exporteren › Auditfile (XAF) sla je een boekjaar op als XAF 3.2, de Nederlandse standaard om boekhoudgegevens uit te wisselen. Daarin staan het rekeningschema, de openingsbalans, alle geboekte posten en je relaties. De meeste Nederlandse boekhoudpakketten lezen dit in, en ook je accountant kan ermee werken.</span></p>
+        </details>
+        <details>
+          <summary><span lang="en">Where is my data stored?</span><span lang="nl">Waar staan mijn gegevens?</span></summary>
+          <p><span lang="en">On your own PC, in one encrypted database file with a password, next to a key file. A backup holds both. There is no server and no account.</span><span lang="nl">Op je eigen pc, in één versleuteld databasebestand met wachtwoord, met een sleutelbestand ernaast. Een back-up bevat beide. Er is geen server en geen account.</span></p>
+        </details>
+        <details>
+          <summary><span lang="en">Which banks are supported?</span><span lang="nl">Welke banken worden ondersteund?</span></summary>
+          <p><span lang="en">Bank statements in CAMT.053 format, tested with Rabobank.</span><span lang="nl">Bankafschriften in CAMT.053-formaat, getest met de Rabobank.</span></p>
+        </details>
+        <details>
+          <summary><span lang="en">I forgot my password. Now what?</span><span lang="nl">Ik ben mijn wachtwoord vergeten. Wat nu?</span></summary>
+          <p><span lang="en">When you create a database, BTW-Boeker shows a recovery key once. Keep it somewhere safe: with it you can choose a new password. Without the password or the recovery key, nobody can open the data, not even the maker.</span><span lang="nl">Bij het aanmaken van een database toont BTW-Boeker één keer een herstelsleutel. Bewaar die op een veilige plek: daarmee kies je een nieuw wachtwoord. Zonder wachtwoord of herstelsleutel kan niemand de gegevens openen, ook de maker niet.</span></p>
+        </details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="dark-zone">
+  <div class="wrap cta">
+    <h2><span lang="en">Less paperwork. More time for your guests.</span><span lang="nl">Minder papierwerk. Meer tijd voor je gasten.</span></h2>
+    <p class="lead">
+      <span lang="en">Try the beta with your own holiday home and tell me what you miss.</span>
+      <span lang="nl">Probeer de bèta met je eigen vakantiehuis en vertel me wat je mist.</span>
+    </p>
+    <div class="actions">
+      <a class="btn primary" href="#download"><span lang="en">Download the beta →</span><span lang="nl">Download de bèta →</span></a>
+    </div>
+  </div>
+  <footer>
+    <div class="wrap">
+      <div class="foot-grid">
+        <div>
+          <a class="brand" href="./"><img src="../assets/btw-boeker.png" alt="" width="30" height="30">BTW-Boeker</a>
+          <p><span lang="en">Bookkeeping with VAT for renting out a holiday home.</span><span lang="nl">Boekhouding met btw voor de verhuur van een vakantiewoning.</span></p>
+        </div>
+        <div class="foot-col">
+          <h4>App</h4>
+          <a href="#features"><span lang="en">Features</span><span lang="nl">Functies</span></a>
+          <a href="#screens"><span lang="en">Screenshots</span><span lang="nl">Schermen</span></a>
+          <a href="#download">Download</a>
+          <a href="#faq">FAQ</a>
+        </div>
+        <div class="foot-col">
+          <h4><span lang="en">More</span><span lang="nl">Meer</span></h4>
+          <a href="../">Shockwave Apps (home)</a>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span>© <span data-year>2026</span> Jeroen Goudswaard</span>
+        <span>BTW-Boeker (beta)</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+</body>
+</html>
