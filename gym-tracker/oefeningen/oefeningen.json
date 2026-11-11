@@ -1,0 +1,1362 @@
+{
+  "oefeningen": [
+    {
+      "id": "bench_press",
+      "naam": "Bench Press",
+      "groep": "chest",
+      "beschrijving": "Lig op een vlakke bank, voeten plat op de grond, schouderbladen samen. Laat de stang gecontroleerd zakken naar je middenborst en druk explosief uit.",
+      "tags": [
+        "Compound",
+        "Barbell",
+        "Push"
+      ]
+    },
+    {
+      "id": "incline_db_press",
+      "naam": "Incline Dumbbell Press",
+      "groep": "chest",
+      "beschrijving": "Bank op 30–45°. Druk de dumbbells boven de borst uit en laat ze diep en gecontroleerd zakken. Legt nadruk op de bovenborst.",
+      "tags": [
+        "Compound",
+        "Dumbbell",
+        "Push"
+      ]
+    },
+    {
+      "id": "db_fly",
+      "naam": "Dumbbell Fly",
+      "groep": "chest",
+      "beschrijving": "Lichte buiging in de ellebogen, armen in een wijde boog naar beneden tot je een rek in de borst voelt, dan terug omhoog \"knuffelen\".",
+      "tags": [
+        "Isolation",
+        "Dumbbell",
+        "Push"
+      ]
+    },
+    {
+      "id": "push_up",
+      "naam": "Push-up",
+      "groep": "chest",
+      "beschrijving": "Handen iets breder dan schouders, lichaam in één rechte lijn. Borst naar de grond en terug omhoog.",
+      "tags": [
+        "Compound",
+        "Bodyweight",
+        "Push"
+      ]
+    },
+    {
+      "id": "cable_crossover",
+      "naam": "Cable Crossover",
+      "groep": "chest",
+      "beschrijving": "Tussen twee kabelkolommen, licht voorovergebogen. Breng de handgrepen in een boog voor je samen en knijp de borst aan.",
+      "tags": [
+        "Isolation",
+        "Cable",
+        "Push"
+      ]
+    },
+    {
+      "id": "incline_barbell_press",
+      "naam": "Incline Barbell Press",
+      "groep": "chest",
+      "beschrijving": "Bank op 30°. Laat de stang naar je bovenborst zakken en druk hem krachtig omhoog. Zwaardere variant voor de bovenborst.",
+      "tags": [
+        "Compound",
+        "Barbell",
+        "Push"
+      ]
+    },
+    {
+      "id": "decline_bench_press",
+      "naam": "Decline Bench Press",
+      "groep": "chest",
+      "beschrijving": "Op een afhellende bank met de voeten vastgezet. Laat de stang naar de onderborst zakken en druk omhoog. Legt nadruk op de onderste borst.",
+      "tags": [
+        "Compound",
+        "Barbell",
+        "Push"
+      ]
+    },
+    {
+      "id": "db_bench_press",
+      "naam": "Dumbbell Bench Press",
+      "groep": "chest",
+      "beschrijving": "Lig op een vlakke bank met een dumbbell in elke hand. Druk ze boven je borst omhoog en laat ze diep zakken voor een grotere rek dan met de stang.",
+      "tags": [
+        "Compound",
+        "Dumbbell",
+        "Push"
+      ]
+    },
+    {
+      "id": "chest_press_machine",
+      "naam": "Chest Press Machine",
+      "groep": "chest",
+      "beschrijving": "Zit tegen de rugleuning met de handgrepen op borsthoogte. Druk naar voren tot de armen bijna gestrekt zijn en keer gecontroleerd terug.",
+      "tags": [
+        "Compound",
+        "Machine",
+        "Push"
+      ]
+    },
+    {
+      "id": "incline_cable_fly",
+      "naam": "Incline Cable Fly",
+      "groep": "chest",
+      "beschrijving": "Bank op 30° tussen twee kabels. Breng de handgrepen in een boog omhoog naar elkaar toe, met licht gebogen ellebogen.",
+      "tags": [
+        "Isolation",
+        "Cable",
+        "Push"
+      ]
+    },
+    {
+      "id": "pec_deck",
+      "naam": "Pec Deck",
+      "groep": "chest",
+      "beschrijving": "Zit rechtop met de ellebogen op schouderhoogte tegen de pads of handgrepen. Breng de armen voor je samen en knijp de borst aan.",
+      "tags": [
+        "Isolation",
+        "Machine",
+        "Push"
+      ]
+    },
+    {
+      "id": "incline_push_up",
+      "naam": "Incline Push-up",
+      "groep": "chest",
+      "beschrijving": "Handen op een verhoging (bank of stang), lichaam in één lijn. Borst naar de verhoging en terug omhoog. Makkelijker dan een gewone push-up.",
+      "tags": [
+        "Compound",
+        "Bodyweight",
+        "Push"
+      ]
+    },
+    {
+      "id": "deadlift",
+      "naam": "Deadlift",
+      "groep": "back",
+      "beschrijving": "Stang boven het midden van de voet. Heupen naar achteren, rug neutraal, borst omhoog. Duw de vloer weg en strek heupen en knieën tegelijk.",
+      "tags": [
+        "Compound",
+        "Barbell",
+        "Pull"
+      ]
+    },
+    {
+      "id": "pull_up",
+      "naam": "Pull-up",
+      "groep": "back",
+      "beschrijving": "Bovenhandse greep iets breder dan schouders. Trek jezelf op tot je kin boven de stang is, ellebogen naar je heupen.",
+      "tags": [
+        "Compound",
+        "Bodyweight",
+        "Pull"
+      ]
+    },
+    {
+      "id": "barbell_row",
+      "naam": "Barbell Row",
+      "groep": "back",
+      "beschrijving": "Heupscharnier tot je bovenlichaam bijna horizontaal is. Trek de stang naar je navel en laat hem gecontroleerd zakken.",
+      "tags": [
+        "Compound",
+        "Barbell",
+        "Pull"
+      ]
+    },
+    {
+      "id": "lat_pulldown",
+      "naam": "Lat Pulldown",
+      "groep": "back",
+      "beschrijving": "Brede greep, licht achterover leunen. Trek de stang naar je bovenborst door de ellebogen naar beneden te trekken.",
+      "tags": [
+        "Compound",
+        "Machine",
+        "Pull"
+      ]
+    },
+    {
+      "id": "seated_cable_row",
+      "naam": "Seated Cable Row",
+      "groep": "back",
+      "beschrijving": "Rechtop zitten, borst vooruit. Trek de handgreep naar je buik en knijp de schouderbladen samen.",
+      "tags": [
+        "Compound",
+        "Cable",
+        "Pull"
+      ]
+    },
+    {
+      "id": "db_row",
+      "naam": "One-arm Dumbbell Row",
+      "groep": "back",
+      "beschrijving": "Eén knie en hand op de bank. Trek de dumbbell langs je lichaam naar je heup.",
+      "tags": [
+        "Compound",
+        "Dumbbell",
+        "Pull"
+      ]
+    },
+    {
+      "id": "chin_up",
+      "naam": "Chin-up",
+      "groep": "back",
+      "beschrijving": "Onderhandse greep op schouderbreedte. Trek jezelf op tot je kin boven de stang is; de biceps werken sterk mee.",
+      "tags": [
+        "Compound",
+        "Bodyweight",
+        "Pull"
+      ]
+    },
+    {
+      "id": "pendlay_row",
+      "naam": "Pendlay Row",
+      "groep": "back",
+      "beschrijving": "Stang elke herhaling vanaf de grond, rug horizontaal. Trek explosief naar de onderborst en zet de stang weer neer.",
+      "tags": [
+        "Compound",
+        "Barbell",
+        "Pull"
+      ]
+    },
+    {
+      "id": "t_bar_row",
+      "naam": "T-Bar Row",
+      "groep": "back",
+      "beschrijving": "Voorovergebogen boven de T-bar (of landmine). Trek het gewicht naar je borst met de ellebogen langs het lichaam.",
+      "tags": [
+        "Compound",
+        "Barbell",
+        "Pull"
+      ]
+    },
+    {
+      "id": "chest_supported_row",
+      "naam": "Chest-supported Row",
+      "groep": "back",
+      "beschrijving": "Borst tegen een schuine bank of machine. Trek de gewichten naar je heupen zonder je lichaam mee te zwaaien.",
+      "tags": [
+        "Compound",
+        "Dumbbell",
+        "Pull"
+      ]
+    },
+    {
+      "id": "close_grip_pulldown",
+      "naam": "Close-grip Lat Pulldown",
+      "groep": "back",
+      "beschrijving": "Smalle V-greep. Trek naar je bovenbuik met de ellebogen langs het lichaam; legt meer nadruk op het onderste deel van de lats.",
+      "tags": [
+        "Compound",
+        "Machine",
+        "Pull"
+      ]
+    },
+    {
+      "id": "straight_arm_pulldown",
+      "naam": "Straight-arm Pulldown",
+      "groep": "back",
+      "beschrijving": "Staand voor de kabel, armen vrijwel gestrekt. Duw de stang in een boog naar je dijen en voel de lats werken.",
+      "tags": [
+        "Isolation",
+        "Cable",
+        "Pull"
+      ]
+    },
+    {
+      "id": "inverted_row",
+      "naam": "Inverted Row",
+      "groep": "back",
+      "beschrijving": "Hangend onder een lage stang met een gestrekt lichaam. Trek je borst naar de stang en laat gecontroleerd zakken.",
+      "tags": [
+        "Compound",
+        "Bodyweight",
+        "Pull"
+      ]
+    },
+    {
+      "id": "back_extension",
+      "naam": "Back Extension",
+      "groep": "back",
+      "beschrijving": "Op de hyperextension-bank met de heupen op het kussen. Zak met rechte rug naar voren en kom op tot je lichaam een rechte lijn is.",
+      "tags": [
+        "Isolation",
+        "Bodyweight",
+        "Pull"
+      ]
+    },
+    {
+      "id": "squat",
+      "naam": "Squat",
+      "groep": "legs",
+      "beschrijving": "Stang op de bovenrug, voeten op schouderbreedte. Zak tot minstens parallel met knieën in lijn met de tenen, en kom krachtig omhoog.",
+      "tags": [
+        "Compound",
+        "Barbell",
+        "Legs"
+      ]
+    },
+    {
+      "id": "leg_press",
+      "naam": "Leg Press",
+      "groep": "legs",
+      "beschrijving": "Voeten op schouderbreedte op het platform. Laat het gewicht zakken tot ~90° in de knie en druk uit zonder de knieën op slot te zetten.",
+      "tags": [
+        "Compound",
+        "Machine",
+        "Legs"
+      ]
+    },
+    {
+      "id": "romanian_deadlift",
+      "naam": "Romanian Deadlift",
+      "groep": "legs",
+      "beschrijving": "Licht gebogen knieën, heupen naar achteren tot je een stevige rek in de hamstrings voelt. Rug blijft neutraal.",
+      "tags": [
+        "Compound",
+        "Barbell",
+        "Legs"
+      ]
+    },
+    {
+      "id": "lunge",
+      "naam": "Walking Lunge",
+      "groep": "legs",
+      "beschrijving": "Grote stap vooruit, zak tot beide knieën ~90° zijn, en stap door met het andere been.",
+      "tags": [
+        "Compound",
+        "Dumbbell",
+        "Legs"
+      ]
+    },
+    {
+      "id": "leg_curl",
+      "naam": "Leg Curl",
+      "groep": "legs",
+      "beschrijving": "Op de machine, krul de hielen richting billen. Langzaam terug.",
+      "tags": [
+        "Isolation",
+        "Machine",
+        "Legs"
+      ]
+    },
+    {
+      "id": "leg_extension",
+      "naam": "Leg Extension",
+      "groep": "legs",
+      "beschrijving": "Strek de benen volledig en knijp de quadriceps bovenin even aan.",
+      "tags": [
+        "Isolation",
+        "Machine",
+        "Legs"
+      ]
+    },
+    {
+      "id": "calf_raise",
+      "naam": "Calf Raise",
+      "groep": "legs",
+      "beschrijving": "Op de voorvoeten, hielen diep laten zakken en zo hoog mogelijk omhoog komen.",
+      "tags": [
+        "Isolation",
+        "Machine",
+        "Legs"
+      ]
+    },
+    {
+      "id": "hip_thrust",
+      "naam": "Hip Thrust",
+      "groep": "legs",
+      "beschrijving": "Bovenrug tegen een bank, stang op de heupen. Duw de heupen omhoog tot je lichaam recht is en knijp de bilspieren aan.",
+      "tags": [
+        "Compound",
+        "Barbell",
+        "Legs"
+      ]
+    },
+    {
+      "id": "front_squat",
+      "naam": "Front Squat",
+      "groep": "legs",
+      "beschrijving": "Stang voor op de schouders, ellebogen hoog. Zak met rechte romp diep door en kom omhoog; zwaarder op quadriceps en core.",
+      "tags": [
+        "Compound",
+        "Barbell",
+        "Legs"
+      ]
+    },
+    {
+      "id": "goblet_squat",
+      "naam": "Goblet Squat",
+      "groep": "legs",
+      "beschrijving": "Houd een dumbbell of kettlebell tegen de borst. Zak diep met rechte rug en kom krachtig omhoog. Goed om de techniek te leren.",
+      "tags": [
+        "Compound",
+        "Dumbbell",
+        "Legs"
+      ]
+    },
+    {
+      "id": "bulgarian_split_squat",
+      "naam": "Bulgarian Split Squat",
+      "groep": "legs",
+      "beschrijving": "Achterste voet op een bank. Zak recht naar beneden op het voorste been tot de dij horizontaal is en duw omhoog.",
+      "tags": [
+        "Compound",
+        "Dumbbell",
+        "Legs"
+      ]
+    },
+    {
+      "id": "hack_squat",
+      "naam": "Hack Squat",
+      "groep": "legs",
+      "beschrijving": "Rug tegen het kussen van de machine, voeten voor op het platform. Zak tot ~90° in de knie en duw omhoog.",
+      "tags": [
+        "Compound",
+        "Machine",
+        "Legs"
+      ]
+    },
+    {
+      "id": "sumo_deadlift",
+      "naam": "Sumo Deadlift",
+      "groep": "legs",
+      "beschrijving": "Brede stand, tenen naar buiten, handen binnen de benen. Trek de stang omhoog met rechte rug en duw de heupen naar voren.",
+      "tags": [
+        "Compound",
+        "Barbell",
+        "Legs"
+      ]
+    },
+    {
+      "id": "good_morning",
+      "naam": "Good Morning",
+      "groep": "legs",
+      "beschrijving": "Stang op de bovenrug, knieën licht gebogen. Buig vanuit de heupen naar voren tot je bovenlichaam bijna horizontaal is en kom weer op.",
+      "tags": [
+        "Compound",
+        "Barbell",
+        "Legs"
+      ]
+    },
+    {
+      "id": "reverse_lunge",
+      "naam": "Reverse Lunge",
+      "groep": "legs",
+      "beschrijving": "Stap achteruit en zak tot beide knieën ~90° zijn. Duw jezelf terug naar de startpositie. Vriendelijker voor de knieën dan een voorwaartse lunge.",
+      "tags": [
+        "Compound",
+        "Dumbbell",
+        "Legs"
+      ]
+    },
+    {
+      "id": "step_up",
+      "naam": "Step-up",
+      "groep": "legs",
+      "beschrijving": "Zet één voet op een bank of box en sta er volledig op. Laat gecontroleerd zakken en wissel van been.",
+      "tags": [
+        "Compound",
+        "Dumbbell",
+        "Legs"
+      ]
+    },
+    {
+      "id": "seated_leg_curl",
+      "naam": "Seated Leg Curl",
+      "groep": "legs",
+      "beschrijving": "Zittend in de machine, krul de hielen naar beneden en achteren. Laat langzaam terug.",
+      "tags": [
+        "Isolation",
+        "Machine",
+        "Legs"
+      ]
+    },
+    {
+      "id": "glute_bridge",
+      "naam": "Glute Bridge",
+      "groep": "legs",
+      "beschrijving": "Op je rug met de voeten dicht bij de billen. Duw de heupen omhoog tot je lichaam een rechte lijn is en knijp de bilspieren aan.",
+      "tags": [
+        "Isolation",
+        "Bodyweight",
+        "Legs"
+      ]
+    },
+    {
+      "id": "cable_kickback",
+      "naam": "Cable Kickback",
+      "groep": "legs",
+      "beschrijving": "Enkelband aan de lage kabel. Trek het been gestrekt naar achteren en knijp de bil aan, zonder de onderrug hol te trekken.",
+      "tags": [
+        "Isolation",
+        "Cable",
+        "Legs"
+      ]
+    },
+    {
+      "id": "hip_abduction",
+      "naam": "Hip Abduction Machine",
+      "groep": "legs",
+      "beschrijving": "Zit in de machine met de pads buiten de knieën. Duw de benen naar buiten en keer gecontroleerd terug.",
+      "tags": [
+        "Isolation",
+        "Machine",
+        "Legs"
+      ]
+    },
+    {
+      "id": "hip_adduction",
+      "naam": "Hip Adduction Machine",
+      "groep": "legs",
+      "beschrijving": "Zit in de machine met de pads binnen de knieën. Breng de benen naar elkaar toe en keer gecontroleerd terug.",
+      "tags": [
+        "Isolation",
+        "Machine",
+        "Legs"
+      ]
+    },
+    {
+      "id": "seated_calf_raise",
+      "naam": "Seated Calf Raise",
+      "groep": "legs",
+      "beschrijving": "Zittend met de knieën onder het kussen. Til de hielen zo hoog mogelijk en laat ze diep zakken; traint vooral de soleus.",
+      "tags": [
+        "Isolation",
+        "Machine",
+        "Legs"
+      ]
+    },
+    {
+      "id": "overhead_press",
+      "naam": "Overhead Press",
+      "groep": "shoulders",
+      "beschrijving": "Staand, stang op de voorkant van de schouders. Druk recht omhoog, hoofd iets naar achteren en dan \"door het raam\".",
+      "tags": [
+        "Compound",
+        "Barbell",
+        "Push"
+      ]
+    },
+    {
+      "id": "db_shoulder_press",
+      "naam": "Dumbbell Shoulder Press",
+      "groep": "shoulders",
+      "beschrijving": "Zittend, dumbbells op oorhoogte. Druk omhoog tot de armen gestrekt zijn.",
+      "tags": [
+        "Compound",
+        "Dumbbell",
+        "Push"
+      ]
+    },
+    {
+      "id": "lateral_raise",
+      "naam": "Lateral Raise",
+      "groep": "shoulders",
+      "beschrijving": "Licht gebogen ellebogen, til de dumbbells zijwaarts op tot schouderhoogte.",
+      "tags": [
+        "Isolation",
+        "Dumbbell",
+        "Push"
+      ]
+    },
+    {
+      "id": "face_pull",
+      "naam": "Face Pull",
+      "groep": "shoulders",
+      "beschrijving": "Touw op ooghoogte. Trek naar je gezicht met de ellebogen hoog en draai de handen naar buiten.",
+      "tags": [
+        "Isolation",
+        "Cable",
+        "Pull"
+      ]
+    },
+    {
+      "id": "arnold_press",
+      "naam": "Arnold Press",
+      "groep": "shoulders",
+      "beschrijving": "Start met de handpalmen naar je toe voor de borst en draai tijdens het omhoogdrukken de handpalmen naar voren. Dekt alle delen van de schouder.",
+      "tags": [
+        "Compound",
+        "Dumbbell",
+        "Push"
+      ]
+    },
+    {
+      "id": "push_press",
+      "naam": "Push Press",
+      "groep": "shoulders",
+      "beschrijving": "Net als overhead press, maar geef met een kleine kniebuiging een stoot mee. Zo til je meer gewicht omhoog.",
+      "tags": [
+        "Compound",
+        "Barbell",
+        "Push"
+      ]
+    },
+    {
+      "id": "machine_shoulder_press",
+      "naam": "Machine Shoulder Press",
+      "groep": "shoulders",
+      "beschrijving": "Zit rechtop met de handgrepen op schouderhoogte. Druk omhoog tot de armen bijna gestrekt zijn en keer gecontroleerd terug.",
+      "tags": [
+        "Compound",
+        "Machine",
+        "Push"
+      ]
+    },
+    {
+      "id": "cable_lateral_raise",
+      "naam": "Cable Lateral Raise",
+      "groep": "shoulders",
+      "beschrijving": "Zijwaarts naast de lage kabel, handgreep in de verste hand. Til de arm gestrekt zijwaarts tot schouderhoogte; constante spanning.",
+      "tags": [
+        "Isolation",
+        "Cable",
+        "Push"
+      ]
+    },
+    {
+      "id": "front_raise",
+      "naam": "Front Raise",
+      "groep": "shoulders",
+      "beschrijving": "Til de dumbbells (of een schijf) gestrekt voor je uit tot schouderhoogte en laat gecontroleerd zakken, zonder te zwaaien.",
+      "tags": [
+        "Isolation",
+        "Dumbbell",
+        "Push"
+      ]
+    },
+    {
+      "id": "rear_delt_fly",
+      "naam": "Rear Delt Fly",
+      "groep": "shoulders",
+      "beschrijving": "Voorovergebogen met licht gebogen ellebogen, til de dumbbells zijwaarts omhoog. Traint de achterkant van de schouders.",
+      "tags": [
+        "Isolation",
+        "Dumbbell",
+        "Pull"
+      ]
+    },
+    {
+      "id": "upright_row",
+      "naam": "Upright Row",
+      "groep": "shoulders",
+      "beschrijving": "Trek de stang dicht langs het lichaam omhoog tot borsthoogte met de ellebogen hoog. Houd het gewicht licht voor de schouders.",
+      "tags": [
+        "Compound",
+        "Barbell",
+        "Pull"
+      ]
+    },
+    {
+      "id": "barbell_shrug",
+      "naam": "Barbell Shrug",
+      "groep": "shoulders",
+      "beschrijving": "Stang voor de dijen. Trek de schouders recht omhoog richting de oren, houd even vast en zak rustig. Niet rondjes draaien.",
+      "tags": [
+        "Isolation",
+        "Barbell",
+        "Pull"
+      ]
+    },
+    {
+      "id": "db_shrug",
+      "naam": "Dumbbell Shrug",
+      "groep": "shoulders",
+      "beschrijving": "Dumbbells langs het lichaam. Trek de schouders recht omhoog, houd even vast en laat gecontroleerd zakken.",
+      "tags": [
+        "Isolation",
+        "Dumbbell",
+        "Pull"
+      ]
+    },
+    {
+      "id": "barbell_curl",
+      "naam": "Barbell Curl",
+      "groep": "arms",
+      "beschrijving": "Ellebogen tegen je zij, krul de stang omhoog zonder te zwaaien.",
+      "tags": [
+        "Isolation",
+        "Barbell",
+        "Pull"
+      ]
+    },
+    {
+      "id": "hammer_curl",
+      "naam": "Hammer Curl",
+      "groep": "arms",
+      "beschrijving": "Neutrale greep (duimen omhoog). Krul de dumbbells afwisselend of tegelijk.",
+      "tags": [
+        "Isolation",
+        "Dumbbell",
+        "Pull"
+      ]
+    },
+    {
+      "id": "triceps_pushdown",
+      "naam": "Triceps Pushdown",
+      "groep": "arms",
+      "beschrijving": "Ellebogen vast tegen je zij, duw de kabel naar beneden tot de armen gestrekt zijn.",
+      "tags": [
+        "Isolation",
+        "Cable",
+        "Push"
+      ]
+    },
+    {
+      "id": "skull_crusher",
+      "naam": "Skull Crusher",
+      "groep": "arms",
+      "beschrijving": "Liggend, laat de EZ-stang naar je voorhoofd zakken door alleen de ellebogen te buigen.",
+      "tags": [
+        "Isolation",
+        "Barbell",
+        "Push"
+      ]
+    },
+    {
+      "id": "dips",
+      "naam": "Dips",
+      "groep": "arms",
+      "beschrijving": "Tussen de leggers, zak tot je bovenarmen horizontaal zijn en druk jezelf omhoog.",
+      "tags": [
+        "Compound",
+        "Bodyweight",
+        "Push"
+      ]
+    },
+    {
+      "id": "db_curl",
+      "naam": "Dumbbell Curl",
+      "groep": "arms",
+      "beschrijving": "Staand of zittend, krul de dumbbells omhoog en draai de handpalmen naar boven. Ellebogen blijven langs je zij.",
+      "tags": [
+        "Isolation",
+        "Dumbbell",
+        "Pull"
+      ]
+    },
+    {
+      "id": "incline_db_curl",
+      "naam": "Incline Dumbbell Curl",
+      "groep": "arms",
+      "beschrijving": "Op een schuine bank (45–60°) met de armen naar achteren hangend. Krul omhoog; de lange kop van de biceps krijgt een extra rek.",
+      "tags": [
+        "Isolation",
+        "Dumbbell",
+        "Pull"
+      ]
+    },
+    {
+      "id": "preacher_curl",
+      "naam": "Preacher Curl",
+      "groep": "arms",
+      "beschrijving": "Bovenarmen op het schuine kussen. Krul omhoog zonder te zwaaien en laat volledig zakken.",
+      "tags": [
+        "Isolation",
+        "Barbell",
+        "Pull"
+      ]
+    },
+    {
+      "id": "cable_curl",
+      "naam": "Cable Curl",
+      "groep": "arms",
+      "beschrijving": "Voor de lage kabel met een rechte of EZ-stang. Krul omhoog met constante spanning en laat gecontroleerd zakken.",
+      "tags": [
+        "Isolation",
+        "Cable",
+        "Pull"
+      ]
+    },
+    {
+      "id": "concentration_curl",
+      "naam": "Concentration Curl",
+      "groep": "arms",
+      "beschrijving": "Zittend, elleboog tegen de binnenkant van de dij. Krul de dumbbell langzaam omhoog en knijp bovenin even aan.",
+      "tags": [
+        "Isolation",
+        "Dumbbell",
+        "Pull"
+      ]
+    },
+    {
+      "id": "reverse_curl",
+      "naam": "Reverse Curl",
+      "groep": "arms",
+      "beschrijving": "Bovenhandse greep op de stang. Krul omhoog met de ellebogen langs het lichaam; traint onderarmen en brachioradialis.",
+      "tags": [
+        "Isolation",
+        "Barbell",
+        "Pull"
+      ]
+    },
+    {
+      "id": "overhead_triceps_extension",
+      "naam": "Overhead Triceps Extension",
+      "groep": "arms",
+      "beschrijving": "Houd een dumbbell met beide handen boven je hoofd. Laat hem achter je hoofd zakken door de ellebogen te buigen en strek weer.",
+      "tags": [
+        "Isolation",
+        "Dumbbell",
+        "Push"
+      ]
+    },
+    {
+      "id": "close_grip_bench_press",
+      "naam": "Close-grip Bench Press",
+      "groep": "arms",
+      "beschrijving": "Bankdrukken met de handen op ongeveer schouderbreedte en de ellebogen dicht langs het lichaam. Zwaar voor de triceps.",
+      "tags": [
+        "Compound",
+        "Barbell",
+        "Push"
+      ]
+    },
+    {
+      "id": "bench_dip",
+      "naam": "Bench Dip",
+      "groep": "arms",
+      "beschrijving": "Handen op een bank achter je, benen vooruit. Zak door de ellebogen te buigen tot ~90° en duw jezelf omhoog.",
+      "tags": [
+        "Compound",
+        "Bodyweight",
+        "Push"
+      ]
+    },
+    {
+      "id": "diamond_push_up",
+      "naam": "Diamond Push-up",
+      "groep": "arms",
+      "beschrijving": "Handen dicht bij elkaar onder de borst, duimen en wijsvingers vormen een ruit. Zak en duw omhoog; de triceps staat centraal.",
+      "tags": [
+        "Compound",
+        "Bodyweight",
+        "Push"
+      ]
+    },
+    {
+      "id": "wrist_curl",
+      "naam": "Wrist Curl",
+      "groep": "arms",
+      "beschrijving": "Onderarmen op de knieën of een bank, handpalmen omhoog. Krul de polsen omhoog en laat langzaam zakken.",
+      "tags": [
+        "Isolation",
+        "Dumbbell",
+        "Pull"
+      ]
+    },
+    {
+      "id": "plank",
+      "naam": "Plank",
+      "groep": "core",
+      "beschrijving": "Op onderarmen en tenen, lichaam in één rechte lijn. Reps = seconden.",
+      "tags": [
+        "Bodyweight",
+        "Core"
+      ],
+      "tijd": true
+    },
+    {
+      "id": "hanging_leg_raise",
+      "naam": "Hanging Leg Raise",
+      "groep": "core",
+      "beschrijving": "Hangend aan een stang, til de benen gestrekt of gebogen op zonder te zwaaien.",
+      "tags": [
+        "Bodyweight",
+        "Core"
+      ]
+    },
+    {
+      "id": "cable_crunch",
+      "naam": "Cable Crunch",
+      "groep": "core",
+      "beschrijving": "Geknield voor de kabel, touw bij je hoofd. Rol je romp naar beneden met je buikspieren.",
+      "tags": [
+        "Cable",
+        "Core"
+      ]
+    },
+    {
+      "id": "side_plank",
+      "naam": "Side Plank",
+      "groep": "core",
+      "beschrijving": "Op één onderarm en de zijkant van de voet, lichaam in één rechte lijn. Reps = seconden per kant.",
+      "tags": [
+        "Bodyweight",
+        "Core"
+      ],
+      "tijd": true
+    },
+    {
+      "id": "hanging_knee_raise",
+      "naam": "Hanging Knee Raise",
+      "groep": "core",
+      "beschrijving": "Hangend aan een stang, trek de knieën naar de borst zonder te zwaaien. Makkelijkere variant van de leg raise.",
+      "tags": [
+        "Bodyweight",
+        "Core"
+      ]
+    },
+    {
+      "id": "crunch",
+      "naam": "Crunch",
+      "groep": "core",
+      "beschrijving": "Op je rug met gebogen knieën. Til de schouderbladen van de grond door de buikspieren aan te spannen en zak gecontroleerd terug.",
+      "tags": [
+        "Bodyweight",
+        "Core"
+      ]
+    },
+    {
+      "id": "sit_up",
+      "naam": "Sit-up",
+      "groep": "core",
+      "beschrijving": "Op je rug met gebogen knieën en vastgezette voeten. Kom gecontroleerd helemaal omhoog en zak langzaam terug.",
+      "tags": [
+        "Bodyweight",
+        "Core"
+      ]
+    },
+    {
+      "id": "bicycle_crunch",
+      "naam": "Bicycle Crunch",
+      "groep": "core",
+      "beschrijving": "Op je rug, handen bij je hoofd. Breng afwisselend een elleboog en de tegenovergestelde knie naar elkaar toe in een fietsbeweging.",
+      "tags": [
+        "Bodyweight",
+        "Core"
+      ]
+    },
+    {
+      "id": "russian_twist",
+      "naam": "Russian Twist",
+      "groep": "core",
+      "beschrijving": "Zittend met achterover leunende romp en opgeheven voeten. Draai de romp van links naar rechts, met of zonder gewicht.",
+      "tags": [
+        "Bodyweight",
+        "Core"
+      ]
+    },
+    {
+      "id": "ab_wheel_rollout",
+      "naam": "Ab Wheel Rollout",
+      "groep": "core",
+      "beschrijving": "Geknield met het wiel onder de schouders. Rol naar voren zonder door te zakken in de onderrug en trek jezelf met de buikspieren terug.",
+      "tags": [
+        "Bodyweight",
+        "Core"
+      ]
+    },
+    {
+      "id": "dead_bug",
+      "naam": "Dead Bug",
+      "groep": "core",
+      "beschrijving": "Op je rug, armen en knieën omhoog. Strek afwisselend een arm en het tegenovergestelde been naar beneden terwijl de onderrug op de grond blijft.",
+      "tags": [
+        "Bodyweight",
+        "Core"
+      ]
+    },
+    {
+      "id": "mountain_climber",
+      "naam": "Mountain Climber",
+      "groep": "core",
+      "beschrijving": "In plankhouding, trek snel afwisselend de knieën naar de borst. Houd de heupen laag en de romp stabiel.",
+      "tags": [
+        "Bodyweight",
+        "Core"
+      ]
+    },
+    {
+      "id": "pallof_press",
+      "naam": "Pallof Press",
+      "groep": "core",
+      "beschrijving": "Zijwaarts naast een kabel, handgreep voor de borst. Duw de handen recht naar voren en houd tegen dat je romp meedraait.",
+      "tags": [
+        "Cable",
+        "Core"
+      ]
+    },
+    {
+      "id": "kettlebell_swing",
+      "naam": "Kettlebell Swing",
+      "groep": "fullBody",
+      "beschrijving": "Heupscharnier, zwaai de kettlebell tussen je benen en stuw hem met de heupen naar borsthoogte.",
+      "tags": [
+        "Compound",
+        "Kettlebell"
+      ]
+    },
+    {
+      "id": "power_clean",
+      "naam": "Power Clean",
+      "groep": "fullBody",
+      "beschrijving": "Trek de stang explosief van de grond met heup- en beenstrekking, vang hem op de schouders en sta op. Techniek eerst, gewicht later.",
+      "tags": [
+        "Compound",
+        "Barbell"
+      ]
+    },
+    {
+      "id": "thruster",
+      "naam": "Thruster",
+      "groep": "fullBody",
+      "beschrijving": "Voorste squat met een stang of dumbbells en direct doorduwen naar een overhead press in één vloeiende beweging.",
+      "tags": [
+        "Compound",
+        "Barbell"
+      ]
+    },
+    {
+      "id": "burpee",
+      "naam": "Burpee",
+      "groep": "fullBody",
+      "beschrijving": "Squat, spring de voeten naar achteren naar plank, push-up, spring de voeten terug en maak een sprong omhoog.",
+      "tags": [
+        "Compound",
+        "Bodyweight"
+      ]
+    },
+    {
+      "id": "farmers_carry",
+      "naam": "Farmer's Carry",
+      "groep": "fullBody",
+      "beschrijving": "Loop met een zwaar gewicht in elke hand, rechtop met aangespannen core en schouders naar achteren. Reps = meters of seconden.",
+      "tags": [
+        "Compound",
+        "Dumbbell"
+      ]
+    },
+    {
+      "id": "rowing_machine",
+      "naam": "Rowing Machine",
+      "groep": "cardio",
+      "beschrijving": "Benen – rug – armen op de haal, armen – rug – benen terug. Reps = minuten.",
+      "tags": [
+        "Cardio",
+        "Machine"
+      ],
+      "tijd": true
+    },
+    {
+      "id": "treadmill",
+      "naam": "Treadmill",
+      "groep": "cardio",
+      "beschrijving": "Wandelen of hardlopen op de loopband, in een rustig constant tempo of in intervallen. Reps = minuten.",
+      "tags": [
+        "Cardio",
+        "Machine"
+      ],
+      "tijd": true
+    },
+    {
+      "id": "stationary_bike",
+      "naam": "Stationary Bike",
+      "groep": "cardio",
+      "beschrijving": "Fietsen op een hometrainer met een stabiele cadans. Reps = minuten.",
+      "tags": [
+        "Cardio",
+        "Machine"
+      ],
+      "tijd": true
+    },
+    {
+      "id": "elliptical",
+      "naam": "Elliptical",
+      "groep": "cardio",
+      "beschrijving": "Beweeg gelijkmatig op de crosstrainer met een rechte houding; belast de gewrichten weinig. Reps = minuten.",
+      "tags": [
+        "Cardio",
+        "Machine"
+      ],
+      "tijd": true
+    },
+    {
+      "id": "jump_rope",
+      "naam": "Jump Rope",
+      "groep": "cardio",
+      "beschrijving": "Spring touw op de voorvoeten met kleine sprongen vanuit de polsen. Reps = minuten.",
+      "tags": [
+        "Cardio",
+        "Bodyweight"
+      ],
+      "tijd": true
+    },
+    {
+      "id": "jumping_jacks",
+      "naam": "Jumping Jacks",
+      "groep": "fullBody",
+      "beschrijving": "Spring met benen en armen tegelijk wijd en weer dicht. Lichte landing op de voorvoet; ideaal om pols en spieren warm te krijgen.",
+      "tags": [
+        "Warming-up",
+        "Cardio"
+      ],
+      "tijd": true
+    },
+    {
+      "id": "high_knees",
+      "naam": "High Knees",
+      "groep": "cardio",
+      "beschrijving": "Ren op de plaats met knieën tot heuphoogte en actieve armen. Blijf licht op je voeten.",
+      "tags": [
+        "Warming-up",
+        "Cardio"
+      ],
+      "tijd": true
+    },
+    {
+      "id": "arm_circles",
+      "naam": "Arm Circles",
+      "groep": "shoulders",
+      "beschrijving": "Armen zijwaarts gestrekt, maak kleine tot grote cirkels, daarna de andere kant op. Maakt de schouders los.",
+      "tags": [
+        "Warming-up",
+        "Mobility"
+      ],
+      "tijd": true
+    },
+    {
+      "id": "leg_swings",
+      "naam": "Leg Swings",
+      "groep": "legs",
+      "beschrijving": "Houd houvast en zwaai één been gecontroleerd voor-achter en daarna zij-zij. Per been; vergroot het bereik geleidelijk.",
+      "tags": [
+        "Warming-up",
+        "Mobility"
+      ]
+    },
+    {
+      "id": "cat_cow",
+      "naam": "Cat-Cow",
+      "groep": "back",
+      "beschrijving": "Op handen en knieën: wissel af tussen een holle rug (kop omhoog) en een bolle rug (kin naar borst). Rustig met de ademhaling mee.",
+      "tags": [
+        "Warming-up",
+        "Mobility"
+      ]
+    },
+    {
+      "id": "worlds_greatest_stretch",
+      "naam": "World's Greatest Stretch",
+      "groep": "fullBody",
+      "beschrijving": "Diepe lunge, hand naast je voet, draai de borstkas open naar het voorste been en reik omhoog. Wissel per kant.",
+      "tags": [
+        "Warming-up",
+        "Mobility"
+      ]
+    },
+    {
+      "id": "hip_circles",
+      "naam": "Hip Circles",
+      "groep": "legs",
+      "beschrijving": "Op één been of op handen en knieën: maak grote cirkels met de knie zodat de heup soepel wordt. Beide richtingen.",
+      "tags": [
+        "Warming-up",
+        "Mobility"
+      ]
+    },
+    {
+      "id": "inchworm",
+      "naam": "Inchworm",
+      "groep": "fullBody",
+      "beschrijving": "Sta voorovergebogen, loop met je handen naar een plank, loop de voeten weer naar de handen. Rekt hamstrings en activeert core en schouders.",
+      "tags": [
+        "Warming-up",
+        "Mobility"
+      ]
+    },
+    {
+      "id": "bodyweight_squat",
+      "naam": "Bodyweight Squat",
+      "groep": "legs",
+      "beschrijving": "Voeten op schouderbreedte, zak diep met rechte rug en kom weer omhoog. Warmt knieën, heupen en enkels op.",
+      "tags": [
+        "Warming-up"
+      ]
+    },
+    {
+      "id": "band_pull_apart",
+      "naam": "Band Pull-Apart",
+      "groep": "shoulders",
+      "beschrijving": "Houd een weerstandsband op borsthoogte en trek hem uit elkaar tot je schouderbladen samenknijpen. Activeert achterste schouders en bovenrug.",
+      "tags": [
+        "Warming-up"
+      ]
+    },
+    {
+      "id": "thoracic_rotation",
+      "naam": "Thoracic Rotation (Open Book)",
+      "groep": "back",
+      "beschrijving": "Zijligging, knieën gebogen, armen voor je. Open de bovenste arm als een boek naar achteren en draai mee met kop en borstkas.",
+      "tags": [
+        "Warming-up",
+        "Mobility"
+      ]
+    },
+    {
+      "id": "hamstring_stretch",
+      "naam": "Hamstring Stretch",
+      "groep": "legs",
+      "beschrijving": "Zit of sta met één been gestrekt en kantel vanuit de heup naar voren met rechte rug tot je een rek achter in het been voelt. Per been vasthouden.",
+      "tags": [
+        "Stretch",
+        "Cooldown"
+      ],
+      "tijd": true
+    },
+    {
+      "id": "quad_stretch",
+      "naam": "Quad Stretch",
+      "groep": "legs",
+      "beschrijving": "Sta op één been, trek de hiel naar de bil en houd de knieën bij elkaar. Heupen licht naar voren. Per been.",
+      "tags": [
+        "Stretch",
+        "Cooldown"
+      ],
+      "tijd": true
+    },
+    {
+      "id": "hip_flexor_stretch",
+      "naam": "Hip Flexor Stretch",
+      "groep": "legs",
+      "beschrijving": "Knielende lunge, spant de bil van het achterste been aan en schuif de heup naar voren. Per kant vasthouden.",
+      "tags": [
+        "Stretch",
+        "Cooldown"
+      ],
+      "tijd": true
+    },
+    {
+      "id": "childs_pose",
+      "naam": "Child's Pose",
+      "groep": "back",
+      "beschrijving": "Zit op je hielen, schuif de armen ver naar voren en laat borst en voorhoofd zakken. Ontspant rug en schouders.",
+      "tags": [
+        "Stretch",
+        "Cooldown"
+      ],
+      "tijd": true
+    },
+    {
+      "id": "chest_stretch",
+      "naam": "Chest Stretch",
+      "groep": "chest",
+      "beschrijving": "Onderarm of hand tegen een deurpost of muur, draai de borst voorzichtig van de arm af tot je een rek voelt. Per kant.",
+      "tags": [
+        "Stretch",
+        "Cooldown"
+      ],
+      "tijd": true
+    },
+    {
+      "id": "lat_stretch",
+      "naam": "Lat Stretch",
+      "groep": "back",
+      "beschrijving": "Pak een stang of paal vast, zak met de heupen naar achteren en laat de borst zakken. Rekt de brede rugspier.",
+      "tags": [
+        "Stretch",
+        "Cooldown"
+      ],
+      "tijd": true
+    },
+    {
+      "id": "cross_body_shoulder_stretch",
+      "naam": "Cross-Body Shoulder Stretch",
+      "groep": "shoulders",
+      "beschrijving": "Trek een gestrekte arm met de andere arm horizontaal over de borst. Schouders laag houden. Per arm.",
+      "tags": [
+        "Stretch",
+        "Cooldown"
+      ],
+      "tijd": true
+    },
+    {
+      "id": "triceps_stretch",
+      "naam": "Triceps Stretch",
+      "groep": "arms",
+      "beschrijving": "Breng een elleboog omhoog achter je hoofd en druk er met de andere hand zachtjes op. Per arm.",
+      "tags": [
+        "Stretch",
+        "Cooldown"
+      ],
+      "tijd": true
+    },
+    {
+      "id": "figure_four_stretch",
+      "naam": "Figure-Four Stretch",
+      "groep": "legs",
+      "beschrijving": "Op je rug: leg een enkel op de andere knie en trek het onderste been naar je toe. Rekt bil en heup. Per kant.",
+      "tags": [
+        "Stretch",
+        "Cooldown"
+      ],
+      "tijd": true
+    },
+    {
+      "id": "spinal_twist",
+      "naam": "Supine Spinal Twist",
+      "groep": "back",
+      "beschrijving": "Op je rug, laat gebogen knieën naar één kant vallen terwijl schouders plat blijven. Ontspant de onderrug. Per kant.",
+      "tags": [
+        "Stretch",
+        "Cooldown"
+      ],
+      "tijd": true
+    },
+    {
+      "id": "calf_stretch",
+      "naam": "Calf Stretch",
+      "groep": "legs",
+      "beschrijving": "Handen tegen de muur, één been gestrekt achter met de hiel op de grond en leun naar voren. Per been.",
+      "tags": [
+        "Stretch",
+        "Cooldown"
+      ],
+      "tijd": true
+    },
+    {
+      "id": "cobra_stretch",
+      "naam": "Cobra Stretch",
+      "groep": "core",
+      "beschrijving": "Op je buik, druk met de handen de borst omhoog terwijl heupen op de grond blijven. Rekt buik en voorkant van de romp. Niet forceren.",
+      "tags": [
+        "Stretch",
+        "Cooldown"
+      ],
+      "tijd": true
+    },
+    {
+      "id": "stair_climber",
+      "naam": "Stair Climber",
+      "groep": "cardio",
+      "beschrijving": "Klim op de trappenmachine in een gelijkmatig tempo, rechtop en zonder op de leuning te hangen.",
+      "tags": [
+        "Cardio"
+      ],
+      "tijd": true
+    },
+    {
+      "id": "battle_ropes",
+      "naam": "Battle Ropes",
+      "groep": "cardio",
+      "beschrijving": "Maak golven of slams met zware touwen vanuit een halve squat. Korte, intensieve intervallen.",
+      "tags": [
+        "Cardio",
+        "HIIT"
+      ],
+      "tijd": true
+    },
+    {
+      "id": "running",
+      "naam": "Hardlopen",
+      "groep": "cardio",
+      "beschrijving": "Buiten of op de loopband in een tempo waarbij je nog kunt praten (rustig) of juist intervallen (snel).",
+      "tags": [
+        "Cardio"
+      ],
+      "tijd": true
+    }
+  ]
+}
