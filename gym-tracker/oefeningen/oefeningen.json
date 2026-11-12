@@ -1033,34 +1033,34 @@
       "id": "rowing_machine",
       "naam": "Rowing Machine",
       "groep": "cardio",
-      "beschrijving": "Benen – rug – armen op de haal, armen – rug – benen terug. Reps = minuten.",
+      "beschrijving": "Benen – rug – armen op de haal, armen – rug – benen terug. Je voert een afstand in (m of km), geen tijd.",
       "tags": [
         "Cardio",
         "Machine"
       ],
-      "tijd": true
+      "afstand": true
     },
     {
       "id": "treadmill",
       "naam": "Treadmill",
       "groep": "cardio",
-      "beschrijving": "Wandelen of hardlopen op de loopband, in een rustig constant tempo of in intervallen. Reps = minuten.",
+      "beschrijving": "Wandelen of hardlopen op de loopband, in een rustig constant tempo of in intervallen. Je voert een afstand in (m of km), geen tijd.",
       "tags": [
         "Cardio",
         "Machine"
       ],
-      "tijd": true
+      "afstand": true
     },
     {
       "id": "stationary_bike",
       "naam": "Stationary Bike",
       "groep": "cardio",
-      "beschrijving": "Fietsen op een hometrainer met een stabiele cadans. Reps = minuten.",
+      "beschrijving": "Fietsen op een hometrainer met een stabiele cadans. Je voert een afstand in (m of km), geen tijd.",
       "tags": [
         "Cardio",
         "Machine"
       ],
-      "tijd": true
+      "afstand": true
     },
     {
       "id": "elliptical",
@@ -1352,11 +1352,11 @@
       "id": "running",
       "naam": "Hardlopen",
       "groep": "cardio",
-      "beschrijving": "Buiten of op de loopband in een tempo waarbij je nog kunt praten (rustig) of juist intervallen (snel).",
+      "beschrijving": "Buiten of op de loopband in een tempo waarbij je nog kunt praten (rustig) of juist intervallen (snel). Je voert een afstand in (m of km), geen tijd.",
       "tags": [
         "Cardio"
       ],
-      "tijd": true
+      "afstand": true
     }
   ]
 }
