@@ -47,12 +47,12 @@
         <span lang="en">Your workouts, <em class="accent">your data.</em></span>
         <span lang="nl">Jouw workouts, <em class="accent">jouw data.</em></span>
       </h1>
-      <p><span lang="en">Last updated: 11 November 2026 · applies to the Gym Tracker app for Android and the web.</span><span lang="nl">Laatst bijgewerkt: 11 november 2026 · geldt voor de Gym Tracker-app voor Android en het web.</span></p>
+      <p><span lang="en">Last updated: 15 November 2026 · applies to the Gym Tracker app for Android and the web.</span><span lang="nl">Laatst bijgewerkt: 15 november 2026 · geldt voor de Gym Tracker-app voor Android en het web.</span></p>
 
       <!-- ───────────── ENGLISH ───────────── -->
       <div lang="en">
         <h2>Short version</h2>
-        <p>Gym Tracker stores your exercises, workout plans and workouts on your own device only. Nothing is sent to us or to anyone else. There is no account, no ads, no analytics and no tracking.</p>
+        <p>Gym Tracker stores your exercises, workout plans and workouts on your own device. An account is optional: only if you sign in with Google (cloud sync) is your training data also stored in Google Firebase, so you have it on all your devices. There are no ads, no analytics and no tracking, and your data is never sold.</p>
 
         <h2>Who is responsible</h2>
         <p>Gym Tracker is developed by Jeroen Goudswaard, the Netherlands. For questions, contact us via <a href="https://github.com/jeroengoudswaard/strokes_gained/issues">GitHub</a>.</p>
@@ -61,14 +61,18 @@
         <ul>
           <li><strong>Your training data:</strong> exercises, workout plans and completed workouts (date, sets, weight, reps). Stored in a file on your device, or in your browser's local storage for the web app.</li>
           <li><strong>Settings:</strong> theme, language, kg or lbs, default rest time and demo mode. Stored on your device.</li>
+          <li><strong>Only with cloud sync:</strong> your Google account details (name, email address, profile photo and account ID) in Google Firebase Authentication, and a copy of your training data in Google Firebase Cloud Firestore, linked to that account. A workout in progress and settings stay on your device.</li>
         </ul>
-        <p>This data never leaves your device unless you export it yourself. You decide where an export file goes.</p>
+        <p>Without cloud sync this data never leaves your device unless you export it yourself. You decide where an export file goes.</p>
+
+        <h2>Cloud sync</h2>
+        <p>Cloud sync is off until you sign in with Google under More → Cloud sync. We process this data to provide that feature, on the basis of your consent (art. 6(1)(a) GDPR); you can withdraw it at any time by signing out. Your data is stored by <strong>Google Firebase</strong> (Authentication, Cloud Firestore); Google may process data outside the EU under the EU Standard Contractual Clauses. <a href="https://firebase.google.com/support/privacy">Firebase privacy</a>. Only you can read your data; we never use it for anything else.</p>
 
         <h2>Internet use</h2>
-        <p>The app only goes online to show an exercise's image or GIF if one is set, and opens a video link in your browser or YouTube app when you tap <em>Watch video</em>. Those sites see a normal web request from your device; their own privacy policies apply. No training data is sent along.</p>
+        <p>The app only goes online to show an exercise's image or GIF if one is set, and opens a video link in your browser or YouTube app when you tap <em>Watch video</em>. Those sites see a normal web request from your device; their own privacy policies apply. No training data is sent along. With cloud sync on, the app also talks to Google Firebase (see above).</p>
 
         <h2>Deleting your data</h2>
-        <p>Delete single workouts in the app, or remove all data by uninstalling the app (Android) or clearing the site data in your browser (web app). We have no copy, so we can't restore it either: export a backup now and then.</p>
+        <p>Delete single workouts in the app, or remove all data by uninstalling the app (Android) or clearing the site data in your browser (web app). With cloud sync on, deleting an item in the app also removes it from the cloud (only a marker without content remains, so it doesn't return from another device). Signing out keeps the cloud copy; if you want your account and all its data removed, contact us and we will delete it within 30 days. Without cloud sync we have no copy, so we can't restore anything: export a backup now and then.</p>
 
         <h2>Children</h2>
         <p>Gym Tracker is not intended for children under 16.</p>
@@ -80,7 +84,7 @@
       <!-- ───────────── NEDERLANDS ───────────── -->
       <div lang="nl">
         <h2>Kort gezegd</h2>
-        <p>Gym Tracker bewaart je oefeningen, trainingsschema's en workouts alleen op je eigen toestel. Er gaat niets naar ons of naar anderen. Er is geen account, geen reclame, geen analytics en geen tracking.</p>
+        <p>Gym Tracker bewaart je oefeningen, trainingsschema's en workouts op je eigen toestel. Een account is niet nodig: alleen als je inlogt met Google (cloud sync) staan je trainingsgegevens ook in Google Firebase, zodat je ze op al je apparaten hebt. Er is geen reclame, geen analytics en geen tracking, en je gegevens worden nooit verkocht.</p>
 
         <h2>Wie is verantwoordelijk</h2>
         <p>Gym Tracker wordt ontwikkeld door Jeroen Goudswaard, Nederland. Voor vragen kun je contact opnemen via <a href="https://github.com/jeroengoudswaard/strokes_gained/issues">GitHub</a>.</p>
@@ -89,14 +93,18 @@
         <ul>
           <li><strong>Je trainingsgegevens:</strong> oefeningen, trainingsschema's en afgeronde workouts (datum, sets, gewicht, reps). Opgeslagen in een bestand op je toestel, of bij de web-app in de lokale opslag van je browser.</li>
           <li><strong>Instellingen:</strong> thema, taal, kg of lbs, standaard rusttijd en demo-modus. Opgeslagen op je toestel.</li>
+          <li><strong>Alleen met cloud sync:</strong> je Google-accountgegevens (naam, e-mailadres, profielfoto en account-ID) in Google Firebase Authentication, en een kopie van je trainingsgegevens in Google Firebase Cloud Firestore, gekoppeld aan dat account. Een lopende workout en je instellingen blijven op je toestel.</li>
         </ul>
-        <p>Deze gegevens verlaten je toestel niet, tenzij je ze zelf exporteert. Jij bepaalt waar een exportbestand naartoe gaat.</p>
+        <p>Zonder cloud sync verlaten deze gegevens je toestel niet, tenzij je ze zelf exporteert. Jij bepaalt waar een exportbestand naartoe gaat.</p>
+
+        <h2>Cloud sync</h2>
+        <p>Cloud sync staat uit tot je inlogt met Google via Meer → Cloud sync. We verwerken deze gegevens om die functie te leveren, op basis van jouw toestemming (art. 6 lid 1 sub a AVG); die kun je altijd intrekken door af te melden. Je gegevens worden bewaard door <strong>Google Firebase</strong> (Authentication, Cloud Firestore); Google kan gegevens buiten de EU verwerken onder de EU-modelcontractbepalingen. <a href="https://firebase.google.com/support/privacy">Firebase-privacy</a>. Alleen jij kunt je gegevens lezen; wij gebruiken ze nergens anders voor.</p>
 
         <h2>Internetgebruik</h2>
-        <p>De app gaat alleen online om de afbeelding of GIF van een oefening te tonen als die is ingesteld, en opent een videolink in je browser of de YouTube-app als je op <em>Bekijk video</em> tikt. Die sites zien een gewoon webverzoek van je toestel; hun eigen privacybeleid geldt. Er gaan geen trainingsgegevens mee.</p>
+        <p>De app gaat alleen online om de afbeelding of GIF van een oefening te tonen als die is ingesteld, en opent een videolink in je browser of de YouTube-app als je op <em>Bekijk video</em> tikt. Die sites zien een gewoon webverzoek van je toestel; hun eigen privacybeleid geldt. Er gaan geen trainingsgegevens mee. Met cloud sync aan praat de app ook met Google Firebase (zie hierboven).</p>
 
         <h2>Gegevens verwijderen</h2>
-        <p>Verwijder losse workouts in de app, of wis alles door de app te verwijderen (Android) of de sitegegevens in je browser te wissen (web-app). Wij hebben geen kopie en kunnen dus ook niets terugzetten: maak af en toe een back-up.</p>
+        <p>Verwijder losse workouts in de app, of wis alles door de app te verwijderen (Android) of de sitegegevens in je browser te wissen (web-app). Met cloud sync aan haalt verwijderen in de app het item ook uit de cloud (er blijft alleen een markering zonder inhoud over, zodat het niet terugkomt vanaf een ander toestel). Afmelden laat de cloudkopie staan; wil je je account en alle gegevens laten verwijderen, neem dan contact op, dan verwijderen we het binnen 30 dagen. Zonder cloud sync hebben wij geen kopie en kunnen we niets terugzetten: maak af en toe een back-up.</p>
 
         <h2>Kinderen</h2>
         <p>Gym Tracker is niet bedoeld voor kinderen onder de 16.</p>
