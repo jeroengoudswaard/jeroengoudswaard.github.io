@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>TraceLab</title>
-  <meta name="description" content="TraceLab (beta, v0.1b): a fast SEG-Y viewer and QC tool for Windows and Linux. Memory-mapped, AVX2-accelerated, with wiggle and variable-density displays, header viewers, histogram and spectrum.">
+  <meta name="description" content="TraceLab (beta, v0.1c): a fast SEG-Y viewer and QC tool for Windows and Linux, with memory-mapped AVX2 reading, seven colour maps, and a resizable octave-band display.">
   <link rel="icon" href="../assets/tracelab.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -69,8 +69,8 @@
     <div class="wrap hero-grid">
       <div>
         <span class="pill beta-pill">
-          <span lang="en">β · v0.1b · Work in progress</span>
-          <span lang="nl">β · v0.1b · In ontwikkeling</span>
+          <span lang="en">β · v0.1c · Work in progress</span>
+          <span lang="nl">β · v0.1c · In ontwikkeling</span>
         </span>
         <h1>
           <span lang="en">Trace<em class="accent">Lab.</em></span>
@@ -102,7 +102,7 @@
         <span class="emoji">🚧</span>
         <div>
           <h3><span lang="en">Beta: not finished yet</span><span lang="nl">Beta: nog niet af</span></h3>
-          <p><span lang="en">TraceLab is early software (v0.1b). The core reading, display and analysis work well, but some menus are still placeholders and features are being added fast. Expect rough edges, and please report what you find.</span><span lang="nl">TraceLab is vroege software (v0.1b). Het inlezen, weergeven en analyseren werken goed, maar sommige menu's zijn nog leeg en er komen snel nieuwe functies bij. Verwacht wat ruwe randjes, en meld gerust wat je tegenkomt.</span></p>
+          <p><span lang="en">TraceLab is early software (v0.1c). The core reading, display and analysis work well, and new display controls are arriving quickly. Some menus are still placeholders, so expect rough edges and please report what you find.</span><span lang="nl">TraceLab is vroege software (v0.1c). Het inlezen, weergeven en analyseren werken goed, en er komen snel nieuwe weergaveopties bij. Sommige menu's zijn nog leeg, dus verwacht wat ruwe randjes en meld gerust wat je tegenkomt.</span></p>
         </div>
       </div>
     </div>
@@ -130,7 +130,7 @@
         <div class="card">
           <span class="emoji">〰️</span>
           <h3><span lang="en">Wiggle &amp; variable density</span><span lang="nl">Wiggle &amp; variable density</span></h3>
-          <p><span lang="en">Switch between displays, with infill, reversed polarity, centre lines, five colour palettes and smooth bilinear rendering.</span><span lang="nl">Wissel tussen weergaven, met infill, omgekeerde polariteit, middenlijnen, vijf kleurenpaletten en vloeiende bilineaire weergave.</span></p>
+          <p><span lang="en">Switch between displays, with infill, reversed polarity, centre lines, seven colour palettes with live previews and flipping, and smooth bilinear rendering.</span><span lang="nl">Wissel tussen weergaven, met infill, omgekeerde polariteit, middenlijnen, zeven kleurenpaletten met live voorbeelden en omkeren, en vloeiende bilineaire weergave.</span></p>
         </div>
         <div class="card">
           <span class="emoji">🔍</span>
@@ -140,7 +140,7 @@
         <div class="card">
           <span class="emoji">📊</span>
           <h3><span lang="en">Histogram &amp; spectrum</span><span lang="nl">Histogram &amp; spectrum</span></h3>
-          <p><span lang="en">Amplitude histograms and frequency spectra of the whole file or a selection, plus octave bands, and an interactive clip set by dragging on the histogram.</span><span lang="nl">Amplitudehistogrammen en frequentiespectra van het hele bestand of een selectie, plus octaafbanden, en een interactieve clip die je instelt door op het histogram te slepen.</span></p>
+          <p><span lang="en">Amplitude histograms and frequency spectra of the whole file or a selection, plus a resizable octave-band display with a shared crosshair and labelled axes. Set the clip by dragging on the histogram.</span><span lang="nl">Amplitudehistogrammen en frequentiespectra van het hele bestand of een selectie, plus een schaalbare octaafbandweergave met een gedeeld dradenkruis en gelabelde assen. Stel de clip in door op het histogram te slepen.</span></p>
         </div>
         <div class="card">
           <span class="emoji">🧾</span>
@@ -179,12 +179,14 @@
       </div>
       <div class="lists">
         <div class="card">
-          <h3>✅ <span lang="en">Works in v0.1b</span><span lang="nl">Werkt in v0.1b</span></h3>
+          <h3>✅ <span lang="en">Works in v0.1c</span><span lang="nl">Werkt in v0.1c</span></h3>
           <ul>
             <li><span lang="en">Fast opening and smooth zoom on large files</span><span lang="nl">Snel openen en vloeiend zoomen op grote bestanden</span></li>
             <li><span lang="en">Wiggle and variable-density displays, gain and clip</span><span lang="nl">Wiggle- en variable-density-weergave, gain en clip</span></li>
             <li><span lang="en">Text and binary header viewers, trace-header plots</span><span lang="nl">Tekst- en binaire headers, trace-headerplots</span></li>
             <li><span lang="en">Histogram, spectrum and octave bands</span><span lang="nl">Histogram, spectrum en octaafbanden</span></li>
+            <li><span lang="en">Resizable octave bands with a shared crosshair and labelled axes</span><span lang="nl">Schaalbare octaafbanden met een gedeeld dradenkruis en gelabelde assen</span></li>
+            <li><span lang="en">Seven colour palettes, live previews and movable dataset labels</span><span lang="nl">Zeven kleurenpaletten, live voorbeelden en verplaatsbare datasetlabels</span></li>
             <li><span lang="en">Split view, calculator, bandpass, save as SEG-Y</span><span lang="nl">Gesplitst beeld, rekenmachine, bandpass, opslaan als SEG-Y</span></li>
             <li><span lang="en">Ready-made download for Windows</span><span lang="nl">Kant-en-klare download voor Windows</span></li>
           </ul>
@@ -296,7 +298,7 @@
       </div>
       <div class="foot-bottom">
         <span>© <span data-year>2026</span> Jeroen Goudswaard</span>
-        <span>TraceLab v0.1b (beta)</span>
+        <span>TraceLab v0.1c (beta)</span>
       </div>
     </div>
   </footer>
